@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :orders
   has_one :cart
   has_many :comments
+  has_one :managed_restaurant, foreign_key: 'manager_id', class_name: "Restaurant"
 
   def set_default_role
     self.role ||= :user
