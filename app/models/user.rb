@@ -6,6 +6,8 @@ class User < ApplicationRecord
   enum role: [:user, :manager, :admin]
   after_initialize :set_default_role, :if => :new_record?
 
+  has_many :orders
+
   def set_default_role
     self.role ||= :user
   end
