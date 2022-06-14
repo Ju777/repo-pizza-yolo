@@ -9,6 +9,8 @@ class OrdersController < ApplicationController
     puts "#"*100
     puts "On est dans la méthode NEW de Orders."
     puts "#"*100
+
+
   end
 
   def create
