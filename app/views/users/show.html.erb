@@ -1,0 +1,19 @@
+<div class="main-div">
+  <h2><strong>Bienvenue sur ta Page de Profil :</strong></h2>
+</div>
+
+    <div class="container">
+     <div class="row justify-content-center">
+        <div class="col-4">
+        <p>Nom : <%= current_user.lastname %></p>
+        <p>Prénom : <%= current_user.firstname %></p>
+        <p>Tel: <%= current_user.phone %></p>
+        <p>Email : <%= current_user.email %></p>
+        <p>Commande : <%= current_user.orders.last %></p>
+
+     <%= link_to 'Editer le profil', edit_user_registration_path(current_user.id), class:"btn btn-success" %>
+    </div>
+   </div>
+  </div>
+       
+</div>

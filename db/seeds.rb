@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'faker'
+
 Faker::Config.locale = :fr
 
 ProductRestaurant.destroy_all
@@ -28,14 +29,24 @@ ActiveRecord::Base.connection.reset_pk_sequence!('orders')
 User.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!('users')
 
+image_url = ["https://img.freepik.com/photos-gratuite/pizza-mixte-divers-ingredients_140725-3790.jpg?t=st=1655193419~exp=1655194019~hmac=93d53a026685e0b93926e67a3757f8c6dd62881985a67248882ac0ddb5d9105a&w=1380",]
+categories = ["Pizza",
+              "Boisson",]
+      
 i=1
 10.times do
   User.create(email:"pizza-user#{i}@yopmail.com", password:"123456", phone:"0607080910")
   i+=1
 end
 
-3.times do
-  Category.create(title:Faker::Fantasy::Tolkien.race)
+5.times do
+  Restaurant.create(name:Faker::Movie.title, street:Faker::Address.street_name, zipcode:rand(10000..99999), city:Faker::Address.city, phone:"0607080910", manager:User.find(rand(User.first.id..User.last.id)))
+end
+
+5.times do
+Category.create(title:categories.sample)
+  i+=1
+puts"category created"
 end
 
 i=1
@@ -44,8 +55,11 @@ i=1
   i+=1
 end
 
-10.times do
-  CartProduct.create(cart:Cart.find(rand(Cart.first.id..Cart.last.id)), product:Product.find(rand(Product.first.id..Product.last.id)), quantity:rand(0..10))
+i=1
+20.times do
+  ProductRestaurant.create(restaurant:Restaurant.find(rand(Restaurant.first.id..Restaurant.last.id)), product:Product.find(rand(Product.first.id..Product.last.id)))
+  i+=1
+  puts"Produit resto"
 end
 
 10.times do
@@ -56,6 +70,9 @@ end
   Comment.create(note:rand(0..5), description:"a user's comment", user:User.find(rand(User.first.id..User.last.id)))
 end
 
-5.times do
-  Restaurant.create(name:Faker::Movie.title, street:Faker::Address.street_name, zipcode:rand(10000..99999), city:Faker::Address.city, phone:"0607080910", manager:User.find(rand(User.first.id..User.last.id)))
+
+20.times do
+ CartProduct.create(cart:Cart.find(rand(Cart.first.id..Cart.last.id)), product:Product.find(rand(Product.first.id..Product.last.id)), quantity:Faker::Number.within(range: 1..10))
+ puts"CartProduct"
 end
+
