@@ -15,13 +15,16 @@ class UserMailer < ApplicationMailer
 
   def order_recap_email(order)
     #on récupère l'instance de la commande en question
-    @order = user.order.last
+    @order = order
+
+    #on declare une variable user pour identifier celui de la commande
+    @user = @order.user
 
     #on définit une variable @url qu'on utilisera dans la view d’e-mail
     @url  = 'https://git.heroku.com/pizza-yolo.git/' 
 
     # c'est cet appel à mail() qui permet d'envoyer l’e-mail en définissant destinataire et sujet.
-    mail(to: @user.email, subject: 'PIZZA-YOLO: Récapitulatif de votre commande') 
+    mail(to: @order.user.email, subject: 'PIZZA-YOLO: Récapitulatif de votre commande') 
   end
 
 end
