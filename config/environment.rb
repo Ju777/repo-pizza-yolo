@@ -10,7 +10,7 @@ ActionMailer::Base.smtp_settings = {
   :domain => 'pizza-yolo.fr',
   :address => 'in-v3.mailjet.com',
   :tls => true,
-  :port => 587,
+  :port => '465',
   :authentication => :plain,
   :enable_starttls_auto => true
 }
