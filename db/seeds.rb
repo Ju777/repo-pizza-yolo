@@ -61,7 +61,7 @@ categories = ["Pizza",
 
 
  5.times do
-   Order.create(user:User.find(rand(User.first.id..User.last.id)), total_amount:100, pickup_code:"1")
+   Order.create(user:User.find(rand(User.first.id..User.last.id)), total_amount:100, pickup_code:Faker::Number.decimal(l_digits: 3, r_digits: 3))
    puts"order"
   end
 
