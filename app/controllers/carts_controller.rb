@@ -9,8 +9,6 @@ class CartsController < ApplicationController
   def show
     @cart_to_show = Cart.find(params[:id])
     @total_to_pay = total_cart
-    @order_to_confirm = Order.create(total_amount:@total_to_pay, user:current_user)
-  
 
   end
 
