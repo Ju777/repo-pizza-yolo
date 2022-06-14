@@ -1,0 +1,21 @@
+<h1>StaticPages#index</h1>
+<p>Find me in app/views/static_pages/index.html.erb</p>
+
+
+<% if user_signed_in? %>
+  <p> Vous êtes connecté : <%= current_user.email %>, votre rôle : <%= current_user.role %><br/>
+    <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+    <%= link_to 'Profile', user_path(current_user) %>
+
+  </p>
+<% else %>
+  <p>Personne n'est connecté :<br/>
+    <%= link_to 'Sign Up', new_user_registration_path %><br/>
+    <%= link_to 'Sign In', new_user_session_path %>
+  </p>
+<% end %>
+
+
+
+<p>Lien vers l'index des carts : <%= link_to 'voir', carts_path %>
+
