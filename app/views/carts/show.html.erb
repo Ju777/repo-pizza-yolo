@@ -1,0 +1,17 @@
+<h1>Carts#show</h1>
+<p>Find me in app/views/carts/show.html.erb</p>
+
+<p><strong>Le cart sélectionné est :</strong> <%= @cart_to_show %>.</p>
+
+<p><strong>Il contient les produits suivants :</strong></p>
+
+<ul>
+  <% @cart_to_show.cart_products.each do |cart_product| %>
+    <li>
+      <%= cart_product.product %> : <%= cart_product.product.title %>. <strong>Prix : <%= cart_product.product.price %> €</strong> 
+    </li>
+  <% end %>
+</ul>
+
+<p><strong>TOTAL A PAYER : <%= @total_to_pay %> €</strong></p>
+<%= link_to 'Confirmer commande', new_order_path, class:"btn btn-primary" %>
