@@ -12,10 +12,8 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Bienvenue chez nous !') 
   end
 
-  def order_recap_email(user)
-    #on récupère l'instance user pour ensuite pouvoir la passer à la view en @user
-    @user = user 
 
+  def order_recap_email(order)
     #on récupère l'instance de la commande en question
     @order = user.order.last
 
