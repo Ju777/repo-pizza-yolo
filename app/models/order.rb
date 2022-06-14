@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  after_create :order_recap
+  after_create :order_recap #we can try 'after_update' for the email to be sent only after we update the order as being 'paid' ?
   
   belongs_to :user
 
