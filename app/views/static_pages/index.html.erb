@@ -5,7 +5,7 @@
 <% if user_signed_in? %>
   <p> Vous êtes connecté : <%= current_user.email %>, votre rôle : <%= current_user.role %><br/>
     <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-    <%= link_to 'Profile', users_show_path %>
+    <%= link_to 'Profile', user_path(current_user) %>
 
   </p>
 <% else %>
