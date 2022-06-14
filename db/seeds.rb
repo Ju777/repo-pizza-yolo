@@ -15,49 +15,49 @@ categories = ["Pizza",
       
 
 
-i=1
-5.times do
-  User.create(email: "user#{i}@yopmail.com", password:"123456", firstname:Faker::Name.first_name, 
-    lastname:Faker::Name.last_name , 
-    phone:Faker::PhoneNumber.cell_phone,
-    role:"")
-    puts"User created"
-  i+=1
-end
-
-i=1
-2.times do
-  Restaurant.create(name:Faker::Restaurant.name, 
-    street:Faker::Address.street_name, 
-    zipcode:Faker::Address.zip_code, 
-    city:Faker::Address.city, 
-    phone:Faker::PhoneNumber.cell_phone,
-    manager:User.first)
-  i+=1
-  puts "restaurant"
-end
-
-5.times do
- Category.create(title:categories.sample)
-  i+=1
- puts"category created"
-end
-
-i=1
-5.times do
-    Product.create(title:"regina",description:"regina la queen parmi les queens",
-    price:Faker::Number.number(digits: 3), image_url:image_url.sample, 
-    catchphrase:"Yummy", category:Category.first)
-    puts"Product created"
+  i=1
+  5.times do
+    User.create(email: "user#{i}@yopmail.com", password:"123456", firstname:Faker::Name.first_name, 
+      lastname:Faker::Name.last_name , 
+      phone:Faker::PhoneNumber.cell_phone,
+      role:"")
+      puts"User created"
     i+=1
-end
+  end
 
-i=1
-2.times do
-  ProductRestaurant.create(restaurant:Restaurant.find(rand(Restaurant.first.id..Restaurant.last.id)), product:Product.find(rand(Product.first.id..Product.last.id)))
-  i+=1
-  puts"Produit resto"
-end
+  i=1
+  2.times do
+    Restaurant.create(name:Faker::Restaurant.name, 
+      street:Faker::Address.street_name, 
+      zipcode:Faker::Address.zip_code, 
+      city:Faker::Address.city, 
+      phone:Faker::PhoneNumber.cell_phone,
+      manager:User.first)
+    i+=1
+    puts "restaurant"
+  end
+
+  5.times do
+  Category.create(title:categories.sample)
+    i+=1
+  puts"category created"
+  end
+
+  i=1
+  5.times do
+      Product.create(title:"regina",description:"regina la queen parmi les queens",
+      price:Faker::Number.number(digits: 3), image_url:image_url.sample, 
+      catchphrase:"Yummy", category:Category.first)
+      puts"Product created"
+      i+=1
+  end
+
+  i=1
+  20.times do
+    ProductRestaurant.create(restaurant:Restaurant.find(rand(Restaurant.first.id..Restaurant.last.id)), product:Product.find(rand(Product.first.id..Product.last.id)))
+    i+=1
+    puts"Produit resto"
+  end
 
 
  5.times do
