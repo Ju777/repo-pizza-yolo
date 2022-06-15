@@ -5,13 +5,14 @@
     <div class="container">
      <div class="row justify-content-center">
         <div class="col-4">
-          <%= form_tag user_avatars_path(@user), multipart: true do %>
-            <%= file_field_tag :avatar %>
-          <%= submit_tag "OK" %>
-          <% end %>
-        <%if @user.avatar.attached?%>
-          <%= image_tag @user.avatar, alt: 'avatar' %>
-        <%end%>
+        <p>ZONE DU FORMULAIRE ACTIVE STORAGE</p>
+          <%#= form_tag user_avatars_path(@user), multipart: true do %>
+            <%#= file_field_tag :avatar %>
+          <%#= submit_tag "OK" %>
+          <%# end %>
+        <%#if @user.avatar.attached?%>
+          <%#= image_tag @user.avatar, alt: 'avatar' %>
+        <%#end%>
 
         <p>Nom : <%= @user.lastname %></p>
         <p>Prénom : <%= @user.firstname %></p>

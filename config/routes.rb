@@ -5,9 +5,9 @@ Rails.application.routes.draw do
 
   resources :carts
   resources :orders
-  resources :users do
-    resources :avatars, only: [:create]
-  end
+  resources :users #do
+  #   resources :avatars, only: [:create]
+  # end
   resources :products
   resources :cart_products
 

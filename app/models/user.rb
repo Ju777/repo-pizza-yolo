@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_one :cart
   has_many :comments
   has_one :managed_restaurant, foreign_key: 'manager_id', class_name: "Restaurant"
-  has_one_attached :avatar
+  # has_one_attached :avatar
 
   enum role: [:user, :manager, :admin]
   after_initialize :set_default_role, :if => :new_record?
