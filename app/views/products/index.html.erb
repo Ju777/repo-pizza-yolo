@@ -1,0 +1,12 @@
+<h1>Products#index</h1>
+<p>Find me in app/views/products/index.html.erb</p>
+
+<p><strong>Listing des produits en base :</strong></p>
+<ul>
+  <% @all_products.each do |product| %>
+    <li>
+      <%= product.id %>. <%= product.title %>. Prix <%= product.price %> €. <strong>[categ. <%= product.category.title %>]</strong> ---
+      [<%= link_to "Details", product_path(product) %>] [<%= link_to "Add to cart", cart_products_path+"?product=#{product.id}", method: :post %>] 
+    </li>
+  <% end %>
+</ul>

@@ -18,6 +18,10 @@ class UsersController < ApplicationController
       @user_orders = current_user.orders
       
   end
+
+  def edit
+    
+  end
   
   private
 
