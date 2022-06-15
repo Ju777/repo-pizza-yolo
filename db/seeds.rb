@@ -10,6 +10,8 @@ require 'faker'
 
 Faker::Config.locale = :fr
 
+Order.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!('orders')
 ProductRestaurant.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!('product_restaurants')
 Restaurant.destroy_all
@@ -24,8 +26,6 @@ Cart.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!('carts')
 Comment.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!('comments')
-Order.destroy_all
-ActiveRecord::Base.connection.reset_pk_sequence!('orders')
 User.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!('users')
 
@@ -63,7 +63,7 @@ i=1
 end
 
 10.times do
-  Order.create(total_amount: Faker::Commerce.price, pickup_code:"not_paid", user:User.find(rand(User.first.id..User.last.id)))
+  Order.create(total_amount: Faker::Commerce.price, pickup_code:"not_paid", user:User.find(rand(User.first.id..User.last.id)), restaurant: Restaurant.find(rand(Restaurant.first.id..Restaurant.last.id)) )
 end
 
 10.times do
