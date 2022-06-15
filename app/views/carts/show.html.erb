@@ -15,9 +15,10 @@
 
 <p><strong>TOTAL A PAYER : <%= @total_to_pay %> €</strong></p>
 
-<!-- Suppression du lien de confirmation de commande pour proposer directeent le paiement CB -->
-<%#= link_to 'Confirmer commande', new_order_path, class:"btn btn-primary" %>
+<!-- Options à choisir -->
+<p>OPTION 1 avec page intermédiaire: <%= link_to 'Confirmer commande', new_order_path, class:"btn btn-primary" %></p>
 
+<p>OPTION 2 paiement direct :</p>
 <%= form_tag orders_path do %>
   <article>
     <% if flash[:error].present? %>
