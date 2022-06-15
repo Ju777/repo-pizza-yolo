@@ -45,7 +45,6 @@ end
 
 5.times do
 Category.create(title:categories.sample)
-  i+=1
 puts"category created"
 end
 
@@ -55,10 +54,8 @@ i=1
   i+=1
 end
 
-i=1
 20.times do
   ProductRestaurant.create(restaurant:Restaurant.find(rand(Restaurant.first.id..Restaurant.last.id)), product:Product.find(rand(Product.first.id..Product.last.id)))
-  i+=1
   puts"Produit resto"
 end
 
