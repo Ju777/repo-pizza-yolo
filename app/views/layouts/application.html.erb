@@ -13,7 +13,16 @@
   </head>
 
   <body>
+
   <%= render partial: 'layouts/navbar' %>
+
+    <% flash.each do |type ,msg| %>
+      <%= msg %>
+    <% end %>
+
+    <%= render 'layouts/sessions_info' %>
+
+
     <%= yield %>
   </body>
 </html>

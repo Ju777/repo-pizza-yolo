@@ -1,0 +1,12 @@
+<h1>Carts#index</h1>
+<p>Find me in app/views/carts/index.html.erb</p>
+
+<p><strong>Affichage de tous les carts en base :</strong></p>
+
+<ul>
+  <% @all_carts.each do |cart| %>
+    <li>
+      <%= cart.id %>. le cart <%= cart %> appartient à <%= cart.user %>. <%= link_to 'voir ce cart', cart_path(cart) %>
+    </li>
+  <% end %>
+</ul>
