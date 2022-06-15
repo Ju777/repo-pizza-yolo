@@ -13,7 +13,3 @@
  *= require bootstrap.min
  *= require custom
  */
-
- body {
-    padding-top: 100px;
- }

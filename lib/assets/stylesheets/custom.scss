@@ -68,3 +68,45 @@
   margin-top: 0px;
   padding-top: 0px;
 }
+
+
+#mainherophrase {
+  color: rgb(255,255,255);
+}
+
+#herobtn {
+  background: rgba(0,183,121,0);
+  color: #00b779;
+  margin-top: 10px;
+  border-radius: 32px;
+  border-width: 2px;
+  border-color: #00b779;
+}
+
+#heropizzas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 20px;
+  padding-top: 10px;
+}
+
+#pizzal {
+  position: relative;
+  flex: 0 0 45%;
+  transform: translate3d(-15%, 35%, 0);
+}
+
+#pizzar1 {
+  width: 461.188px;
+  margin: 0px;
+  padding: 0px;
+}
+
+#pizzar2 {
+  position: relative;
+  flex: 0 0 45%;
+  transform: translate3d(-5%, 20%, 0);
+}
