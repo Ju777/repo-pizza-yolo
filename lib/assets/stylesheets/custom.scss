@@ -110,3 +110,64 @@
   flex: 0 0 45%;
   transform: translate3d(-5%, 20%, 0);
 }
+
+section {
+  background: #000000;
+  border-style: none;
+}
+
+#menurow {
+  background: #000000;
+  margin-top: 20px;
+  padding-top: 20px;
+  margin-right: 0px;
+}
+
+div {
+  background: #000000;
+}
+
+#cardrow {
+  max-width: 900px;
+}
+
+#productcard {
+  background: #000000;
+  border-radius: 0px;
+  margin: 0px;
+  text-align: center;
+}
+
+#cardtitle {
+  color: #ffffff;
+  text-align: center;
+  margin: 0px;
+  padding: 5px;
+  font-size: 25px;
+}
+
+#cardcatchphrase {
+  margin: 0px;
+  padding: 0px;
+  color: #2d2d2d;
+}
+
+#cardimg {
+  width: 280px;
+  padding: 5px;
+  margin: 10px;
+}
+
+#cardprice {
+  color: rgb(255,255,255);
+  padding: 15px;
+}
+
+#cardseebtn {
+  background: rgba(0,183,121,0);
+  transform: perspective(0px);
+  margin: -5px;
+  border-width: 2px;
+  border-color: #00b779;
+  color: #00b779;
+}
