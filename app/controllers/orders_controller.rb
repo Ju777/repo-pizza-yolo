@@ -59,6 +59,7 @@ class OrdersController < ApplicationController
     cart_products_to_empty = current_user.cart.cart_products
 
     puts "#"*100
+
     puts "cart_products_to_empty AVANT VIDAGE = #{cart_products_to_empty}"
     puts "Il contient : "
     cart_products_to_empty.each do |cart_product|
@@ -74,6 +75,7 @@ class OrdersController < ApplicationController
       puts cart_product.product.title
       # cart_product.destroy
     end
+
     puts "#"*100
 
 

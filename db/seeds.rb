@@ -35,7 +35,7 @@ categories = ["Pizza",
       
 i=1
 10.times do
-  User.create(email:"pizza-user#{i}@yopmail.com", password:"123456", phone:"0607080910")
+  User.create(email:"pizza-user#{i}@yopmail.com", password:"123456", phone:"0600000000")
   i+=1
 end
 
