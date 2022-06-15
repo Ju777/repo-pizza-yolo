@@ -1,0 +1,7 @@
+<h1>Products#show</h1>
+<p>Find me in app/views/products/show.html.erb</p>
+
+<p>Produit sélectionné : <%= @product_to_show %></p>
+<p><%= @product_to_show.id %>. <%= @product_to_show.title %></p>
+[<%= link_to "Add to cart", cart_products_path+"?product=#{@product_to_show.id}", method: :post %>] 
+

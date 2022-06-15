@@ -9,7 +9,7 @@ class CartsController < ApplicationController
   def show
     @cart_to_show = Cart.find(params[:id])
     @total_to_pay = total_cart
-    # Julien : ajout du 15/06
+
     @order_to_pay = Order.create(total_amount:@total_to_pay, user:current_user, pickup_code:"not_paid")
 
     puts "#"*100
