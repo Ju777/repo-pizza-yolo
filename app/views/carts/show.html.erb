@@ -19,22 +19,26 @@
 <p>OPTION 1 avec page intermédiaire: <%= link_to 'Confirmer commande', new_order_path, class:"btn btn-primary" %></p>
 
 <p>OPTION 2 paiement direct :</p>
-<%= form_tag orders_path do %>
-  <article>
-    <% if flash[:error].present? %>
-      <div id="error_explanation">
-        <p><%= flash[:error] %></p>
-      </div>
-    <% end %>
-    <!--<label class="amount">-->
-      <!--<span>paiement de : <%#= @order_to_pay.total_amount %> €</span>-->
-    <!--</label>-->
-  </article>
-  <br/>
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-  data-description="Achat d'un produit"
-  data-amount=<%= @stripe_amount %>
-  data-currency="eur"
-  data-locale="auto"></script>
+<% if current_user.firstname == "" && current_user.lastname == "" && current_user.phone == "0600000000" %>
+<!-- Prompter l'utilisateur à renseigner ses données personelles avant de pouvoir passer commande -->
+<% else %>
+  <%= form_tag orders_path do %>
+    <article>
+      <% if flash[:error].present? %>
+        <div id="error_explanation">
+          <p><%= flash[:error] %></p>
+        </div>
+      <% end %>
+      <!--<label class="amount">-->
+        <!--<span>paiement de : <%#= @order_to_pay.total_amount %> €</span>-->
+      <!--</label>-->
+    </article>
+    <br/>
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+    data-description="Achat d'un produit"
+    data-amount=<%= @stripe_amount %>
+    data-currency="eur"
+    data-locale="auto"></script>
+  <% end %>
 <% end %>
