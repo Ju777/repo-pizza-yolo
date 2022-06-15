@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'avatars/create'
+
   devise_for :users
   root 'static_pages#index'
 
