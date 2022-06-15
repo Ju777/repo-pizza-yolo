@@ -1,0 +1,7 @@
+<h1>Orders#create</h1>
+<p>Find me in app/views/orders/create.html.erb</p>
+
+<h1>Votre paiement est confirmé.</h1>
+<h2>Merci <%= @current_user %> pour votre achat de <strong><%= @current_order.total_amount %> €</strong> !</h2>
+<p>Un email vous a été envoyé à <%= @current_user.email %> avec le récapitulatif de votre commande.</p>
+<p>Votre code de retrait est <%= @current_order.pickup_code %>
