@@ -9,7 +9,16 @@
         <p>Prénom : <%= current_user.firstname %></p>
         <p>Tel: <%= current_user.phone %></p>
         <p>Email : <%= current_user.email %></p>
-        <p>Commande : <%= current_user.orders.last %></p>
+        <p>Historiques des commandes : </p>
+        <ul>
+          <% @user_orders.each do |order| %>
+          <li>
+            <p><strong>Commande n° <%= order.id %> générée le <%= order.created_at %>, montant <%= order.total_amount %> €.</strong>(code retrait <%= order.pickup_code %>)</p>
+            <p><strong>Détails des produits achetés :</strong> (nécessite une modif de la DB)</p>
+
+          </li>
+          <% end %>
+        </ul>
 
      <%= link_to 'Editer le profil', edit_user_registration_path(current_user.id), class:"btn btn-success" %>
     </div>
