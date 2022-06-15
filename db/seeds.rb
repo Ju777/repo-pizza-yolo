@@ -63,7 +63,7 @@ i=1
 end
 
 10.times do
-  Order.create(total_amount: Faker::Commerce.price, pickup_code:"-", user:User.find(rand(User.first.id..User.last.id)))
+  Order.create(total_amount: Faker::Commerce.price, pickup_code:"not_paid", user:User.find(rand(User.first.id..User.last.id)))
 end
 
 10.times do
