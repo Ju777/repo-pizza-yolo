@@ -4,7 +4,9 @@ class Order < ApplicationRecord
   belongs_to :user
 
   def order_recap
-    UserMailer.customer_order_email(self).deliver_now # email sent to customer
-    UserMailer.pizzeria_order_email(self).deliver_now # email sent to restaurant's manager
+    unless self.pickup_code == "not_paid"
+      UserMailer.customer_order_email(self).deliver_now # email sent to customer
+      UserMailer.pizzeria_order_email(self).deliver_now # email sent to restaurant's manager
+    end
   end
 end

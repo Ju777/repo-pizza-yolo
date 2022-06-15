@@ -15,7 +15,6 @@ class CartsController < ApplicationController
     puts "#"*100
     puts "@order_to_pay = #{@order_to_pay.id}"
     puts "#"*100
-
   end
 
   def new
@@ -48,7 +47,7 @@ class CartsController < ApplicationController
     @cart = Cart.find(params[:id])
     total = 0
       @cart.products.each do |product|
-        total = total + product.price
+        total += product.price
       end
     return total
   end
