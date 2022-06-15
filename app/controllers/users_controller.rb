@@ -9,12 +9,12 @@ class UsersController < ApplicationController
     # (par Julien) Comme c'est directement le curren_user qui est appelé dans la view users#show, les variables suivantes ne servent qu'au controller.
     # On devrait pouvoir les supprimer, elles ne sont pas appelées ailleurs pour l'instant.
 
-    # @user = current_user
+    
     # @firstname = current_user.firstname
     # @lastname = current_user.lastname
     # @email = current_user.email
     # @phone = current_user.phone
-
+      @user = current_user
       @user_orders = current_user.orders
       
   end

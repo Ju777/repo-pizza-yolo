@@ -8,7 +8,7 @@
 <ul>
   <% @cart_to_show.cart_products.each do |cart_product| %>
     <li>
-      <%= cart_product.product %> : <%= cart_product.product.title %>. <strong>Prix : <%= cart_product.product.price %> €</strong>
+      <%= cart_product.product %> : <%= cart_product.product.title %>. <strong>Prix : <%= cart_product.product.price %> €</strong> [<%= link_to "Remove", cart_product, method: :delete, class: "btn btn-outline-danger" %>]
     </li>
   <% end %>
 </ul>
