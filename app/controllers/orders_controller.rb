@@ -9,10 +9,9 @@ class OrdersController < ApplicationController
     puts "#"*100
     puts "On est dans la méthode NEW de Orders."
     puts "#"*100
-
     @order_to_pay = Order.where(user:current_user).last
     puts "#"*100
-    puts "order_to_pay = #{@order_to_pay}"
+    puts "order_to_pay = #{@order_to_pay.id}"
     puts "#"*100
 
 
