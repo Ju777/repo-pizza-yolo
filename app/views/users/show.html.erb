@@ -7,7 +7,11 @@
         <div class="col-4">
         <p>Nom : <%= current_user.lastname %></p>
         <p>Prénom : <%= current_user.firstname %></p>
-        <p>Tel: <%= current_user.phone %></p>
+        <p>Tel: <%= current_user.phone %>
+        <% if current_user.phone == "0600000000" %>
+          <strong>TIPS</strong> : Entrez votre num de mobile pour être prévenu par SMS quand votre commande est prête.
+        <% end %>
+        </p>
         <p>Email : <%= current_user.email %></p>
         <p>Historiques des commandes : </p>
         <ul>

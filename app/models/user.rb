@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   after_create :welcome_send
+  after_create :create_cart
 
   def welcome_send
     UserMailer.welcome_email(self).deliver_now
@@ -22,12 +23,12 @@ class User < ApplicationRecord
     length: { maximum: 30 }
 
   validates :phone,
-    presence: true,
     format: {with: /\A(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})\z/}
 
-  after_create :create_cart
+
 
   def create_cart
+    # A supprimer en review finale
     puts "Creating cart"
     Cart.create(user:self)
   end
