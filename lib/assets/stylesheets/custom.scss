@@ -1,3 +1,7 @@
+/*body {
+  background: rgb(0,0,0);
+}*/
+
 #mainNav {
   color: var(--bs-white);
   --bs-body-bg: #000000;
@@ -147,6 +151,7 @@ div {
 }
 
 #cardcatchphrase {
+  font-size: 15px;
   margin: 0px;
   padding: 0px;
   color: #2d2d2d;
@@ -161,13 +166,75 @@ div {
 #cardprice {
   color: rgb(255,255,255);
   padding: 15px;
+  margin-bottom: 8px;
 }
 
 #cardseebtn {
   background: rgba(0,183,121,0);
   transform: perspective(0px);
-  margin: -5px;
+  margin: 0px;
+  margin-top: 0px;
   border-width: 2px;
   border-color: #00b779;
   color: #00b779;
+  padding-right: 15px;
+  padding-left: 15px;
+  
 }
+
+#cardaddtocartbtn {
+  color: #00b779;
+  border-width: 2px;
+  border-color: #00b779;
+  background: rgba(0, 183, 121, 0);
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-left: 20px;
+}
+
+#backlink {
+  color: rgb(255,255,255);
+}
+
+#productshowimg {
+  min-height: 300px;
+}
+
+#productshowtextcol {
+  text-align: center;
+}
+
+#productshowtitle {
+  color: rgb(255,255,255);
+  padding-bottom: 0px;
+}
+
+#productshowcatchphrase {
+  padding-top: 0px;
+  padding-bottom: 10px;
+}
+
+#productshowdesc {
+  color: rgb(255,255,255);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#productshowprice {
+  color: rgb(255,255,255);
+}
+
+#productshowbtn {
+  color: #00b779;
+  font-size: 16px;
+  padding-right: 16px;
+  padding-left: 16px;
+  border: 2px solid #00b779;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.fit-cover {
+  object-fit: cover;
+}
+
