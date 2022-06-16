@@ -13,7 +13,8 @@ class UserMailer < ApplicationMailer
   end
 
 
-  def order_recap_email(order)
+  # email au client pour confirmer sa commande payée
+  def customer_order_email(order)
     #on récupère l'instance de la commande en question
     @order = order
 
@@ -26,5 +27,21 @@ class UserMailer < ApplicationMailer
     # c'est cet appel à mail() qui permet d'envoyer l’e-mail en définissant destinataire et sujet.
     mail(to: @order.user.email, subject: 'PIZZA-YOLO: Récapitulatif de votre commande') 
   end
+
+
+  # email au manager du restaurant pour indiquer qu'une commande vient d'être passée/payée
+  def pizzeria_order_email(order)
+    #on récupère l'instance de la commande en question
+    @order = order
+
+    #on défini une variable qui identifie le manager du restaurant lié à la commande
+    @admin_user = @order.restaurant.manager
+
+    #on recupere dans une variable le nom du user ayant passé commande
+    @order_user_name = "#{@order.user.firstname} #{@order.user.lastname}" 
+
+    mail(to: @admin_email, subject: "Une commande vient d\'passée par #{@order_user_name}" + " !")
+  end
+
 
 end

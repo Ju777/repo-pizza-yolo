@@ -6,9 +6,10 @@ class Order < ApplicationRecord
 
   private
 
-  def order_recap
+  def order_recap #method to send emails after an order is paid
     unless self.pickup_code == "not_paid"
-      UserMailer.order_recap_email(self).deliver_now
+      UserMailer.customer_order_email(self).deliver_now # email sent to customer
+      UserMailer.pizzeria_order_email(self).deliver_now # email sent to restaurant's manager
     end
   end
 
