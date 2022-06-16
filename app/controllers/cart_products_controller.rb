@@ -33,6 +33,8 @@ class CartProductsController < ApplicationController
   end
 
   def update
+
+    redirect_to cart_products_path
   end
 
   def destroy
