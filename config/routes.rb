@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   end
   resources :products
   resources :cart_products
+  get '/story', to: 'static_pages#story'
 end

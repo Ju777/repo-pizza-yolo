@@ -1,6 +1,6 @@
-/*body {
+body {
   background: rgb(0,0,0);
-}*/
+}
 
 #mainNav {
   color: var(--bs-white);
@@ -125,10 +125,6 @@ section {
   margin-top: 20px;
   padding-top: 20px;
   margin-right: 0px;
-}
-
-div {
-  background: #000000;
 }
 
 #cardrow {
@@ -261,4 +257,31 @@ div {
   color: #00b779;
   background: rgba(0,183,121,0);
   border: 2px solid #00b779;
+}
+
+#storyparallax {
+  height: 930px;
+  background: url("storyimg.jpg") center / cover;
+  margin-top: 130px;
+  padding-top: 50px;
+  padding-right: 6px;
+  filter: sepia(100%);
+}
+
+#storytextcol {
+  padding-top: 120px;
+}
+
+#storycard {
+  max-width: 350px;
+}
+
+#storytitle {
+  color: rgb(255,255,255);
+  margin-top: 10px;
+  padding-top: 50px;
+}
+
+#storytext {
+  color: rgb(255,255,255);
 }

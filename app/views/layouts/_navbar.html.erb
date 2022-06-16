@@ -4,7 +4,7 @@
             <a class="navbar-brand" href=<%=root_path%>><%= image_tag "logo_navbar.png", id:"navimg"%> </a>
                 <ul class="navbar-nav mx-auto">
                     <%= link_to "Accueil", root_path, class:"nav-link active", id:"homebtn"%>
-                    <%= link_to "L'Histoire", root_path, class:"nav-link", id:"storylink"%>
+                    <%= link_to "L'Histoire", "/story", class:"nav-link", id:"storylink"%>
                     <%= link_to "Menu", products_path, class:"nav-link", id:"menulink"%>
                 </ul>
             <% if user_signed_in? %>
