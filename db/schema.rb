@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 2022_06_15_125208) do
     t.datetime "updated_at", null: false
     t.string "firstname", default: ""
     t.string "lastname", default: ""
-    t.string "phone", default: ""
+    t.string "phone", default: "0600000000"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
