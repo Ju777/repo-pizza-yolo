@@ -31,16 +31,17 @@ ActiveRecord::Base.connection.reset_pk_sequence!('users')
 
 image_url = ["https://img.freepik.com/photos-gratuite/pizza-mixte-divers-ingredients_140725-3790.jpg?t=st=1655193419~exp=1655194019~hmac=93d53a026685e0b93926e67a3757f8c6dd62881985a67248882ac0ddb5d9105a&w=1380",]
 categories = ["Pizza",
-              "Boisson",]
-      
-i=1
-1.times do
-  User.create(email:"pizza-user#{i}@yopmail.com", password:"123456", phone:"0600000000")
+              "Boisson"]
+
+User.create(email:"admin-pizza@yopmail.com", password:"123456", role:2)              
+i=2
+10.times do
+  User.create(email:"pizza-user#{i}@yopmail.com", password:"123456")
   i+=1
 end
 
 5.times do
-  Restaurant.create(name:Faker::Movie.title, street:Faker::Address.street_name, zipcode:rand(10000..99999), city:Faker::Address.city, phone:"0607080910", manager:User.find(rand(User.first.id..User.last.id)))
+  Restaurant.create(name:Faker::Movie.title, street:Faker::Address.street_name, zipcode:rand(10000..99999), city:Faker::Address.city, phone:"", manager:User.find(rand(User.first.id..User.last.id)))
 end
 
 5.times do
@@ -59,7 +60,7 @@ end
   puts"Produit resto"
 end
 
-1.times do
+20.times do
   Order.create(total_amount: Faker::Commerce.price, pickup_code:"not_paid", user:User.find(rand(User.first.id..User.last.id)), restaurant: Restaurant.find(rand(Restaurant.first.id..Restaurant.last.id)) )
 end
 
