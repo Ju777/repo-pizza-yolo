@@ -40,7 +40,7 @@ class UserMailer < ApplicationMailer
     #on recupere dans une variable le nom du user ayant passé commande
     @order_user_name = "#{@order.user.firstname} #{@order.user.lastname}" 
 
-    mail(to: @admin_email, subject: "Une commande vient d\'passée par #{@order_user_name}" + " !")
+    mail(to: @admin_user.email, subject: "Une commande vient d\'passée par #{@order_user_name}" + " !")
   end
 
 
