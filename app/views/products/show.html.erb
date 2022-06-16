@@ -3,5 +3,5 @@
 
 <p>Produit sélectionné : <%= @product_to_show %></p>
 <p><%= @product_to_show.id %>. <%= @product_to_show.title %></p>
-[<%= link_to "Add to cart", cart_products_path+"?product=#{@product_to_show.id}", method: :post %>] 
+[<%= link_to "Add to cart", cart_products_path(product_id:@product_to_show), method: :post %>]
 

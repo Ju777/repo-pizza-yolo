@@ -8,13 +8,18 @@
 <ul>
   <% @cart_to_show.cart_products.each do |cart_product| %>
     <li>
-      <%= cart_product.product %> : <%= cart_product.product.title %>. <strong>Prix : <%= cart_product.product.price %> €</strong> [<%= link_to "Remove", cart_product_path(cart_product), method: :delete, class: "btn btn-outline-danger" %>]
+      <%= cart_product.product %> : <%= cart_product.product.title %>. <strong>Prix : <%= cart_product.product.price %> €</strong>[<%= link_to "Remove", cart_product, method: :delete, class: "btn btn-outline-danger" %>]
+      <%= cart_product.inspect %>
+
     </li>
   <% end %>
+
 </ul>
 
+<%= link_to "Voir profil", users_path(current_user) %>
+
 <h1>Page de modif de panier de <%= @order_to_pay.user %> !</h1>
-<%= form_tag orders_path do %>
+<%= form_tag orders_path do  %>
   <article>
     <% if flash[:error].present? %>
       <div id="error_explanation">
