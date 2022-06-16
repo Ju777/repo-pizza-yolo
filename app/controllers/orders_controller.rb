@@ -40,7 +40,8 @@ class OrdersController < ApplicationController
       description: "Achat d'un produit",
       currency: 'eur',
       })
-      @current_order.update(pickup_code:"#{@current_order.id}####{@current_order.created_at}")
+      final_pickup_code = "#{@current_order.id}##{@current_order.created_at.to_i}"
+      @current_order.update(pickup_code:final_pickup_code)
       puts "#"*100
       puts "On est dans le block STRIPE."
       puts "@current_order = #{@current_order}"
