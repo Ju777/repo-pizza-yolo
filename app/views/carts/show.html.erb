@@ -24,7 +24,7 @@
   <p><strong>TOTAL A PAYER : <%= @total_to_pay %> €</strong></p>
 
   <% if current_user.firstname == "" && current_user.lastname == "" && current_user.phone == "" %>
-  <!-- Prompter l'utilisateur à renseigner ses données personelles avant de pouvoir passer commande -->
+  <!-- Force user to update his personnal data in order do process order -->
     <p>Profil incomplet, merci de <%= link_to "compléter votre profil", edit_user_path(@current_user.id) %> pour pouvoir finaliser votre commande :</p>
   <% else %>
 
@@ -35,9 +35,6 @@
             <p><%= flash[:error] %></p>
           </div>
         <% end %>
-        <!--<label class="amount">-->
-          <!--<span>paiement de : <%#= @order_to_pay.total_amount %> €</span>-->
-        <!--</label>-->
       </article>
       <br/>
       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"

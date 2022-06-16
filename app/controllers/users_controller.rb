@@ -7,28 +7,18 @@ class UsersController < ApplicationController
   end
 
   def show
-    # (par Julien) Comme c'est directement le curren_user qui est appelé dans la view users#show, les variables suivantes ne servent qu'au controller.
-    # On devrait pouvoir les supprimer, elles ne sont pas appelées ailleurs pour l'instant.
-
-    
-    # @firstname = current_user.firstname
-    # @lastname = current_user.lastname
-    # @email = current_user.email
-    # @phone = current_user.phone
       @user = current_user
-      @user_orders = current_user.orders
-      
+      @user_orders = current_user.orders  
   end
 
   def edit
-
    @user = User.find(params[:id])
   end
 
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to user_path(@user), notice: "Modifications enregistrées" }
+        format.html { redirect_to user_path(@user), notice: "Modifications enregistrées." }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -39,7 +29,6 @@ class UsersController < ApplicationController
 
 
   private
-
   
   def set_user
     @user = User.find(params[:id])
@@ -48,8 +37,6 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:email, :encrypted_password, :description, :firstname, :lastname, :phone,)
   end
-
-
   
   def check_profile_owner
     profile_owner = User.find(params[:id])
