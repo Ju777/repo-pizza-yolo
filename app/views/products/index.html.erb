@@ -1,3 +1,26 @@
+<%= render partial: 'products/hero' %>
+<section>
+        <div class="container bg-primary-gradient py-5">
+            <div class="row" id="menurow">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <p class="fw-bold text-success mb-2">Nos pizzas</p>
+                    <h3 class="fw-bold">Elles n'attendent que vous.</h3>
+                </div>
+            </div>
+            <div class="py-5 p-lg-5">
+                <div class="row row-cols-1 row-cols-md-2 mx-auto" id="cardrow">
+                    <div class="col mb-5">
+                        <div class="card">
+                            <div class="card-body px-4 py-5 px-md-5" id="productcard">
+                                <h5 class="fw-bold card-title" id="cardtitle">Margherita</h5><small id="cardcatchphrase">Le grand Classique</small><%= image_tag "cardimgtest.png", id:"cardimg" %>
+                                <p id="cardprice">12,00€</p><a class="btn btn-primary" role="button" id="cardseebtn">Voir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
 <h1>Products#index</h1>
 <p>Find me in app/views/products/index.html.erb</p>
 

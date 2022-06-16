@@ -121,9 +121,9 @@ ActiveRecord::Schema.define(version: 2022_06_15_125208) do
     t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "firstname", default: ""
-    t.string "lastname", default: ""
-    t.string "phone", default: "0600000000"
+    t.string "firstname"
+    t.string "lastname"
+    t.string "phone"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

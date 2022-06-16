@@ -1,0 +1,173 @@
+#mainNav {
+  color: var(--bs-white);
+  --bs-body-bg: #000000;
+  background: rgb(0,0,0);
+  --bs-body-color: #ffffff;
+  height: 91px;
+}
+
+#navimg {
+  color: rgb(0,0,0);
+  width: 240px;
+  margin: 0px;
+  padding: 0px;
+  margin-right: 20px;
+}
+
+#homebtn {
+  border-color: rgba(255,255,255,0.9);
+  color: rgba(255,255,255,0.9);
+}
+
+#storylink {
+  color: rgba(255,255,255,0.55);
+}
+
+#menulink {
+  color: rgba(255,255,255,0.55);
+}
+
+#subscribelink {
+  color: #ffffff;
+  margin: 0px;
+  padding: 0px;
+  font-size: 15px;
+}
+
+#loglink {
+  color: #ffffff;
+  font-size: 15px;
+  margin: 5px;
+  padding: 10px;
+  height: 44px;
+}
+
+#cartbtn {
+  background: rgba(0,183,121,0);
+  color: #00b779;
+  border-radius: 32px;
+  font-size: 15px;
+  border-width: 2px;
+  border-color: #00b779;
+  padding: 7.6px 32px;
+  margin: 0px;
+}
+
+.bg-primary-gradient {
+  background: #000000;
+  text-align: center;
+  border-top-width: 1px;
+}
+
+#copyright {
+  color: #2d2d2d;
+}
+
+#logofooter {
+  width: 90px;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+
+#mainherophrase {
+  color: rgb(255,255,255);
+}
+
+#herobtn {
+  background: rgba(0,183,121,0);
+  color: #00b779;
+  margin-top: 10px;
+  border-radius: 32px;
+  border-width: 2px;
+  border-color: #00b779;
+}
+
+#heropizzas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 20px;
+  padding-top: 10px;
+}
+
+#pizzal {
+  position: relative;
+  flex: 0 0 45%;
+  transform: translate3d(-15%, 35%, 0);
+}
+
+#pizzar1 {
+  width: 461.188px;
+  margin: 0px;
+  padding: 0px;
+}
+
+#pizzar2 {
+  position: relative;
+  flex: 0 0 45%;
+  transform: translate3d(-5%, 20%, 0);
+}
+
+section {
+  background: #000000;
+  border-style: none;
+}
+
+#menurow {
+  background: #000000;
+  margin-top: 20px;
+  padding-top: 20px;
+  margin-right: 0px;
+}
+
+div {
+  background: #000000;
+}
+
+#cardrow {
+  max-width: 900px;
+}
+
+#productcard {
+  background: #000000;
+  border-radius: 0px;
+  margin: 0px;
+  text-align: center;
+}
+
+#cardtitle {
+  color: #ffffff;
+  text-align: center;
+  margin: 0px;
+  padding: 5px;
+  font-size: 25px;
+}
+
+#cardcatchphrase {
+  margin: 0px;
+  padding: 0px;
+  color: #2d2d2d;
+}
+
+#cardimg {
+  width: 280px;
+  padding: 5px;
+  margin: 10px;
+}
+
+#cardprice {
+  color: rgb(255,255,255);
+  padding: 15px;
+}
+
+#cardseebtn {
+  background: rgba(0,183,121,0);
+  transform: perspective(0px);
+  margin: -5px;
+  border-width: 2px;
+  border-color: #00b779;
+  color: #00b779;
+}

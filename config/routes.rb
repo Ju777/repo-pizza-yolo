@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  root 'static_pages#index'
+  root 'products#index'
 
   resources :carts
   resources :orders
