@@ -9,11 +9,11 @@ class OrdersController < ApplicationController
     puts "#"*100
     puts "On est dans la méthode NEW de Orders."
     puts "#"*100
-
+    @cart_to_show = current_user.cart
     @order_to_pay = Order.where(user:current_user).last
 
     puts "#"*100
-    puts "order_to_pay = #{@order_to_pay.id}"
+    puts "order_to_pay = #{@order_to_pay}"
     puts "#"*100
 
 
@@ -40,7 +40,8 @@ class OrdersController < ApplicationController
       description: "Achat d'un produit",
       currency: 'eur',
       })
-      @current_order.update(pickup_code:"#{@current_order.id}####{@current_order.created_at}")
+      final_pickup_code = "#{@current_order.id}##{@current_order.created_at.to_i}"
+      @current_order.update(pickup_code:final_pickup_code)
       puts "#"*100
       puts "On est dans le block STRIPE."
       puts "@current_order = #{@current_order}"

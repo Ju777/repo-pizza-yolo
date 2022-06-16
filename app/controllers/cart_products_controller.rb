@@ -14,10 +14,9 @@ class CartProductsController < ApplicationController
     puts "#"*100
     puts "On est dans CartProduct#create"
     puts "params.inspect = #{params.inspect}"
-    puts "params[:product] = #{params[:product]}"
     puts "#"*100
 
-    product_to_add = Product.find(params[:product])
+    product_to_add = Product.find(params[:product_id])
     @new_cart_product = CartProduct.new(cart:current_user.cart, product: product_to_add)
 
     if @new_cart_product.save
@@ -37,5 +36,21 @@ class CartProductsController < ApplicationController
   end
 
   def destroy
+    puts "#"*100
+    puts "On est dans CartProduct#create"
+    puts "params.inspect = #{params.inspect}"
+    puts "#"*100
+
+    product = CartProduct.find(params[:id])
+    product.destroy
+    respond_to do |format|
+      format.html {
+        flash.notice = "Produit retiré du panier"
+        redirect_to cart_path(current_user.cart)
+      }
+      format.js {}
+    end
+
+
   end
 end

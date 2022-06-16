@@ -5,26 +5,39 @@
     <div class="container">
      <div class="row justify-content-center">
         <div class="col-4">
-        <p>Nom : <%= current_user.lastname %></p>
-        <p>Prénom : <%= current_user.firstname %></p>
-        <p>Tel: <%= current_user.phone %>
-        <% if current_user.phone == "0600000000" %>
+          <%= form_tag user_avatars_path(@user), multipart: true do %>
+            <%= file_field_tag :avatar %>
+          <%= submit_tag "OK" %>
+          <% end %>
+        <%if @user.avatar.attached?%>
+          <%= image_tag @user.avatar, alt: 'avatar' %>
+        <%end%>
+
+        <p>Nom : <%= @user.lastname %></p>
+        <p>Prénom : <%= @user.firstname %></p>
+        <p>Tel: <%= @user.phone %>
+        <% if @user.phone == "0600000000" %>
           <strong>TIPS</strong> : Entrez votre num de mobile pour être prévenu par SMS quand votre commande est prête.
         <% end %>
         </p>
-        <p>Email : <%= current_user.email %></p>
+        <p>Email : <%= @user.email %></p>
         <p>Historiques des commandes : </p>
         <ul>
           <% @user_orders.each do |order| %>
           <li>
             <p><strong>Commande n° <%= order.id %> générée le <%= order.created_at %>, montant <%= order.total_amount %> €.</strong>(code retrait <%= order.pickup_code %>)</p>
-            <p><strong>Détails des produits achetés :</strong> (nécessite une modif de la DB)</p>
+            <p><strong>Détails des produits achetés :</strong> (à venir nécessite une modif de la DB)</p>
 
           </li>
           <% end %>
         </ul>
 
-     <%= link_to 'Editer les identifiants', edit_user_registration_path(current_user.id), class:"btn btn-success" %>
+
+     <%= link_to 'Editer les identifiants', edit_user_registration_path(@user.id), class:"btn btn-success" %>
+
+
+     <%= link_to 'Changer mes infos', edit_user_path(current_user.id), class:"btn btn-success" %>
+
     </div>
    </div>
   </div>

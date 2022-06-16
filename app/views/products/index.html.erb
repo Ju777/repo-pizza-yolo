@@ -29,7 +29,7 @@
   <% @all_products.each do |product| %>
     <li>
       <%= product.id %>. <%= product.title %>. Prix <%= product.price %> €. <strong>[categ. <%= product.category.title %>]</strong> ---
-      [<%= link_to "Details", product_path(product) %>] [<%= link_to "Add to cart", cart_products_path+"?product=#{product.id}", method: :post %>] 
+      [<%= link_to "Details", product_path(product) %>] [<%= link_to "Add to cart", cart_products_path(product_id:product), method: :post %>] 
     </li>
   <% end %>
 </ul>

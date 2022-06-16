@@ -34,7 +34,7 @@ categories = ["Pizza",
               "Boisson",]
       
 i=1
-10.times do
+1.times do
   User.create(email:"pizza-user#{i}@yopmail.com", password:"123456", phone:"0600000000")
   i+=1
 end
@@ -45,7 +45,6 @@ end
 
 5.times do
 Category.create(title:categories.sample)
-  i+=1
 puts"category created"
 end
 
@@ -55,14 +54,12 @@ i=1
   i+=1
 end
 
-i=1
 20.times do
   ProductRestaurant.create(restaurant:Restaurant.find(rand(Restaurant.first.id..Restaurant.last.id)), product:Product.find(rand(Product.first.id..Product.last.id)))
-  i+=1
   puts"Produit resto"
 end
 
-10.times do
+1.times do
   Order.create(total_amount: Faker::Commerce.price, pickup_code:"not_paid", user:User.find(rand(User.first.id..User.last.id)), restaurant: Restaurant.find(rand(Restaurant.first.id..Restaurant.last.id)) )
 end
 

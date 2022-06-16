@@ -8,21 +8,24 @@
 <ul>
   <% @cart_to_show.cart_products.each do |cart_product| %>
     <li>
-      <%= cart_product.product %> : <%= cart_product.product.title %>. <strong>Prix : <%= cart_product.product.price %> €</strong> 
+      <%= cart_product.product %> : <%= cart_product.product.title %>. <strong>Prix : <%= cart_product.product.price %> €</strong> [<%= link_to "Remove", cart_product, method: :delete, class: "btn btn-outline-danger" %>]
     </li>
+
   <% end %>
 </ul>
 
 <p><strong>TOTAL A PAYER : <%= @total_to_pay %> €</strong></p>
 
 <!-- Options à choisir -->
-<p>OPTION 1 avec page intermédiaire: <%= link_to 'Confirmer commande', new_order_path, class:"btn btn-primary" %></p>
+<!--<p>OPTION 1 : <%= link_to 'Modif. panier', new_order_path, class:"btn btn-primary" %></p> -->
 
-<p>OPTION 2 paiement direct :</p>
-<% if current_user.firstname == "" && current_user.lastname == "" && current_user.phone == "0600000000" %>
+<!--<p>OPTION 2 paiement direct :</p> -->
+
+<% if current_user.firstname == "" && current_user.lastname == "" && current_user.phone == "" %>
 <!-- Prompter l'utilisateur à renseigner ses données personelles avant de pouvoir passer commande -->
   <p>Profil incomplet, merci de <%= link_to "compléter votre profil", edit_user_path(@current_user.id) %> pour pouvoir finaliser votre commande :</p>
 <% else %>
+
   <%= form_tag orders_path do %>
     <article>
       <% if flash[:error].present? %>
