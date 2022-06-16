@@ -175,6 +175,12 @@ div {
 
 /* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */ 
 .cartcontent { 
+
+}
+
+/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */ 
+.insidecartcontent { 
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  width: 100%;
 }

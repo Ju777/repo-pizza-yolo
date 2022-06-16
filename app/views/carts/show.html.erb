@@ -3,23 +3,25 @@
 <br>
 <br>
 
-<div class="cartcontent">
-  <div>
+<div>
+  <div class="insidecartcontent">
     <p><strong>Votre panier contient les produits suivants :</strong></p>
   
-
       <% @cart_to_show.cart_products.each do |cart_product| %>
       
       <div class="container">
         <div class="row">
+
           <div class="col">
             <%= cart_product.product.title %>
             <br>
             Qté = <%= cart_product.quantity %>
           </div>
+
           <div class="col">
             Prix : <%= cart_product.product.price %> €
             </div>
+
           <div class="col">
             <%= link_to "retirer", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %>
           </div>
@@ -32,39 +34,38 @@
           -->
 
       <% end %>
-
   </div>
+
+  <h3>TOTAL A PAYER : <%= @total_to_pay %> €</h3>
+
+  <% if current_user.firstname == "" && current_user.lastname == "" && current_user.phone == "" %>
+  
+  <!-- Prompter l'utilisateur à renseigner ses données personelles avant de pouvoir passer commande -->
+    <p>Profil incomplet, merci de <%= link_to "compléter votre profil", edit_user_path(@current_user.id) %> pour pouvoir finaliser votre commande :</p>
+  
+  <% else %>
+
+    <%= form_tag orders_path do %>
+      <article>
+        <% if flash[:error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:error] %></p>
+          </div>
+        <% end %>
+        <!--<label class="amount">-->
+          <!--<span>paiement de : <%#= @order_to_pay.total_amount %> €</span>-->
+        <!--</label>-->
+      </article>
+      <br/>
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+      data-description="Achat d'un produit"
+      data-amount=<%= @stripe_amount %>
+      data-currency="eur"
+      data-locale="auto"></script>
+    <% end %>
+  <% end %>
 </div>
 
-<p><strong>TOTAL A PAYER : <%= @total_to_pay %> €</strong></p>
 
-<!-- Options à choisir -->
-<!--<p>OPTION 1 : <%= link_to 'Modif. panier', new_order_path, class:"btn btn-primary" %></p> -->
 
-<!--<p>OPTION 2 paiement direct :</p> -->
-
-<% if current_user.firstname == "" && current_user.lastname == "" && current_user.phone == "" %>
-<!-- Prompter l'utilisateur à renseigner ses données personelles avant de pouvoir passer commande -->
-  <p>Profil incomplet, merci de <%= link_to "compléter votre profil", edit_user_path(@current_user.id) %> pour pouvoir finaliser votre commande :</p>
-<% else %>
-
-  <%= form_tag orders_path do %>
-    <article>
-      <% if flash[:error].present? %>
-        <div id="error_explanation">
-          <p><%= flash[:error] %></p>
-        </div>
-      <% end %>
-      <!--<label class="amount">-->
-        <!--<span>paiement de : <%#= @order_to_pay.total_amount %> €</span>-->
-      <!--</label>-->
-    </article>
-    <br/>
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-    data-description="Achat d'un produit"
-    data-amount=<%= @stripe_amount %>
-    data-currency="eur"
-    data-locale="auto"></script>
-  <% end %>
-<% end %>
