@@ -147,6 +147,7 @@ div {
 }
 
 #cardcatchphrase {
+  font-size: 15px;
   margin: 0px;
   padding: 0px;
   color: #2d2d2d;
@@ -161,13 +162,28 @@ div {
 #cardprice {
   color: rgb(255,255,255);
   padding: 15px;
+  margin-bottom: 8px;
 }
 
 #cardseebtn {
   background: rgba(0,183,121,0);
   transform: perspective(0px);
-  margin: -5px;
+  margin: 0px;
+  margin-top: 0px;
   border-width: 2px;
   border-color: #00b779;
   color: #00b779;
+  padding-right: 15px;
+  padding-left: 15px;
+  
+}
+
+#cardaddtocartbtn {
+  color: #00b779;
+  border-width: 2px;
+  border-color: #00b779;
+  background: rgba(0, 183, 121, 0);
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-left: 20px;
 }
