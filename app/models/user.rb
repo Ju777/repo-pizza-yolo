@@ -20,7 +20,7 @@ class User < ApplicationRecord
     length: { maximum: 30 }
 
     validates :phone,
-    length: { is: 10, message "doit être composé de 10 chiffres" },
+    length: { is: 10, message: "doit être composé de 10 chiffres" },
     format: {with: /\A[0]{1}[1-7]{1}[0-9]{8}\z/,
       message: "doit être composé de 10 chiffres et commencer par 0" },
   on: :update
