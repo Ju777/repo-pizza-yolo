@@ -16,13 +16,15 @@
 <p><strong>TOTAL A PAYER : <%= @total_to_pay %> €</strong></p>
 
 <!-- Options à choisir -->
-<p>OPTION 1 : <%= link_to 'Modif. panier', new_order_path, class:"btn btn-primary" %></p>
+<!--<p>OPTION 1 : <%= link_to 'Modif. panier', new_order_path, class:"btn btn-primary" %></p> -->
 
-<p>OPTION 2 paiement direct :</p>
+<!--<p>OPTION 2 paiement direct :</p> -->
+
 <% if current_user.firstname == "" && current_user.lastname == "" && current_user.phone == "0600000000" %>
 <!-- Prompter l'utilisateur à renseigner ses données personelles avant de pouvoir passer commande -->
   <p>Profil incomplet, merci de <%= link_to "compléter votre profil", edit_user_path(@current_user.id) %> pour pouvoir finaliser votre commande :</p>
 <% else %>
+
   <%= form_tag orders_path do %>
     <article>
       <% if flash[:error].present? %>
