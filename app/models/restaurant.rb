@@ -13,7 +13,9 @@ class Restaurant < ApplicationRecord
     format: { with: /\A(?:0[1-9]|[1-8]\d|9[0-8])\d{3}\z/ }
     
   validates :phone,
+    presence: true,
+    allow_blank: true,
     length: { is: 10, message: "doit être composé de 10 chiffres" },
-    format: {with: /\A[0]{1}[1-7]{1}[0-9]{8}\z/, message: "doit être composé de 10 chiffres et commencer par 0" },
-  on: :update
+    format: {with: /\A[0]{1}[1-7]{1}[0-9]{8}\z/, message: "doit être composé de 10 chiffres et commencer par 01 ou 02 etc ..." },
+  on: :create
 end
