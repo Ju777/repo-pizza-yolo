@@ -9,12 +9,8 @@ class CartsController < ApplicationController
   def show
     @cart_to_show = Cart.find(params[:id])
     @total_to_pay = total_cart
+
     @order_to_pay = Order.create(total_amount:@total_to_pay, user:current_user, pickup_code:"not_paid", restaurant: Restaurant.first)
-    error_message = @order_to_pay.errors.full_messages
-    puts "#"*100
-    puts "@order_to_pay = #{@order_to_pay.id}"
-    puts "@order_to_pay = #{error_message}"
-    puts "#"*100
 
   end
 
@@ -48,7 +44,7 @@ class CartsController < ApplicationController
     @cart = Cart.find(params[:id])
     total = 0
       @cart.products.each do |product|
-        total = total + product.price
+        total += product.price
       end
     return total
   end
