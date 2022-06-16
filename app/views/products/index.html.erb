@@ -7,24 +7,23 @@
                     <h3 class="fw-bold">Elles n'attendent que vous.</h3>
                 </div>
             </div>
-             <div class="py-5 p-lg-5">
-                <% @all_products.each do |product| %>
-                    <div class="row mx-auto" id="cardrow">
-                    <div class="col lg-5">
-                        <div class="card">
-                            <div class="card-body px-4 py-5 px-md-5" id="productcard">
-                             <%= image_tag "cardimgtest.png", id:"cardimg" %>
-                             <h5 class="fw-bold card-title" id="cardtitle"> <%= product.id %>.<%= product.title%></h5>
-                              <small id="cardcatchphrase"> <%= product.catchphrase%> </small>
-                             <p id="cardprice">Prix <%= product.price%> €</p>
-                            <%= link_to 'Voir', product_path(product), class:"btn btn-success" %>
-                             <%= link_to 'Ajouter au panier', cart_products_path(product), class:"btn btn-success" %> 
-                            </div>
+             <div class="row mx-auto  mx-auto">
+                    <% @all_products.each do |product|  %>
+                  <div class="col-sm  mx-auto"id="cardrow">
+                      <div class="card border-dark text-center">
+                          <div class="card-body"id="productcard">
+                          <%= image_tag "cardimgtest.png", id:"cardimg"%>
+                            <h5 class="card-title" id="cardtitle"><%=product.title%></h5>
+                            <small id="cardcatchphrase"> <%= product.catchphrase%> </small>
+                            <p id="cardprice">Prix <%= product.price%> €</p>
+                            <%= link_to 'Voir', product_path(product), class:"btn btn-success", id:"cardseebtn" %>
+                            <%= link_to 'Ajouter au panier', cart_products_path(product), class:"btn btn-success", id:"cardaddtocartbtn", type:"button" %> 
+                         </div>
                         </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div><%end%>
+                    <br/>
+                  </div>
+                 <% end %>
+             </div>         
+        </div>
 </section>
 
