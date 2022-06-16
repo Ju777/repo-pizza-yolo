@@ -1,8 +1,5 @@
 <%= form_for user do |f|%>
-
-                  
-
-              <div class="form-group my-3">
+  <div class="form-group my-3">
     <label>Prénom :</label>
     <%= f.text_field :firstname, class: 'form-control'%>
   </div>
@@ -12,9 +9,9 @@
     <%= f.text_field :lastname, class: 'form-control'%>
   </div>
 
-    <div class="form-group my-3">
+  <div class="form-group my-3">
     <label>Tel :</label>
     <%= f.text_field :phone, class: 'form-control'%>
-    </div>    
-      <%=f.submit "update"%>
-      <% end %>
+  </div>    
+  <%=f.submit "update"%>
+<% end %>

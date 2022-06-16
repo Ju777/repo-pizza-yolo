@@ -11,11 +11,6 @@ class CartProductsController < ApplicationController
   end
 
   def create
-    puts "#"*100
-    puts "On est dans CartProduct#create"
-    puts "params.inspect = #{params.inspect}"
-    puts "#"*100
-
     product_to_add = Product.find(params[:product_id])
     @new_cart_product = CartProduct.new(cart:current_user.cart, product: product_to_add)
     @new_cart_product.quantity = 1
@@ -27,7 +22,6 @@ class CartProductsController < ApplicationController
       flash.alert="Produit non ajouté. Erreur."
       redirect_to product_path(product_to_add)
     end
-
   end
 
   def edit
@@ -62,11 +56,6 @@ class CartProductsController < ApplicationController
   end
 
   def destroy
-    puts "#"*100
-    puts "On est dans CartProduct#create"
-    puts "params.inspect = #{params.inspect}"
-    puts "#"*100
-
     product = CartProduct.find(params[:id])
     product.destroy
     respond_to do |format|

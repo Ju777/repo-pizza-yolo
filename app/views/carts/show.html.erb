@@ -12,6 +12,7 @@
       <div class="container">
         <div class="row">
 
+<<<<<<< HEAD
           <div class="col">
             <%= cart_product.product.title %>
             <br>
@@ -43,6 +44,31 @@
   <!-- Prompter l'utilisateur à renseigner ses données personelles avant de pouvoir passer commande -->
     <p>Profil incomplet, merci de <%= link_to "compléter votre profil", edit_user_path(@current_user.id) %> pour pouvoir finaliser votre commande :</p>
   
+=======
+<% if @cart_to_show.cart_products.length == 0 %>
+  <p><strong>Votre panier est vide.</strong></p>
+  <%= link_to 'Voir catalogue', products_path, class:"btn btn-primary"%>
+<% else %>
+
+  <p><strong>Il contient les produits suivants :</strong></p>
+
+  <ul>
+    <% @cart_to_show.cart_products.each do |cart_product| %>
+      <li>
+        <%= cart_product.product %> : <%= cart_product.product.title %>. <strong>Prix : <%= cart_product.product.price %> €</strong> [<%= link_to "Remove", cart_product, method: :delete, class: "btn btn-outline-danger" %>]
+      </li>
+
+    <% end %>
+  </ul>
+
+
+
+  <p><strong>TOTAL A PAYER : <%= @total_to_pay %> €</strong></p>
+
+  <% if current_user.firstname == "" && current_user.lastname == "" && current_user.phone == "" %>
+  <!-- Force user to update his personnal data in order do process order -->
+    <p>Profil incomplet, merci de <%= link_to "compléter votre profil", edit_user_path(@current_user.id) %> pour pouvoir finaliser votre commande :</p>
+>>>>>>> dev
   <% else %>
 
     <%= form_tag orders_path do %>
@@ -52,9 +78,12 @@
             <p><%= flash[:error] %></p>
           </div>
         <% end %>
+<<<<<<< HEAD
         <!--<label class="amount">-->
           <!--<span>paiement de : <%#= @order_to_pay.total_amount %> €</span>-->
         <!--</label>-->
+=======
+>>>>>>> dev
       </article>
       <br/>
       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -65,7 +94,12 @@
       data-locale="auto"></script>
     <% end %>
   <% end %>
+<<<<<<< HEAD
 </div>
 
 
 
+=======
+
+<% end %>
+>>>>>>> dev
