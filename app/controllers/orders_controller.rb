@@ -9,9 +9,11 @@ class OrdersController < ApplicationController
     puts "#"*100
     puts "On est dans la méthode NEW de Orders."
     puts "#"*100
+    @cart_to_show = current_user.cart
     @order_to_pay = Order.where(user:current_user).last
+
     puts "#"*100
-    puts "order_to_pay = #{@order_to_pay.id}"
+    puts "order_to_pay = #{@order_to_pay}"
     puts "#"*100
 
 
@@ -52,6 +54,29 @@ class OrdersController < ApplicationController
       redirect_to new_order_path # initialement : redirect_to new_order_path
     end
     # After the rescue, if the payment succeeded
+
+    # Vidage du cart
+    cart_products_to_empty = current_user.cart.cart_products
+
+    puts "#"*100
+
+    puts "cart_products_to_empty AVANT VIDAGE = #{cart_products_to_empty}"
+    puts "Il contient : "
+    cart_products_to_empty.each do |cart_product|
+      puts "#"*30
+      puts cart_product.product.title
+      cart_product.destroy
+    end
+
+    puts "#"*100
+    puts "cart_products_to_empty APRES VIDAGE= #{cart_products_to_empty}"
+    cart_products_to_empty.each do |cart_product|
+      puts "#"*30
+      puts cart_product.product.title
+      # cart_product.destroy
+    end
+
+    puts "#"*100
 
 
   end
