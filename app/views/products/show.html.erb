@@ -1,15 +1,15 @@
 <h1>[<%= link_to "Retour", products_path(@products),class:"btn btn-success", type:"button" %>]</h1>
 
 
-    <div class="container py-4 py-xl-5">
-        <div class="row gy-4 gy-md-0">
-            <div class="col-md-6">
-            <%= @product_to_show %>
-                <div class="p-xl-5 m-xl-5"><%= image_tag "cardimgtest.png", class:"rounded img-fluid w-100 fit-cover", id:"productshowimg"%>
-                </div>
+<div class="container py-4 py-xl-5">
+    <div class="row gy-4 gy-md-0">
+        <div class="col-md-6">
+         <% @product_to_show %>
+            <div class="p-xl-5 m-xl-5"><%= image_tag "cardimgtest.png", class:"rounded img-fluid w-100 fit-cover", id:"productshowimg"%>
             </div>
-            <div class="col-md-6 d-md-flex align-items-md-center" id="productshowtextcol">
-                <div id="productshowtexts">
+         </div>
+        <div class="col-md-6 d-md-flex align-items-md-center" id="productshowtextcol">
+            <div id="productshowtexts">
                 <h2 class="text-uppercase fw-bold" id="productshowtitle"><%=@product_to_show.title%></h2>
                 <h5 id="productshowcatchphrase"><%=@product_to_show.catchphrase%></h5>
                 <p id="productshowdesc" class="my-3"><%=@product_to_show.description%></p>
