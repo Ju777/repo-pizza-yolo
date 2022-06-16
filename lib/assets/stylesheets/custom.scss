@@ -125,6 +125,7 @@ section {
 
 div {
   background: #000000;
+  color: #ffffff;
 }
 
 #cardrow {
@@ -170,4 +171,10 @@ div {
   border-width: 2px;
   border-color: #00b779;
   color: #00b779;
+}
+
+/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */ 
+.cartcontent { 
+  display: flex;
+  justify-content: center;
 }
