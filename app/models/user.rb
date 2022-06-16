@@ -1,9 +1,7 @@
 class User < ApplicationRecord
-  # after_create :welcome_send
+  # after_create :welcome_send MAILER A RÉACTIVER AVANT LA LIVRAISON DU MVP
   after_create :create_cart
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -30,8 +28,6 @@ class User < ApplicationRecord
   end
 
   def create_cart
-    # puts à supprimer en review finale
-    puts "Creating cart"
     Cart.create(user:self)
   end
 
