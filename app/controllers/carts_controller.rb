@@ -10,11 +10,8 @@ class CartsController < ApplicationController
     @cart_to_show = Cart.find(params[:id])
     @total_to_pay = total_cart
 
-    @order_to_pay = Order.create(total_amount:@total_to_pay, user:current_user, pickup_code:"not_paid", restaurant:Restaurant.first)
+    @order_to_pay = Order.create(total_amount:@total_to_pay, user:current_user, pickup_code:"not_paid", restaurant: Restaurant.first)
 
-    puts "#"*100
-    puts "@order_to_pay = #{@order_to_pay.id}"
-    puts "#"*100
   end
 
   def new

@@ -37,5 +37,21 @@ class CartProductsController < ApplicationController
   end
 
   def destroy
+    puts "#"*100
+    puts "On est dans CartProduct#create"
+    puts "params.inspect = #{params.inspect}"
+    puts "#"*100
+
+    product = CartProduct.find(params[:id])
+    product.destroy
+    respond_to do |format|
+      format.html {
+        flash.notice = "Produit retiré du panier"
+        redirect_to cart_path(current_user.cart)
+      }
+      format.js {}
+    end
+
+
   end
 end
