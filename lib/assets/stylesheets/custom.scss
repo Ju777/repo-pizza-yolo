@@ -1,3 +1,7 @@
+/*body {
+  background: rgb(0,0,0);
+}*/
+
 #mainNav {
   color: var(--bs-white);
   --bs-body-bg: #000000;
@@ -187,3 +191,50 @@ div {
   padding-left: 15px;
   margin-left: 20px;
 }
+
+#backlink {
+  color: rgb(255,255,255);
+}
+
+#productshowimg {
+  min-height: 300px;
+}
+
+#productshowtextcol {
+  text-align: center;
+}
+
+#productshowtitle {
+  color: rgb(255,255,255);
+  padding-bottom: 0px;
+}
+
+#productshowcatchphrase {
+  padding-top: 0px;
+  padding-bottom: 10px;
+}
+
+#productshowdesc {
+  color: rgb(255,255,255);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#productshowprice {
+  color: rgb(255,255,255);
+}
+
+#productshowbtn {
+  color: #00b779;
+  font-size: 16px;
+  padding-right: 16px;
+  padding-left: 16px;
+  border: 2px solid #00b779;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.fit-cover {
+  object-fit: cover;
+}
+
