@@ -7,29 +7,24 @@
                     <h3 class="fw-bold">Elles n'attendent que vous.</h3>
                 </div>
             </div>
-            <div class="py-5 p-lg-5">
-                <div class="row row-cols-1 row-cols-md-2 mx-auto" id="cardrow">
-                    <div class="col mb-5">
+             <div class="py-5 p-lg-5">
+                <% @all_products.each do |product| %>
+                    <div class="row mx-auto" id="cardrow">
+                    <div class="col lg-5">
                         <div class="card">
                             <div class="card-body px-4 py-5 px-md-5" id="productcard">
-                                <h5 class="fw-bold card-title" id="cardtitle">Margherita</h5><small id="cardcatchphrase">Le grand Classique</small><%= image_tag "cardimgtest.png", id:"cardimg" %>
-                                <p id="cardprice">12,00€</p><a class="btn btn-primary" role="button" id="cardseebtn">Voir</a>
+                             <%= image_tag "cardimgtest.png", id:"cardimg" %>
+                             <h5 class="fw-bold card-title" id="cardtitle"> <%= product.id %>.<%= product.title%></h5>
+                              <small id="cardcatchphrase"> <%= product.catchphrase%> </small>
+                             <p id="cardprice">Prix <%= product.price%> €</p>
+                            <%= link_to 'Voir', product_path(product), class:"btn btn-success" %>
+                             <%= link_to 'Ajouter au panier', cart_products_path(product), class:"btn btn-success" %> 
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
-        </div>
+        </div><%end%>
 </section>
-<h1>Products#index</h1>
-<p>Find me in app/views/products/index.html.erb</p>
 
-<p><strong>Listing des produits en base :</strong></p>
-<ul>
-  <% @all_products.each do |product| %>
-    <li>
-      <%= product.id %>. <%= product.title %>. Prix <%= product.price %> €. <strong>[categ. <%= product.category.title %>]</strong> ---
-      [<%= link_to "Details", product_path(product) %>] [<%= link_to "Add to cart", cart_products_path(product_id:product), method: :post %>] 
-    </li>
-  <% end %>
-</ul>
