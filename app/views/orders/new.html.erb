@@ -1,11 +1,19 @@
-<h1>A SUPPRIMER EN REVIEW FINALE</h1>
-
-
-
 <h1>Orders#new</h1>
 <p>Find me in app/views/orders/new.html.erb</p>
 
-<h1>Bienvenue sur la page de paiement, <%= @order_to_pay.user %> !</h1>
+<p><strong>Le cart sélectionné est :</strong> <%= @cart_to_show %>.</p>
+
+<p><strong>Il contient les produits suivants :</strong></p>
+
+<ul>
+  <% @cart_to_show.cart_products.each do |cart_product| %>
+    <li>
+      <%= cart_product.product %> : <%= cart_product.product.title %>. <strong>Prix : <%= cart_product.product.price %> €</strong> [<%= link_to "Remove", cart_product_path(cart_product), method: :delete, class: "btn btn-outline-danger" %>]
+    </li>
+  <% end %>
+</ul>
+
+<h1>Page de modif de panier de <%= @order_to_pay.user %> !</h1>
 <%= form_tag orders_path do %>
   <article>
     <% if flash[:error].present? %>
