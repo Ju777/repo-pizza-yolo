@@ -2,9 +2,11 @@
 <br>
 <br>
 <br>
+<br>
+<br>
 
 
-<div>
+<div class="cartcontent">
   <div class="insidecartcontent">
     <p><strong>Votre panier contient les produits suivants :</strong></p>
   
@@ -39,29 +41,7 @@
       <% end %>
   </div>
 
-  <h3>TOTAL A PAYER : <%= @total_to_pay %> €</h3>
 
-  <% if current_user.firstname == "" && current_user.lastname == "" && current_user.phone == "" %>
-  
-  <!-- Prompter l'utilisateur à renseigner ses données personelles avant de pouvoir passer commande -->
-    <p>Profil incomplet, merci de <%= link_to "compléter votre profil", edit_user_path(@current_user.id) %> pour pouvoir finaliser votre commande :</p>
-  
-
-<% if @cart_to_show.cart_products.length == 0 %>
-  <p><strong>Votre panier est vide.</strong></p>
-  <%= link_to 'Voir catalogue', products_path, class:"btn btn-primary"%>
-<% else %>
-
-  <p><strong>Votre panier contient les produits suivants :</strong></p>
-
-  <ol>
-    <% @cart_to_show.cart_products.each do |cart_product| %>
-      <li>
-        <%= cart_product.product.title %>. <strong>Prix : <%= cart_product.product.price %> €</strong> [<%= link_to "Remove", cart_product, method: :delete, class: "btn btn-outline-danger" %>]
-      </li>
-
-    <% end %>
-  </ol>
 
 
   <p><strong>TOTAL A PAYER : <%= @total_to_pay %> €</strong></p>
@@ -100,10 +80,3 @@
   <% end %>
 
 </div>
-
-
-
-
-
-<% end %>
-
