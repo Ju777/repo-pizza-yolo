@@ -24,7 +24,6 @@ class User < ApplicationRecord
     format: { with: /\A[0]{1}[1-7]{1}[0-9]{8}\z/, message: "doit être composé de 10 chiffres et commencer par 0" },
   on: :update
 
-
   def welcome_send
     UserMailer.welcome_email(self).deliver_now
   end
