@@ -1,5 +1,6 @@
 body {
   background: rgb(0,0,0);
+  color: white;
 }
 
 #mainNav {
@@ -262,7 +263,7 @@ section {
 #storyparallax {
   height: 930px;
   background: url("storyimg.jpg") center / cover;
-  margin-top: 130px;
+  margin-top: 20px;
   padding-top: 50px;
   padding-right: 6px;
   filter: sepia(100%);

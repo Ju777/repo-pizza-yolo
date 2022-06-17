@@ -1,11 +1,12 @@
-    <header class="bg-primary-gradient pt-5">
-        <div class="container pt-4 pt-xl-5">
-            <div class="row pt-5">
+    <header class="pt-5">
+        <div class="container pt-xl-5">
+            <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
                     <div class="text-center">
                         <p class="fw-bold text-success mb-2">Voted #1 Worldwide</p>
                         <h1 class="fw-bold" id="mainherophrase">Votre Nouvelle Pizzeria Traditionnelle.</h1>
-                    </div><a class="btn btn-primary" role="button" id="herobtn" href="index.html">Commander</a>
+                <%= link_to "Commander", "#menurow", class:"btn btn-primary", role:"button", id:"herobtn"%> 
+                    </div>
                 </div>
                 <div class="col-12 col-lg-10 mx-auto">
                     <div id="heropizzas" class="position-relative">
