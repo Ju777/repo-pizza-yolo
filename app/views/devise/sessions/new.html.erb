@@ -2,8 +2,8 @@
   <div class="container py-5">
     <div class="row mb-4 mb-lg-5">
       <div class="col-md-8 col-xl-6 text-center mx-auto">
-        <p class="fw-bold text-success mb-2">Login</p>
-        <h2 class="fw-bold" id="welcometitle">Welcome back</h2>
+        <p class="fw-bold text-success mb-2">Se connecter</p>
+        <h2 class="fw-bold" id="welcometitle">Bon retour parmi nous !</h2>
       </div>
     </div>  
       <div class="row d-flex justify-content-center">
@@ -20,26 +20,25 @@
                   </div>
 
                   <div class="mb-3">
-                    <%= f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder:"Password"%>
+                    <%= f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder:"Mot de Passe"%>
                   </div>
 
                   <div class="mb-3">
                     <% if devise_mapping.rememberable? %>
                       <div class="field mb-3">
                         <%= f.check_box :remember_me %>
-                        <%= f.label :remember_me, class:"text-white" %>
+                        <%= f.label :Se_souvenir_de_moi, class:"text-white" %>
                       </div>
                     <% end %>
                   </div>
 
                   <div class="actions mb-3">
-                    <%= f.submit "Log in", class:"btn btn-primary d-block w-100", id:"loginbtn" %>
+                    <%= f.submit "Connexion", class:"btn btn-primary d-block w-100", id:"loginbtn" %>
                   </div>
 
                   <%= render "devise/shared/links", class:"form-text text-center mb-5 text-dark"%>
 
-                <% end %>
-                              
+                <% end %>                             
             </div>
           </div>
         </div>
