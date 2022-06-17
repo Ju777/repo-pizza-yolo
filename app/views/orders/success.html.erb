@@ -1,5 +1,18 @@
-<h1>SUCCESS.html.erb</h1>
-<h1>SUCCESS.html.erb</h1>
-<h1>SUCCESS.html.erb</h1>
-<h1>SUCCESS.html.erb</h1>
-<p><strong>Status du paiement :</strong> <%= @payment_intent.status %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 pt-5">
+    <div class="alert alert-success" role="alert">
+  
+      <h1 class="text-center">La commande est bien passée ! Merci !</h1>
+      <h2 class="text-center">Ton code de retrait est <strong><%= current_user.orders.last.pickup_code %></strong>,<br/>
+      Tu vas le recevoir sur l'adresse <strong><%= current_user.email %></strong>.
+      </h2>
+      <div class="d-flex justify-content-center pt-5">
+    <%= link_to  "Continuer le Shopping", root_path, class: "btn btn-success btn-lg me-5"%>
+</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
