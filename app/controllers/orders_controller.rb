@@ -64,15 +64,10 @@ class OrdersController < ApplicationController
       format.js
     end
 
-    total_amount = params[:total]
-    order = Order.create(total_amount:total_amount, pickup_code:"not_paid", user:current_user, restaurant: Restaurant.first)
-    pickup_code = "#{order.id}##{order.created_at.to_i}"
-    order.update(pickup_code:pickup_code)
-
     # STRIPE V2 process ends
     ############################################
 
-    empty_cart
+
   end
 
   def edit
@@ -84,26 +79,23 @@ class OrdersController < ApplicationController
   def destroy
   end
 
-  private 
-
   def success
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
-    
-    puts "#"*100
-    puts "METHODE SUCCESS"
-    puts "#"*100
+    total_amount = params[:total]
+    order = Order.create(total_amount:@payment_intent.amount.to_f/100, pickup_code:"not_paid", user:current_user, restaurant: Restaurant.first)
+    pickup_code = "#{order.id}##{order.created_at.to_i}"
+    order.update(pickup_code:pickup_code)
+    empty_cart
   end
 
   def cancel
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
-    
-    puts "#"*100
-    puts "METHODE CANCEL"
-    puts "#"*100
   end
   
+  private 
+
   def empty_cart
     cart_products_to_empty = current_user.cart.cart_products
     cart_products_to_empty.each do |cart_product|
