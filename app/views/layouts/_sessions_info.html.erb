@@ -3,15 +3,9 @@
 <%= link_to 'Vers accueil', root_path %><br/>
 <% if user_signed_in? %>
   <ul>
-    <li>
-      <p>Vous êtes connecté : <%= current_user.email %>, votre rôle : <%= current_user.role %> -> <%= link_to 'Profile', user_path(current_user) %></p>
-    </li>
-    <li>
-    <p>Achat en cours : <%= current_user.cart.cart_products.length %> [<%= link_to "voir panier", cart_path(current_user.cart)%>]</p>
-    </li>
-    <li>
-      <p><%= link_to 'Logout', destroy_user_session_path, method: :delete %> </p>
-    </li>
+    <li><p>Vous êtes connecté : <%= current_user.email %>, votre rôle : <%= current_user.role %> -> <%= link_to 'Profile', user_path(current_user) %></p></li>
+    <li><p>Achat en cours : <%= current_user.cart.cart_products.length %> [<%= link_to "voir panier", cart_path(current_user.cart)%>]</p></li>
+    <li><p><%= link_to 'Logout', destroy_user_session_path, method: :delete %></p></li>
   </ul>
 <% else %>
   <p>Personne n'est connecté :<br/>
