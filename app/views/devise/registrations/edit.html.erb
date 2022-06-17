@@ -41,10 +41,11 @@
                     <%= f.submit "Mettre à jour", class:"btn btn-outline-success d-block w-100" %>
                   </div>
                   <hr/>
-                  <h3 class="mt-5">Suppression de compte</h3>
-                  <p>Vous nous quittez ? <%= button_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Êtes-vous sûr ?" }, method: :delete, class:"btn btn-outline-success d-block w-100 mt-3"%></p>
+                  
                   <%= link_to "Retour", :back, class:"mb-2" %>
-                <% end %>                              
+                <% end %> 
+                <h3 class="mt-5">Suppression de compte</h3>
+                  <p>Vous nous quittez ? <%= button_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Êtes-vous sûr ?" }, method: :delete, class:"btn btn-outline-success d-block w-100 mt-3"%></p>                             
             </div>
           </div>
         </div>
