@@ -4,10 +4,10 @@ Commande n° <%= @order.pickup_code %> enregistrée !
 PIZZA-YOLO vous remercie pour votre commande, <%= @order.user.firstname %> !
 
 Nous vous invitons à venir la récupérer à notre pizzeria située au:
-<%= @order.restaurant.name %>
 <%= @order.restaurant.street %>
 <%= @order.restaurant.city %>
 <%= @order.restaurant.zipcode %>
+Se munir du code retrait <%= @order.pickup_code %>
 
 N'hesitez-pas à nous téléphoner au : <%= @order.restaurant.phone %> si besoin.
 

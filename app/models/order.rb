@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  # after_update :order_recap MAILER A RÉACTIVER AVANT LA LIVRAISON DU MVP
+  after_update :order_recap
   
   belongs_to :user
   belongs_to :restaurant

@@ -285,3 +285,15 @@ section {
 #storytext {
   color: rgb(255,255,255);
 }
+
+/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */ 
+.cartcontent { 
+
+}
+
+/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */ 
+.insidecartcontent { 
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

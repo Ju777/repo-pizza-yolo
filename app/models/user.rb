@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  # after_create :welcome_send MAILER A RÉACTIVER AVANT LA LIVRAISON DU MVP
+  after_create :welcome_send
   after_create :create_cart
   
   devise :database_authenticatable, :registerable,
