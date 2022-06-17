@@ -1,7 +1,3 @@
-
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
@@ -15,8 +11,6 @@
       <div class="container">
         <div class="row">
 
-
-
           <div class="col">
             <%= cart_product.product.title %>
             <br>
@@ -28,67 +22,32 @@
             </div>
 
           <div class="col">
-            <%= link_to "retirer", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %>
+            <%= link_to "retirer du panier", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %>
           </div>
-        </div>          
-        
-          <p>bouton qté +1 (NE FONCTIONNE PAS) :  </p>
-        
-        <h3>TOTAL A PAYER : <%= @total_to_pay %> €</h3>
-        <% end %>
-
-      <% if current_user.firstname == "" && current_user.lastname == "" && current_user.phone == "" %>
-      <!-- Force user to update his personnal data in order do process order -->
-        <p>Profil incomplet, merci de <%= link_to "compléter votre profil", edit_user_path(@current_user.id) %> pour pouvoir finaliser votre commande :</p>
-
-      <% else %>
-       
-
-        <p>Paiement Stripe V2</P>
-        <%= link_to 'Payer Stripe V2', orders_path(total:@total_to_pay), method: :post, class: "btn btn-primary", remote: true %>
-      <% end %>
-    <% end %> 
-
+          <div class="col">
+          <!--  <%= link_to "Ajouter +1", cart_product_path(product_id:cart_product), method: :put, class: "btn btn-outline-success btn-sm" %> -->
+          </div>
+          
+        </div>
+      </div>
 
       <% end %>
   </div>
+</div>
 
 
-
-
+<div>
   <p><strong>TOTAL A PAYER : <%= @total_to_pay %> €</strong></p>
 
   <% if current_user.firstname == "" && current_user.lastname == "" && current_user.phone == "" %>
-  <!-- Force user to update his personnal data in order do process order -->
-
+    
+    <!-- Force user to update his personnal data in order do process order -->
     <p>Profil incomplet, merci de <%= link_to "compléter votre profil", edit_user_path(@current_user.id) %> pour pouvoir finaliser votre commande :</p>
 
   <% else %>
 
-
-    <p>Paiement Stripe V1 : désactivé</p>
-
-    <%#= form_tag orders_path do %>
-        <article>
-          <%# if flash[:error].present? %>
-            <div id="error_explanation">
-              <p><%#= flash[:error] %></p>
-            </div>
-          <%# end %>
-        </article>
-        <br/>
-        <!-- <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="<%#= Rails.configuration.stripe[:publishable_key] %>"
-        data-description="Achat d'un produit"
-        data-amount=<%#= @stripe_amount %>
-        data-currency="eur"
-        data-locale="auto"></script> -->
-    <% #end %>
-
     <p>Paiement Stripe V2</P>
     <%= link_to 'Payer Stripe V2', orders_path(total:@total_to_pay), method: :post, class: "btn btn-primary", remote: true %>
   
-
   <% end %>
-
 </div>
