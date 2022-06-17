@@ -45,8 +45,7 @@
 
   <% else %>
 
-    <p>Paiement Stripe V2</P>
-    <%= link_to 'Payer Stripe V2', orders_path(total:@total_to_pay), method: :post, class: "btn btn-primary", remote: true %>
+    <%= link_to 'Payer ma Commande', orders_path(total:@total_to_pay), method: :post, class: "btn btn-primary", remote: true %>
   
   <% end %>
 </div>
