@@ -30,13 +30,25 @@
           <div class="col">
             <%= link_to "retirer", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %>
           </div>
-        </div>
-      </div>
-          
-          <!-- 
-              bouton qté +1 (NE FONCTIONNE PAS) : 
-                <%= button_to "+", cart_product_path, method: :create, class: "btn btn-outline-success btn-sm" %>
-          -->
+        </div>          
+        
+          <p>bouton qté +1 (NE FONCTIONNE PAS) :  </p>
+        
+        <h3>TOTAL A PAYER : <%= @total_to_pay %> €</h3>
+        <% end %>
+
+      <% if current_user.firstname == "" && current_user.lastname == "" && current_user.phone == "" %>
+      <!-- Force user to update his personnal data in order do process order -->
+        <p>Profil incomplet, merci de <%= link_to "compléter votre profil", edit_user_path(@current_user.id) %> pour pouvoir finaliser votre commande :</p>
+
+      <% else %>
+       
+
+        <p>Paiement Stripe V2</P>
+        <%= link_to 'Payer Stripe V2', orders_path(total:@total_to_pay), method: :post, class: "btn btn-primary", remote: true %>
+      <% end %>
+    <% end %> 
+
 
       <% end %>
   </div>
