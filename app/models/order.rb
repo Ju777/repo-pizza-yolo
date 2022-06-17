@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   after_update :order_recap
   
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
   belongs_to :restaurant
 
   private
