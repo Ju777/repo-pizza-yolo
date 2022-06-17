@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   validates :firstname, :lastname,
     length: { maximum: 30 },
-    format: { with: /\A([A-Z]*|[a-z]*|\s*|[\'éèàç-]*)*\z/, message: "Un ou plusieurs caractères sont invalides." },
+    format: { with: /\A([A-Z]*|[a-z]*|\s*|[\'éèàç-]*)*\z/, message: "contient un ou des caractères non valides." },
   on: :update
 
   validates :phone,
