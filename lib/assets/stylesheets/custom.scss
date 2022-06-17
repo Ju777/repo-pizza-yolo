@@ -129,6 +129,7 @@ section {
 
 div {
   background: #000000;
+  color: #ffffff;
 }
 
 #cardrow {
@@ -177,6 +178,21 @@ div {
   border-width: 2px;
   border-color: #00b779;
   color: #00b779;
+<<<<<<< HEAD
+}
+
+/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */ 
+.cartcontent { 
+
+}
+
+/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */ 
+.insidecartcontent { 
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+=======
   padding-right: 15px;
   padding-left: 15px;
   
@@ -238,3 +254,4 @@ div {
   object-fit: cover;
 }
 
+>>>>>>> dev

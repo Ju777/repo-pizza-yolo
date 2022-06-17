@@ -8,6 +8,7 @@ class CartsController < ApplicationController
 
   def show
     @cart_to_show = Cart.find(params[:id])
+    
     @total_to_pay = total_cart
 
     # La ligne du dessous est à utiliser uniquement avec un paiement Stripe V1. Il faudra la désactiver en cas d'utilisation de Stripe V2.

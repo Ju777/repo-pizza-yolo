@@ -13,6 +13,7 @@ class CartProductsController < ApplicationController
   def create
     product_to_add = Product.find(params[:product_id])
     @new_cart_product = CartProduct.new(cart:current_user.cart, product: product_to_add)
+    @new_cart_product.quantity = 1
 
     if @new_cart_product.save
       flash.notice="Produit ajouté avec succès."
@@ -27,6 +28,31 @@ class CartProductsController < ApplicationController
   end
 
   def update
+    #on identifie le produit selectionné dans le panier:
+    @cartproduct_to_update = CartProduct.find(params[:id])
+
+    puts " "
+    puts "="*50
+    puts "voici le cartproduct_to_update : #{@cartproduct_to_update}"
+    puts "="*50
+    puts " " 
+
+    puts " "
+    puts "="*50
+    puts "qté du cartproduct_to_update : #{@cartproduct_to_update.quantity}"
+    puts "="*50
+    puts " "
+
+    @cartproduct_to_update.quantity += 1 
+
+    puts " "
+    puts "="*50
+    puts "qté du cartproduct_to_update apres l'update : #{@cartproduct_to_update.quantity}"
+    puts "="*50
+    puts " "
+    
+    # on redirige vers le panier (1ère étape, ensuite il faudra que ça soit fait via AJAX)
+    redirect_to cart_path(current_user)
   end
 
   def destroy
