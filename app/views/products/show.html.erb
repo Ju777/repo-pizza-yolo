@@ -1,22 +1,22 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<h1>[<%= link_to "Retour", products_path(@products),class:"btn btn-success", type:"button" %>]</h1>
 
-<p>Produit sélectionné : <%= @product_to_show %></p>
-<p><%= @product_to_show.id %>. <%= @product_to_show.title %></p>
-[<%= link_to "Add to cart", cart_products_path(product_id:@product_to_show), method: :post %>]
 
-<div class="container py-4 py-xl-5"><a id="backlink" href="#">Retour à la liste des produits</a>
+<div class="container py-4 py-xl-5">
     <div class="row gy-4 gy-md-0">
         <div class="col-md-6">
+         <% @product_to_show %>
             <div class="p-xl-5 m-xl-5"><%= image_tag "cardimgtest.png", class:"rounded img-fluid w-100 fit-cover", id:"productshowimg"%>
             </div>
          </div>
         <div class="col-md-6 d-md-flex align-items-md-center" id="productshowtextcol">
             <div id="productshowtexts">
-                <h2 class="text-uppercase fw-bold" id="productshowtitle">Margherita</h2>
-                <h5 id="productshowcatchphrase">Catchphrase</h5>
-                <p id="productshowdesc" class="my-3">Description (ingrédients)</p>
-                <p id="productshowprice">12,00€</p><a class="btn" role="button" id="productshowbtn" href="#">Ajouter au panier</a>
+                <h2 class="text-uppercase fw-bold" id="productshowtitle"><%=@product_to_show.title%></h2>
+                <h5 id="productshowcatchphrase"><%=@product_to_show.catchphrase%></h5>
+                <p id="productshowdesc" class="my-3"><%=@product_to_show.description%></p>
+                <p id="productshowprice"><%=@product_to_show.price%></p>
+                [<%= link_to "Add to cart", cart_products_path(product_id:@product_to_show),class:"btn btn-success", type:"button", method: :post %>]
+                [<%= link_to "Retour", products_path(@products),class:"btn btn-success", type:"button" %>]
+
             </div>
         </div>
     </div>

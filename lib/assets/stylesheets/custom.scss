@@ -1,6 +1,6 @@
-/*body {
+body {
   background: rgb(0,0,0);
-}*/
+}
 
 #mainNav {
   color: var(--bs-white);
@@ -127,11 +127,6 @@ section {
   margin-right: 0px;
 }
 
-div {
-  background: #000000;
-  color: #ffffff;
-}
-
 #cardrow {
   max-width: 900px;
 }
@@ -178,21 +173,6 @@ div {
   border-width: 2px;
   border-color: #00b779;
   color: #00b779;
-<<<<<<< HEAD
-}
-
-/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */ 
-.cartcontent { 
-
-}
-
-/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */ 
-.insidecartcontent { 
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-=======
   padding-right: 15px;
   padding-left: 15px;
   
@@ -254,4 +234,66 @@ div {
   object-fit: cover;
 }
 
->>>>>>> dev
+#welcometitle {
+  color: rgb(255,255,255);
+}
+
+#logcard {
+  background: #000000;
+  border: 1px solid #2d2d2d;
+  border-radius: 10px;
+}
+
+#logiconcircle {
+  background: rgba(0,183,121,0);
+  border: 2px solid #00b779;
+}
+
+#logicon {
+  color: #00b779;
+}
+
+#loginbtn {
+  color: #00b779;
+  background: rgba(0,183,121,0);
+  border: 2px solid #00b779;
+}
+
+#storyparallax {
+  height: 930px;
+  background: url("storyimg.jpg") center / cover;
+  margin-top: 130px;
+  padding-top: 50px;
+  padding-right: 6px;
+  filter: sepia(100%);
+}
+
+#storytextcol {
+  padding-top: 120px;
+}
+
+#storycard {
+  max-width: 350px;
+}
+
+#storytitle {
+  color: rgb(255,255,255);
+  margin-top: 10px;
+  padding-top: 50px;
+}
+
+#storytext {
+  color: rgb(255,255,255);
+}
+
+/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */ 
+.cartcontent { 
+
+}
+
+/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */ 
+.insidecartcontent { 
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

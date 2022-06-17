@@ -17,4 +17,5 @@ Rails.application.routes.draw do
 
   resources :products
   resources :cart_products
+  get '/story', to: 'static_pages#story'
 end
