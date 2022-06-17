@@ -11,7 +11,7 @@ class CartsController < ApplicationController
     
     @total_to_pay = total_cart
 
-    # La ligne du dessous est à utiliser uniquement avec un paiement Stripe V1. Il faudra la désactiver en cas d'utilisation de Stripe V2.
+    # The following line is used with Stripe payment V1 only. It has to to be commented while using Stripe payment V2.
     # @order_to_pay = Order.create(total_amount:@total_to_pay, user:current_user, pickup_code:"not_paid", restaurant: Restaurant.first)
 
   end

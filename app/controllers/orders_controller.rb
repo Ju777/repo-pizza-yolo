@@ -6,10 +6,8 @@ class OrdersController < ApplicationController
   end
 
   def new
-    puts "#"*100
-    puts "ORDERS#NEW"
-    puts "#"*100
-
+  # The following code is not called in this user's process.
+  # But it is kept here in order to work with during the next week if the final project.
     @cart_to_show = current_user.cart
     @order_to_pay = Order.where(user:current_user).last
   end
@@ -47,15 +45,13 @@ class OrdersController < ApplicationController
 
     #############################################
     # STRIPE V2 process begins
-    total_to_pay = params[:total]
-    order = Order.create(total_amount:total_to_pay, pickup_code:"not_paid", user:current_user, restaurant: Restaurant.first)
-
+    
     @session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       line_items: [
         {
           name: 'Pizza-Yolo',
-          amount: (total_to_pay.to_f*100).to_i,
+          amount: ((params[:total].to_f)*100).to_i,
           currency: 'eur',
           quantity: 1
         },
@@ -64,14 +60,18 @@ class OrdersController < ApplicationController
       cancel_url: orders_cancel_url
     )
   
-    pickup_code = "#{order.id}##{order.created_at.to_i}"
-    order.update(pickup_code:pickup_code)
-    
     respond_to do |format|
       format.js
     end
+
+    total_amount = params[:total]
+    order = Order.create(total_amount:total_amount, pickup_code:"not_paid", user:current_user, restaurant: Restaurant.first)
+    pickup_code = "#{order.id}##{order.created_at.to_i}"
+    order.update(pickup_code:pickup_code)
+
     # STRIPE V2 process ends
-    ############################################ 
+    ############################################
+
     empty_cart
   end
 
@@ -89,11 +89,19 @@ class OrdersController < ApplicationController
   def success
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+    
+    puts "#"*100
+    puts "METHODE SUCCESS"
+    puts "#"*100
   end
 
   def cancel
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+    
+    puts "#"*100
+    puts "METHODE CANCEL"
+    puts "#"*100
   end
   
   def empty_cart
