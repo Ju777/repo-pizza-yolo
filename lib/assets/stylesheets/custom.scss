@@ -167,23 +167,16 @@ section {
 }
 
 #cardseebtn {
-  background: rgba(0,183,121,0);
+
   transform: perspective(0px);
   margin: 0px;
   margin-top: 0px;
-  border-width: 2px;
-  border-color: #00b779;
-  color: #00b779;
   padding-right: 15px;
   padding-left: 15px;
   
 }
 
 #cardaddtocartbtn {
-  color: #00b779;
-  border-width: 2px;
-  border-color: #00b779;
-  background: rgba(0, 183, 121, 0);
   padding-right: 15px;
   padding-left: 15px;
   margin-left: 20px;
@@ -252,12 +245,6 @@ section {
 
 #logicon {
   color: #00b779;
-}
-
-#loginbtn {
-  color: #00b779;
-  background: rgba(0,183,121,0);
-  border: 2px solid #00b779;
 }
 
 #storyparallax {
