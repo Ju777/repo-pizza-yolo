@@ -17,17 +17,10 @@ class CartProductsController < ApplicationController
 
     unless current_user.cart.products.include?(product)
       new_cart_product = CartProduct.new(product: product, cart:current_user.cart, quantity:1)
-    puts " "
-    puts " "
-    puts "#"*50
-    puts new_cart_product
-    puts "#"*50
-    puts " "
-    puts " "
 
-      if new_cart_product.save!
-      flash[:success] = "Produit ajouté au panier"
-      redirect_to cart_path(current_user.cart)
+      if new_cart_product.save
+        flash[:success] = "Produit ajouté au panier"
+        redirect_to cart_path(current_user.cart)
       else
         flash[:error] = "Erreur d'ajout au panier"
         redirect_to root_path
@@ -35,6 +28,7 @@ class CartProductsController < ApplicationController
 
     else
       existing_cart_product.update(quantity: existing_cart_product.quantity+1)
+      redirect_to cart_path(current_user.cart)
     end
 
   end

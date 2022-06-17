@@ -1,7 +1,3 @@
-
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
@@ -28,15 +24,14 @@
             </div>
 
           <div class="col">
-            <%= link_to "retirer", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %>
+            <%= link_to "retirer du panier", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %>
+          </div>
+          <div class="col">
+          <!--  <%= link_to "Ajouter +1", cart_product_path(product_id:cart_product), method: :put, class: "btn btn-outline-success btn-sm" %> -->
           </div>
         </div>
       </div>
-          
-          <!-- 
-              bouton qté +1 (NE FONCTIONNE PAS) : 
-                <%= button_to "+", cart_product_path, method: :create, class: "btn btn-outline-success btn-sm" %>
-          -->
+
 
       <% end %>
   </div>
