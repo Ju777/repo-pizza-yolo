@@ -47,15 +47,15 @@ class OrdersController < ApplicationController
 
     #############################################
     # STRIPE V2 process begins
-    total_to_pay = params[:total]
-    order = Order.create(total_amount:total_to_pay, pickup_code:"not_paid", user:current_user, restaurant: Restaurant.first)
+    
+    
 
     @session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       line_items: [
         {
           name: 'Pizza-Yolo',
-          amount: (total_to_pay.to_f*100).to_i,
+          amount: (params[:total]*100).to_i,
           currency: 'eur',
           quantity: 1
         },
@@ -63,7 +63,13 @@ class OrdersController < ApplicationController
       success_url: orders_success_url + '?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: orders_cancel_url
     )
-  
+    @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+    puts "#"*100
+    puts @payment_intent.inspect
+    puts "#"*100
+
+    total_amount = params[:total]
+    order = Order.create(total_amount:total_amount, pickup_code:"not_paid", user:current_user, restaurant: Restaurant.first)
     pickup_code = "#{order.id}##{order.created_at.to_i}"
     order.update(pickup_code:pickup_code)
     
@@ -72,7 +78,7 @@ class OrdersController < ApplicationController
     end
     # STRIPE V2 process ends
     ############################################ 
-    empty_cart
+    # empty_cart
   end
 
   def edit
