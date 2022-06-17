@@ -1,11 +1,8 @@
-<br>
-<%= link_to "Retour", products_path(@products),class:"top-link hide", type:"button" %>>
-
 <div class="container py-4 py-xl-5">
-
+    <br>
+    <br>
+    <h2><%= link_to "Retour", products_path(@products),class:"btn btn-success",id:"cardaddtocartbtn", type:"button" %></h2>
     <div class="row gy-4 gy-md-0">
-    <h2><%= link_to "Retour", products_path(@products),class:"btn btn-success", type:"button" %></h2>
-
         <div class="col-md-6">
          <% @product_to_show %>
             <div class="p-xl-5 m-xl-5"><%= image_tag "cardimgtest.png", class:"rounded img-fluid w-100 fit-cover", id:"productshowimg"%>
