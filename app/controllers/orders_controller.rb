@@ -59,15 +59,16 @@ class OrdersController < ApplicationController
       success_url: orders_success_url + '?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: orders_cancel_url
     )
+  
+    respond_to do |format|
+      format.js
+    end
 
     total_amount = params[:total]
     order = Order.create(total_amount:total_amount, pickup_code:"not_paid", user:current_user, restaurant: Restaurant.first)
     pickup_code = "#{order.id}##{order.created_at.to_i}"
     order.update(pickup_code:pickup_code)
-    
-    respond_to do |format|
-      format.js
-    end
+
     # STRIPE V2 process ends
     ############################################
 
@@ -88,11 +89,19 @@ class OrdersController < ApplicationController
   def success
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+    
+    puts "#"*100
+    puts "METHODE SUCCESS"
+    puts "#"*100
   end
 
   def cancel
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+    
+    puts "#"*100
+    puts "METHODE CANCEL"
+    puts "#"*100
   end
   
   def empty_cart
