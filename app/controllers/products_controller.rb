@@ -5,7 +5,6 @@ class ProductsController < ApplicationController
 
   def show
     @products = Product.all
-
     @product_to_show = Product.find(params[:id]) 
   end
 
