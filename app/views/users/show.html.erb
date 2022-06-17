@@ -27,7 +27,7 @@
                     <ul>
                     <% @user_orders.each do |order| %>
                       <li>
-                      <p><strong>Commande n° <%= order.id %> générée le <%= order.created_at %>, montant <%= order.total_amount %> €.</strong>(code retrait <%= order.pickup_code %>)</p>
+                      <p><strong>Commande n° <%= order.id %> générée le <%= order.created_at %>, montant <%= order.total_amount %> €.</strong></p>
                       </li>
                     <% end %>
                     </ul>
