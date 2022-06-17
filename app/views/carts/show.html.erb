@@ -13,6 +13,9 @@
               <div class="mb-3">
                 <div class="cartcontent">
                   <div class="insidecartcontent">
+                     <% if @cart_to_show.cart_products.length == 0 %>
+                     <p><strong>Votre panier est vide.</strong></p>
+                     <% else %>
                     <p><strong>Votre panier contient les produits suivants :</strong></p>
                       <% @cart_to_show.cart_products.each do |cart_product| %>
                         <div class="container mb-2">
@@ -37,6 +40,7 @@
                       <p>Profil incomplet, merci de <%= link_to "compléter votre profil", edit_user_path(@current_user.id) %> pour pouvoir finaliser votre commande :</p>
                       <% else %>
                       <%= link_to 'Payer ma Commande', orders_path(total:@total_to_pay), method: :post, class: "btn btn-outline-success", remote: true %>
+                      <% end %>
                       <% end %>
                     </div>
                   </div>
