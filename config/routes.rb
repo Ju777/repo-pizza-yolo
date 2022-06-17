@@ -5,11 +5,11 @@ Rails.application.routes.draw do
   resources :carts
   resources :orders
 
-  scope '/orders' do
+  # scope '/orders' do
     # post 'create', to: 'orders#create', as: orders_create
     get 'cancel', to: 'orders#cancel', as: 'orders_cancel'
     get 'success', to: 'orders#success', as: 'orders_success'
-  end
+  # end
 
   resources :users, only: [:show, :edit, :update] do
     resources :avatars, only: [:create]

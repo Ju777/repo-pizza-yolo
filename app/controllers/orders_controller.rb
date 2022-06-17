@@ -84,12 +84,11 @@ class OrdersController < ApplicationController
   def destroy
   end
 
-  private 
-
   def success
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
-    
+    # redirect_to orders_success_path
+
     puts "#"*100
     puts "METHODE SUCCESS"
     puts "#"*100
@@ -104,6 +103,8 @@ class OrdersController < ApplicationController
     puts "#"*100
   end
   
+  private 
+
   def empty_cart
     cart_products_to_empty = current_user.cart.cart_products
     cart_products_to_empty.each do |cart_product|
