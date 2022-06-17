@@ -16,11 +16,8 @@
   <body>
 
   <%= render partial: 'layouts/navbar' %>
-
-    <% flash.each do |type ,msg| %>
-      <%= msg %>
-    <% end %>
-
+  
+  <%= render partial: 'layouts/flash_message' %>
     
 
 
