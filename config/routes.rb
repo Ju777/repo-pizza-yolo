@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   resources :carts
   resources :cart_products do
     member do
-      put 'add_qty'
-      put 'qty_minus_one'
+      post 'add_qty'
+      post 'qty_minus_one'
     end
   end
 
