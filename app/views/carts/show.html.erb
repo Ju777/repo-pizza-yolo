@@ -28,7 +28,7 @@
                               Prix : <%= cart_product.product.price %> €
                             </div>
 
-                             <div class="col">
+                            <div class="col">
                               <%= link_to "Qté +1", cart_product_path(product_id:cart_product), method: :put, class: "btn btn-outline-success btn-sm" %>
                             </div>
 
@@ -46,7 +46,7 @@
                             </div>
 
                             <div class="col">
-                            <%= link_to "Vider le Panier", cart_product, method: :delete, class: "btn btn-primary btn-sm" %>                           
+                            <%= link_to "Vider le Panier", cart_product, method: :delete_all, class: "btn btn-primary btn-sm" %>                           
                             </div>                            
 
                             <hr/>
