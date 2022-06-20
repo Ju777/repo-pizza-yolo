@@ -27,9 +27,24 @@
                             <div class="col">
                               Prix : <%= cart_product.product.price %> €
                             </div>
+
+                             <div class="col">
+                              <%= link_to "Qté +1", cart_product_path(product_id:cart_product), method: :put, class: "btn btn-outline-success btn-sm" %>
+                            </div>
+
+                            <div>
+                              <%= text_area_tag(:message, "#{cart_product.quantity}", size: "2x1") %>
+                              <!-- ajouter ici le bouton 'Submit' (pour updater la nouvelle quantité) -->
+                            </div>                            
+
+                             <div class="col">
+                              <%= link_to "Qté -1", cart_product_path(product_id:cart_product), method: :put, class: "btn btn-outline-danger btn-sm" %>
+                            </div>
+
                             <div class="col">
                             <%= link_to "Retirer du Panier", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %>                           
                             </div>
+                            
                             <hr/>
                           </div>
                         </div>
