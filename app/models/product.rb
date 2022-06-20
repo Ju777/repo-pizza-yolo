@@ -4,6 +4,7 @@ class Product < ApplicationRecord
   belongs_to :category
   has_many :product_restaurants
   has_many :restaurants, through: :product_restaurants
+  belongs_to :schedule
 
   validates :title,
     presence: true,

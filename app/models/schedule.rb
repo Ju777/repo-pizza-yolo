@@ -1,3 +1,3 @@
 class Schedule < ApplicationRecord
-  has_many :cart_products
+  has_many :products, dependent: :destroy
 end
