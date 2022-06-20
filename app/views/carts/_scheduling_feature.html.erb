@@ -1,0 +1,6 @@
+<h5>Travail sur la fonctionnalité "Horaires"</h5>
+<p>Choisir un horaire de livraison</p>
+<%= form_tag schedules_path, method: "post" do %>
+  <%= datetime_local_field_tag 'date'%>
+  <%= submit_tag "OK" %>
+<% end %>

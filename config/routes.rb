@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  get 'schedules/index'
-  get 'schedules/show'
-  get 'schedules/new'
-  get 'schedules/create'
-  get 'schedules/edit'
-  get 'schedules/update'
-  get 'schedules/destroy'
   root 'products#index'
   devise_for :users
   
@@ -21,4 +14,5 @@ Rails.application.routes.draw do
   resources :products
   resources :cart_products
   get '/story', to: 'static_pages#story'
+  resources :schedules
 end
