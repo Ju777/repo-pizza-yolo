@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :orders, dependent: :destroy
-  has_one :cart
+  has_one :cart, dependent: :destroy
   has_many :comments
   has_one :managed_restaurant, foreign_key: 'manager_id', class_name: "Restaurant"
   has_one_attached :avatar

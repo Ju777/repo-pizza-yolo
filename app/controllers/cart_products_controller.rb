@@ -33,7 +33,6 @@ class CartProductsController < ApplicationController
 
   end
 
-
   def edit
   end
 
