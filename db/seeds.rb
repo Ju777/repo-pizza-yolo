@@ -45,8 +45,15 @@ Category.create(title:"boisson")
 Category.create(title:"dessert")
 Category.create(title:"pizza")
 
+i=1
 10.times do
-  Schedule.create(date:Time.now + 3600*24*rand(2..10))
+  # Schedule.create(date:Time.now + 3600*24*rand(2..10))
+  if i.even?
+    Schedule.create(date: Time.new(Time.now.year, Time.now.month, rand(Time.now.day..30), rand(10..21), 00))
+  else
+    Schedule.create(date: Time.new(Time.now.year, Time.now.month, rand(Time.now.day..30), rand(10..21), 30))
+  end
+  i+=1
 end
 
 i=1

@@ -28,7 +28,7 @@
                               Prix : <%= cart_product.product.price %> €
                             </div>
                             <div class="col">
-                            <%= link_to "Retirer du Panier", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %>                           
+                            <%= link_to "Retirer du Panier", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %> <%= cart_product.product.category.title %>                         
                             </div>
                             <hr/>
                           </div>

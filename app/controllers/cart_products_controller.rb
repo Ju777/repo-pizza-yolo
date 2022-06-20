@@ -16,12 +16,6 @@ class CartProductsController < ApplicationController
 
     existing_cart_product = CartProduct.find_by(product: product, cart: current_user.cart)
 
-    if existing_cart_product == nil
-      existing_cart_product = CartProduct.create(product: product, cart: current_user.cart, quantity:1)
-    end
-
-
-
     unless current_user.cart.products.include?(product)
       new_cart_product = CartProduct.new(product: product, cart:current_user.cart, quantity:1)
 
