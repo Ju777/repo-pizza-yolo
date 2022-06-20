@@ -53,10 +53,12 @@ class CartProductsController < ApplicationController
   end
 
   def add_qty
-    @cart_product = CartProduct.find(params[:id])
-    product = @cart_product.product
-    new_prod = CartProduct.new(cart_id:current_user.cart.id, product:product, quantity:1)
-    new_prod.save
+    current_item = CartProduct.find(params[:id])
+    current_item.update(quantity:current_item.quantity + 1)
+
+    if current_item.save
+      redirect_to cart_path(current_user.cart), notice: 'Line item was successfully updated.'
+    end
 
     #redirect_to cart_path(current_user.cart) <- mis en commentaire pour montrer que la qté s'incrémente sur la page 'add_qty' mais pas dans la BDD et la page cart/show
   end
