@@ -45,9 +45,13 @@ Category.create(title:"boisson")
 Category.create(title:"dessert")
 Category.create(title:"pizza")
 
+10.times do
+  Schedule.create(date:Time.now + 3600*24*rand(2..10))
+end
+
 i=1
 20.times do
-  Product.create(title:Faker::Food.dish, description:Faker::Food.description, price:Faker::Commerce.price, image_url:"product_#{i}_image.jpg",catchphrase:Faker::Movie.quote, category:Category.find(rand(Category.first.id..Category.last.id))) 
+  Product.create(title:Faker::Food.dish, description:Faker::Food.description, price:Faker::Commerce.price, image_url:"product_#{i}_image.jpg",catchphrase:Faker::Movie.quote, category:Category.find(rand(Category.first.id..Category.last.id)), schedule: Schedule.find(rand(Schedule.first.id..Schedule.last.id))) 
   i+=1
 end
 
