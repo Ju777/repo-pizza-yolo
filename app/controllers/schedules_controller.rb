@@ -102,7 +102,7 @@ private
     selected_schedule = Schedule.find_by(date: time_object)
     unless selected_schedule == nil
       puts "Oui ! C'est le n° #{selected_schedule.id}. Vérifie plus haut."
-      return true
+      return selected_schedule
     else
       puts "Non, je ne le trouve pas. Il faut donc le créer. Vérifie plus haut."
       return false
@@ -112,19 +112,67 @@ private
 
   def search_schedule(remaining_pizzas, params_to_time)
     puts "#"*100
-    puts "Ca y'est on démarre la recherche d'horaire dispo pour donner #{remaining_pizzas} pizzas à livrer pour le #{params_to_time}."
+    puts "Ca y'est on démarre la recherche d'horaire disponible pour donner #{remaining_pizzas} pizzas (normalement pour le #{params_to_time})."
     puts "Déjà, est-ce que l'horaire demandé par l'utilisateur existe ?" 
     puts "#"*100
     unless is_schedule_existing(params_to_time)
       selected_schedule = Schedule.create(date: params_to_time)
     puts "#"*100
-    puts "Voici ce que j'ai crée => selected_schedule = #{selected_schedule} => #{selected_schedule.date}. Si c'est bon, on continue."
+    puts "Voici ce que j'ai créé => selected_schedule = #{selected_schedule} => #{selected_schedule.date}. Si c'est bon, on continue."
     puts "#"*100
     else
+      selected_schedule = is_schedule_existing(params_to_time)
       puts "#"*100
       puts "Je ne crée donc rien, on continue."
       puts "#"*100
     end
-    return 0
+
+    puts "#"*100
+    puts "Maintenant qu'on a un créneau bien créé, y'a-t-il assez de place pour cuisiner #{remaining_pizzas} pizzas ? Rappelons que le maxium est #{Restaurant.first.cooking_capacity}."
+    puts "#"*100
+
+    if has_enough_places(selected_schedule, remaining_pizzas)
+      puts "#"*100
+      puts "Y'A ASSEZ ! On a plus qu'à communiquer ce créneau à #{current_user.email} qui pourra donc venir chercher sa commande à partir du #{selected_schedule.date}"
+      puts "Il faut penser à associer tous ses autres produits sur ce créneau aussi. "
+      puts "#"*100
+      remaining_pizzas = 0
+      return remaining_pizzas
+    else
+      puts "#"*100
+      puts "Y'A PAS ASSEZ !"
+      puts "#"*100
+    end  
+
+    # return 0
+  end
+
+  def has_enough_places(schedule, pizzas_quantity)
+    puts "#"*100
+    puts "On arrive dans la méthode has_enough_places, on y calcule s'il y a assez de places dans le créneau choisi par le client."
+    puts "Je vais commencer par récupérer le nombre de pizzas déjà commandées sur ce créneau #{schedule.date}."
+    puts "Pour ce faire, je vais regarder quelle est la catégorie associée à chaque produit de ce créneau."
+    products = schedule.products
+    puts "En voici la liste :"
+    already_ordered_pizzas = 0
+    products.each do |product|
+      puts "Produit #{product.title} => #{product.category.title}"
+      if product.category.title == "pizza"
+        already_ordered_pizzas += 1
+      end
+    end
+    puts "#"*100
+    if already_ordered_pizzas + pizzas_quantity <= Restaurant.first.cooking_capacity
+      puts "#"*100
+      puts "il y a #{already_ordered_pizzas} pizzas déjà commandées + les #{pizzas_quantity} du client ça fait #{already_ordered_pizzas + pizzas_quantity} en tout."
+      puts "#"*100
+      return true
+    else
+      puts "#"*100
+      puts "il y a #{already_ordered_pizzas} pizzas déjà commandées + les #{pizzas_quantity} du client ça fait #{already_ordered_pizzas + pizzas_quantity} en tout."
+      puts "#"*100
+      return false
+    end
+
   end
 end
