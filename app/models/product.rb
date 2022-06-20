@@ -4,15 +4,14 @@ class Product < ApplicationRecord
   belongs_to :category
   has_many :product_restaurants, dependent: :destroy
   has_many :restaurants, through: :product_restaurants
-  belongs_to :schedule
 
   validates :title,
     presence: true,
-    length: { in: 3..20 }
+    length: { in: 3..50 }
     
   validates :catchphrase,
     presence: true,
-    length: { in: 3..100 }
+    length: { in: 3..200 }
 
   validates :description,
     presence: true,

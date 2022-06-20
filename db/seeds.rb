@@ -58,7 +58,7 @@ end
 
 i=1
 20.times do
-  Product.create(title:Faker::Food.dish, description:Faker::Food.description, price:Faker::Commerce.price, image_url:"product_#{i}_image.jpg",catchphrase:Faker::Movie.quote, category:Category.find(rand(Category.first.id..Category.last.id)), schedule: Schedule.find(rand(Schedule.first.id..Schedule.last.id))) 
+  Product.create(title:Faker::Food.dish, description:Faker::Food.description, price:Faker::Commerce.price, image_url:"product_#{i}_image.jpg",catchphrase:Faker::Movie.quote, category:Category.find(rand(Category.first.id..Category.last.id))) 
   i+=1
 end
 
@@ -77,7 +77,7 @@ i=1
 end
 
 20.times do
- CartProduct.create(cart:Cart.find(rand(Cart.first.id..Cart.last.id)), product:Product.find(rand(Product.first.id..Product.last.id)), quantity:Faker::Number.within(range: 1..10))
+ CartProduct.create(cart:Cart.find(rand(Cart.first.id..Cart.last.id)), product:Product.find(rand(Product.first.id..Product.last.id)), quantity:Faker::Number.within(range: 1..10), schedule: Schedule.find(rand(Schedule.first.id..Schedule.last.id)))
 end
 
 

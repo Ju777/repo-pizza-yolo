@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_20_155220) do
+ActiveRecord::Schema.define(version: 2022_06_20_184811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,8 +42,10 @@ ActiveRecord::Schema.define(version: 2022_06_20_155220) do
     t.datetime "updated_at", null: false
     t.bigint "cart_id"
     t.bigint "product_id"
+    t.bigint "schedule_id"
     t.index ["cart_id"], name: "index_cart_products_on_cart_id"
     t.index ["product_id"], name: "index_cart_products_on_product_id"
+    t.index ["schedule_id"], name: "index_cart_products_on_schedule_id"
   end
 
   create_table "carts", force: :cascade do |t|
@@ -97,9 +99,7 @@ ActiveRecord::Schema.define(version: 2022_06_20_155220) do
     t.datetime "updated_at", null: false
     t.bigint "category_id"
     t.string "catchphrase"
-    t.bigint "schedule_id"
     t.index ["category_id"], name: "index_products_on_category_id"
-    t.index ["schedule_id"], name: "index_products_on_schedule_id"
   end
 
   create_table "restaurants", force: :cascade do |t|
@@ -140,10 +140,10 @@ ActiveRecord::Schema.define(version: 2022_06_20_155220) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cart_products", "carts"
   add_foreign_key "cart_products", "products"
+  add_foreign_key "cart_products", "schedules"
   add_foreign_key "orders", "restaurants"
   add_foreign_key "orders", "users"
   add_foreign_key "product_restaurants", "products"
   add_foreign_key "product_restaurants", "restaurants"
   add_foreign_key "products", "categories"
-  add_foreign_key "products", "schedules"
 end
