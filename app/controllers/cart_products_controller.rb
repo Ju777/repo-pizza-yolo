@@ -56,7 +56,7 @@ class CartProductsController < ApplicationController
     @cart_product = CartProduct.find(params[:id])
     @cart_product.quantity += 1
     @cart_product.save
-    redirect_to cart_path(current_user.cart)
+    #redirect_to cart_path(current_user.cart) <- mis en commentaire pour montrer que la qté s'incrémente sur la page 'add_qty' mais pas dans la BDD et la page cart/show
   end
 
   def qty_minus_one

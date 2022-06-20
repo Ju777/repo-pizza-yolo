@@ -29,7 +29,7 @@
                             </div>
 
                             <div class="col">
-                              <%= link_to "Qté +1", add_qty_cart_cart_product_path(cart_id:current_user.cart.id), method: :put, class: "btn btn-outline-success btn-sm" %>
+                              <%= link_to "Qté +1", add_qty_cart_product_path(cart_id:current_user.cart.id), method: :post, class: "btn btn-outline-success btn-sm" %>
                             </div>
 
                             <div>
