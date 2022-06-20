@@ -39,9 +39,9 @@ end
 
 Restaurant.create(name:"PIZZA-YOLO", street:Faker::Address.street_name, zipcode:Faker::Address.zip_code, city:Faker::Address.city, phone:"0110203040", manager:User.second)
 
-Category.create(title:"Boisson")
-Category.create(title:"Dessert")
-Category.create(title:"Pizza")
+Category.create(title:"boisson")
+Category.create(title:"dessert")
+Category.create(title:"pizza")
 
 i=1
 20.times do
