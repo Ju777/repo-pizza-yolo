@@ -20,16 +20,83 @@ body {
 }
 
 #homebtn {
-  border-color: rgba(255,255,255,0.9);
   color: rgba(255,255,255,0.9);
+  font-size: large;
+  padding-top: 6px;
+  border-bottom: 2px solid #009129;
+  transition: all 0.25s linear;
+  position: relative;
+}
+
+#homebtn:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #000000;
+  position: absolute;
+  left: 0;
+  bottom: -3px; /* this is to match where the border is */
+  transform-origin: top; 
+  transform: scale(0);
+  transition: 0.25s linear;
+/*   will-change: transform; */
+}
+
+#homebtn:hover:before {
+  transform: scale(1);
 }
 
 #storylink {
   color: rgba(255,255,255,0.55);
+  border-bottom: 2px solid #ffffff;
+  transition: all 0.25s linear;
+  position: relative;
+}
+
+#storylink:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #000000;
+  position: absolute;
+  left: 0;
+  bottom: -3px; /* this is to match where the border is */
+  transform-origin: top;
+  transform: scale(0);
+  transition: 0.25s linear;
+/*   will-change: transform; */
+}
+
+#storylink:hover:before {
+  transform: scale(1);
 }
 
 #menulink {
   color: rgba(255,255,255,0.55);
+  border-bottom: 2px solid #b70000;
+  transition: all 0.25s linear;
+  position: relative;
+}
+
+#menulink:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #000000;
+  position: absolute;
+  left: 0;
+  bottom: -3px; /* this is to match where the border is */
+  transform-origin: top; 
+  transform: scale(0);
+  transition: 0.25s linear;
+/*   will-change: transform; */
+}
+
+#menulink:hover:before {
+  transform: scale(1);
 }
 
 #subscribelink {
@@ -284,4 +351,12 @@ section {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.badge {
+  background: #b70000;
+  transform: translate(-25px);
+  color: #ffffff;
+  padding: 6px 9px;
+  margin-bottom: 40px;
 }
