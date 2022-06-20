@@ -64,6 +64,11 @@ i=1
 end
 
 20.times do
- CartProduct.create(cart:Cart.find(rand(Cart.first.id..Cart.last.id)), product:Product.find(rand(Product.first.id..Product.last.id)), quantity:Faker::Number.within(range: 1..10))
+  Schedule.create(date: Time.now + 3600*24*rand(2..10))
 end
+
+20.times do
+ CartProduct.create(cart:Cart.find(rand(Cart.first.id..Cart.last.id)), product:Product.find(rand(Product.first.id..Product.last.id)), quantity:Faker::Number.within(range: 1..10), schedule:Schedule.find(rand(Schedule.first.id..Schedule.last.id)))
+end
+
 
