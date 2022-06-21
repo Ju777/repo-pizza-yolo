@@ -13,25 +13,42 @@
               <div class="mb-3">
                 <div class="cartcontent">
                   <div class="insidecartcontent">
-                      <% if @cart_to_show.cart_products.length == 0 %>
-                       <p><strong>Votre panier est vide.</strong></p>
-                      <% else %>
-                        <p><strong>Votre panier contient les produits suivants :</strong></p>
-                        <% @cart_to_show.cart_products.each do |cart_product| %>
-                          <div class="container mb-2">
-                            <div class="row">
-                              <div class="col">
-                                <%= cart_product.product.title %>
-                                <p><i>Quantité </i>= <%= cart_product.quantity %></p>
-                              </div>
-                              <div class="col">
-                                Prix : <%= cart_product.product.price %> €
-                              </div>
-                              <div class="col">
-                              <%= link_to "Retirer du Panier", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %> <%= cart_product.product.category.title %>                         
-                              </div>
-                              <hr/>
+                     <% if @cart_to_show.cart_products.length == 0 %>
+                     <p><strong>Votre panier est vide.</strong></p>
+                     <% else %>
+                    <p><strong>Votre panier contient les produits suivants :</strong></p>
+                      <% @cart_to_show.cart_products.each do |cart_product| %>
+                        <div class="container mb-2">
+                          <div class="row">
+                            <div class="col">
+                              <%= cart_product.product.title %>
+                              <p><i>Quantité </i>= <%= cart_product.quantity %></p>
                             </div>
+                            <div class="col">
+                              Prix : <%= cart_product.product.price %> €
+                            </div>
+
+                            <div class="col">
+                              <%= link_to "Qté +1", add_qty_cart_product_path(cart_product), method: :post, class: "btn btn-outline-success btn-sm" %>
+                            </div>
+
+                            <div>
+                              <%= text_area_tag(:message, "#{cart_product.quantity}", size: "2x1") %>
+                              <!-- ajouter ici le bouton 'Submit' (pour updater la nouvelle quantité) -->
+                            </div>                            
+
+                             <div class="col">
+                            <%= link_to "Qté -1", qty_minus_one_cart_product_path(cart_product), method: :post, class: "btn btn-outline-danger btn-sm" %>
+                            </div>
+
+                            <div class="col">
+                            <%#= link_to "Retirer du Panier", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %> <%= cart_product.product.category.title %>                          
+                            </div>
+
+                            <div class="col">
+                            <%#= link_to "Vider le Panier", cart_product, method: :delete_all, class: "btn btn-primary btn-sm" %>                           
+                            </div>                            
+                            <hr/>
                           </div>
                         <% end %>
                       <div>
@@ -43,8 +60,7 @@
                         <% end %>
 
                         <%= render 'scheduling_feature' %>
-
-
+                        
                       <% end %>
                     </div>
                   </div>
