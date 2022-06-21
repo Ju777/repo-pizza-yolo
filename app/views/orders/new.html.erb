@@ -12,10 +12,8 @@
     <li>
       <%= cart_product.product %> : <%= cart_product.product.title %>. <strong>Prix : <%= cart_product.product.price %> €</strong>[<%= link_to "Remove", cart_product, method: :delete, class: "btn btn-outline-danger" %>]
       <%= cart_product.inspect %>
-
     </li>
   <% end %>
-
 </ul>
 
 <h1>Page de modif de panier de <%= @order_to_pay.user %> !</h1>

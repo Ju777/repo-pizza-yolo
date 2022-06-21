@@ -12,7 +12,7 @@ class CartProductsController < ApplicationController
 
   def create
     product = Product.find(params[:product_id])
-  
+
     existing_cart_product = CartProduct.find_by(product: product, cart: current_user.cart)
 
     unless current_user.cart.products.include?(product)
@@ -31,9 +31,7 @@ class CartProductsController < ApplicationController
       existing_cart_product.update(quantity: existing_cart_product.quantity+1)
       redirect_to cart_path(current_user.cart)
     end
-
   end
-
 
   def edit
   end
