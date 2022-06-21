@@ -1,12 +1,11 @@
-<%= render partial: 'products/hero' %>
 <section>
-  <div class="container bg-primary-gradient py-5">
-    <div class="row" id="menurow">
-      <div class="col-md-8 col-xl-6 text-center mx-auto">
-        <p class="fw-bold text-success mb-2">Nos pizzas</p>
-        <h3 class="fw-bold">Elles n'attendent que vous.</h3>
+        <div class="container py-5 mt-5">
+            <div class="row" id="menurow">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h4 class="fw-bold text-success mb-2">Nos pizzas</h4>
+                    <h3 class="fw-bold">Elles n'attendent que vous.</h3>
+                </div>
       </div>
-    </div>
     <div class="row mx-auto  mx-auto">
       <% @all_products.each do |product|  %>
         <div class="col-sm  mx-auto"id="cardrow">
