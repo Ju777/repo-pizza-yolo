@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root 'products#index'
   devise_for :users
   
+  
+
   resources :carts
   resources :orders
   get 'cancel', to: 'orders#cancel', as: 'orders_cancel'
@@ -9,7 +11,11 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update] do
     resources :avatars, only: [:create]
+
   end
+  resources :admins, only: [:show]
+
+
 
   resources :products
   resources :cart_products
