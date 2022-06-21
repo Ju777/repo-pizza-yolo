@@ -1,11 +1,11 @@
-<nav class="navbar navbar-light navbar-expand-md position-relative fixed-top navbar-shrink py-3" id="mainNav" style="background: rgb(0,0,0);">
+<nav class="navbar navbar-expand-md position-relative" id="mainNav" style="background: rgb(0,0,0);">
     <div class="container">
         <div class="collapse navbar-collapse" id="navcol-1">
             <a class="navbar-brand" href=<%=root_path%>><%= image_tag "logo_navbar.png", id:"navimg"%> </a>
                 <ul class="navbar-nav mx-auto">
                     <%= link_to "Accueil", root_path, class:"nav-link active", id:"homebtn"%>
                     <%= link_to "L'Histoire", "/story", class:"nav-link", id:"storylink"%>
-                    <%= link_to "Menu", root_path+"#menurow", class:"nav-link", id:"menulink"%>
+                    <%= link_to "La Carte", products_path, class:"nav-link", id:"menulink"%>
                 </ul>
             <% if user_signed_in? %>
                 <%= link_to "Mon Profil", user_path(current_user), id:"subscribelink"%>
@@ -16,9 +16,11 @@
             <% end %>
             <%if user_signed_in?%>
                 <%= link_to "Panier", cart_path(current_user.cart), class:"btn btn-outline-success", role:"button"%>
+                <span id="item-count" class="badge"> <%=current_user.cart.products.count%>  </span>
             <%else%>
                 <%= link_to "Panier", new_user_session_path, class:"btn btn-outline-success", role:"button"%>
             <%end%>
         </div>
     </div>
+  </div>
 </nav>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'products#index'
+  root 'products#landing'
   devise_for :users
   
   resources :carts
@@ -20,4 +20,5 @@ Rails.application.routes.draw do
 
   resources :products
   get '/story', to: 'static_pages#story'
+  resources :schedules
 end

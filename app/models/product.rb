@@ -1,17 +1,19 @@
 class Product < ApplicationRecord
-  has_many :cart_products
+  has_many :cart_products, dependent: :destroy
   has_many :carts, through: :cart_products
   belongs_to :category
-  has_many :product_restaurants
+  has_many :product_restaurants, dependent: :destroy
   has_many :restaurants, through: :product_restaurants
 
   validates :title,
     presence: true,
-    length: { in: 3..20 }
+
+    length: { in: 3..50 }
     
+
   validates :catchphrase,
     presence: true,
-    length: { in: 3..100 }
+    length: { in: 3..200 }
 
   validates :description,
     presence: true,

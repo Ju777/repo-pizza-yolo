@@ -5,8 +5,12 @@ class ProductsController < ApplicationController
 
   def show
     @products = Product.all
-
     @product_to_show = Product.find(params[:id]) 
+  end
+
+  def landing
+    @all_products = Product.all
+    @productssample = @all_products.sample(3)
   end
 
   def new

@@ -10,6 +10,8 @@ require 'faker'
 
 Faker::Config.locale = :fr
 
+Schedule.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!('schedules')
 Order.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!('orders')
 ProductRestaurant.destroy_all
@@ -39,9 +41,20 @@ end
 
 Restaurant.create(name:"PIZZA-YOLO", street:Faker::Address.street_name, zipcode:Faker::Address.zip_code, city:Faker::Address.city, phone:"0110203040", manager:User.second)
 
-Category.create(title:"Boisson")
-Category.create(title:"Dessert")
-Category.create(title:"Pizza")
+Category.create(title:"boisson")
+Category.create(title:"dessert")
+Category.create(title:"pizza")
+
+i=1
+10.times do
+  # Schedule.create(date:Time.now + 3600*24*rand(2..10))
+  if i.even?
+    Schedule.create(date: Time.new(Time.now.year, Time.now.month, rand(Time.now.day..30), rand(10..21), 00))
+  else
+    Schedule.create(date: Time.new(Time.now.year, Time.now.month, rand(Time.now.day..30), rand(10..21), 30))
+  end
+  i+=1
+end
 
 i=1
 20.times do
@@ -64,6 +77,7 @@ i=1
 end
 
 20.times do
- CartProduct.create(cart:Cart.find(rand(Cart.first.id..Cart.last.id)), product:Product.find(rand(Product.first.id..Product.last.id)), quantity:Faker::Number.within(range: 1..10))
+ CartProduct.create(cart:Cart.find(rand(Cart.first.id..Cart.last.id)), product:Product.find(rand(Product.first.id..Product.last.id)), quantity:Faker::Number.within(range: 1..10), schedule: Schedule.find(rand(Schedule.first.id..Schedule.last.id)))
 end
+
 

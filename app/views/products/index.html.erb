@@ -1,27 +1,27 @@
-
-<%= render partial: 'products/hero' %>
 <section>
-  <div class="container py-5 mt-5">
-    <div class="row" id="menurow">
-      <div class="col-md-8 col-xl-6 text-center mx-auto">
-        <p class="fw-bold text-success mb-2">Nos pizzas</p>
-        <h3 class="fw-bold">Elles n'attendent que vous.</h3>
+        <div class="container py-5 mt-5">
+            <div class="row" id="menurow">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h4 class="fw-bold text-success mb-2">Nos pizzas</h4>
+                    <h3 class="fw-bold">Elles n'attendent que vous.</h3>
+                </div>
       </div>
-    </div>
-    
-    <div class="row mx-auto  mx-auto">
-      <% @all_products.each do |product|  %>
-        <div class="col-sm  mx-auto"id="cardrow">
-          <div class="card border-dark text-center">
-            <div class="card-body"id="productcard">
-              <%= image_tag "cardimgtest.png", id:"cardimg"%>
-              <h5 class="card-title" id="cardtitle"><%=product.title%></h5>
-              <small id="cardcatchphrase"> <%= product.catchphrase%> </small>
-              <p id="cardprice">Prix <%= product.price%> €</p>
-              <%= link_to 'Voir', product_path(product), class:"btn btn-outline-success", id:"cardseebtn" %>
-              <%= link_to "Ajouter au panier", cart_products_path(product_id:product),class:"btn btn-outline-success", id:"cardaddtocartbtn", type:"button", method: :post %>
-            </div>
-          </div>
+             <div class="row mx-auto  mx-auto">
+                    <% @all_products.each do |product|  %>
+                  <div class="col-sm  mx-auto"id="cardrow">
+                      <div class="card border-dark text-center">
+                          <div class="card-body"id="productcard">
+                          <%= image_tag "cardimgtest.png", id:"cardimg"%>
+                            <h5 class="card-title" id="cardtitle"><%=product.title%><br/><%= product.category.title %></h5>
+                            <small id="cardcatchphrase"> <%= product.catchphrase%> </small>
+                            <p id="cardprice">Prix <%= product.price%> €</p>
+                            <%= link_to 'Voir', product_path(product), class:"btn btn-outline-success", id:"cardseebtn" %>
+                            <%= link_to "Ajouter au panier", cart_products_path(product_id:product),class:"btn btn-outline-success", id:"cardaddtocartbtn", type:"button", method: :post %>
+                         </div>
+                        </div>
+                     </div>
+                 <% end %>
+             </div>         
         </div>
       <% end %>
     </div>         

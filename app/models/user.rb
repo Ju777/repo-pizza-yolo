@@ -5,6 +5,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+
   has_many :orders, dependent: :destroy
   has_one :cart, dependent: :destroy
   has_many :comments
@@ -23,7 +24,6 @@ class User < ApplicationRecord
   #   length: { is: 10, message: "doit être composé de 10 chiffres" },
   #   format: { with: /\A[0]{1}[1-7]{1}[0-9]{8}\z/, message: "doit être composé de 10 chiffres et commencer par 0" },
   # on: :update
-
 
   def welcome_send
     UserMailer.welcome_email(self).deliver_now

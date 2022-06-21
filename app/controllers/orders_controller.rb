@@ -66,8 +66,6 @@ class OrdersController < ApplicationController
 
     # STRIPE V2 process ends
     ############################################
-
-
   end
 
   def edit
