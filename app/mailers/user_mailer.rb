@@ -7,8 +7,6 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Bienvenue chez nous !') 
   end
 
-
-  # send a mail confirmation order to user
   def customer_order_email(order)
     @order = order
     @user = @order.user
@@ -16,8 +14,6 @@ class UserMailer < ApplicationMailer
     mail(to: @order.user.email, subject: 'PIZZA-YOLO: Récapitulatif de votre commande') 
   end
 
-
-  # send a mail confirmation order to restaurant manager
   def pizzeria_order_email(order)
     @order = order
     @admin_user = @order.restaurant.manager
