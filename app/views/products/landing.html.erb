@@ -1,13 +1,14 @@
+<%= render partial: 'products/hero' %>
 <section>
         <div class="container py-5 mt-5">
             <div class="row" id="menurow">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h4 class="fw-bold text-success mb-2">Nos pizzas</h4>
-                    <h3 class="fw-bold">Elles n'attendent que vous.</h3>
+                    <h4 class="fw-bold text-success mb-2">Sélection</h4>
+                    <h3 class="fw-bold">Qu'allez-vous prendre aujourd'hui ?</h3>
                 </div>
             </div>
-             <div class="row mx-auto  mx-auto">
-                    <% @all_products.each do |product|  %>
+            <div class="row mx-auto  mx-auto">
+             <% @productssample.each do |product|  %>
                   <div class="col-sm  mx-auto"id="cardrow">
                       <div class="card border-dark text-center">
                           <div class="card-body"id="productcard">
@@ -21,6 +22,8 @@
                         </div>
                      </div>
                  <% end %>
+                    <div class="col-md-8 col-xl-6 text-center mt-4 mx-auto">
+                        <%= link_to 'Voir toutes les pizzas', products_path, class:"btn btn-outline-light", id:"cardseebtn" %>
              </div>         
         </div>
 </section>
