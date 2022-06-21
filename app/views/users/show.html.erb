@@ -40,8 +40,8 @@
                     <%= submit_tag "OK" %>
                     <% end %>
                   </div>
-                <%= link_to 'Éditer les identifiants', edit_user_registration_path(@user.id), class:"btn btn-success mt-3 mb-3", id:"loginbtn" %>
-                <%= link_to 'Changer mes infos personnelles', edit_user_path(current_user.id), class:"btn btn-success", id:"loginbtn" %>                        
+                <%= link_to 'Éditer les identifiants', edit_user_registration_path(@user.id), class:"btn btn-outline-success mt-3 mb-3" %>
+                <%= link_to 'Changer mes infos personnelles', edit_user_path(current_user.id), class:"btn btn-outline-success" %>                        
             </div>
           </div>
         </div>
