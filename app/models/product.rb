@@ -8,7 +8,7 @@ class Product < ApplicationRecord
   validates :title,
     presence: true,
     length: { in: 3..20 }
-    
+
   validates :catchphrase,
     presence: true,
     length: { in: 3..100 }
