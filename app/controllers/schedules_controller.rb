@@ -140,13 +140,18 @@ private
     end
 
     puts "#"*100
-    puts "Maintenant qu'on a un créneau bien créé, y'a-t-il assez de place pour cuisiner #{remaining_pizzas} pizzas ? Rappelons que la capacité max de cette pizzeria est est #{Restaurant.first.cooking_capacity} pizzas par créneau de 30 min."
+    puts "Maintenant qu'on a un créneau bien créé, y'a-t-il assez de place pour cuisiner #{remaining_pizzas} pizzas ? Rappelons que la capacité max de cette pizzeria est  #{Restaurant.first.cooking_capacity} pizzas par créneau de 30 min."
     puts "#"*100
 
-    available_places = how_much_places(selected_schedule, remaining_pizzas)
-    has_enough_places(available_places, remaining_pizzas)
+    # available_places = how_much_places_V1(selected_schedule, remaining_pizzas)
+    # has_enough_places(available_places, remaining_pizzas)
+    # update_user_cart_schedules_V1(selected_schedule, remaining_pizzas, available_places)
 
-    update_user_cart_schedules(selected_schedule, remaining_pizzas, available_places)
+    available_places = how_much_places_V2(selected_schedule)
+    # has_enough_places(available_places, remaining_pizzas)
+    update_user_cart_schedules_V2(selected_schedule, remaining_pizzas, available_places)
+
+    
 
     remaining_pizzas = 0
     return remaining_pizzas
@@ -154,7 +159,7 @@ private
     
   end
 
-  def how_much_places(selected_schedule, remaining_pizzas)
+  def how_much_places_V1(selected_schedule, remaining_pizzas)
     cart_products = selected_schedule.cart_products
     already_ordered_pizzas = 0
 
@@ -176,19 +181,19 @@ private
   def has_enough_places(available_places, remaining_pizzas)
     if available_places >= remaining_pizzas
       puts "#"*100
-      puts "Y'A ASSEZ DE PLACES."
+      puts "Y'A ASSEZ DE PLACES. Notre client veut #{remaining_pizzas} pizzas."
       puts "#"*100
       return true
     else
       puts "#"*100
-      puts "Y'A PAS ASSEZ DE PLACES"
+      puts "Y'A PAS ASSEZ DE PLACES. Notre client veut #{remaining_pizzas} pizzas."
       puts "#"*100
       return false
     end
 
   end
 
-  def update_user_cart_schedules(selected_schedule, remaining_pizzas, available_places)
+  def update_user_cart_schedules_V1(selected_schedule, remaining_pizzas, available_places)
     puts "#"*100
     puts "ENTREE DANS L'UPDATE avec le créneau choisi : on est dans la véritable phase de réservation des cart_product."
     puts "Le principe c'est que l'on va caser les pizzas jusqu'a ce qu'il n'y ait plus de places disponibles."
@@ -210,5 +215,59 @@ private
       end
     end
     puts "#"*100
+  end
+
+  def how_much_places_V2(selected_schedule)
+    available_places = Restaurant.first.cooking_capacity - selected_schedule.ordered_pizzas
+    puts "#"*100
+    puts "Le créneau #{selected_schedule.date} contient déjà #{selected_schedule.ordered_pizzas} pizzas, il reste #{available_places} places."
+    puts "#"*100
+    return available_places
+  end
+
+  def update_user_cart_schedules_V2(selected_schedule, remaining_pizzas, available_places)
+    puts "#"*100
+    puts "ON ENTRE DANS LA MÉTHODE UPDATE. Commençons déjà par vérifier si notre créneau contient assez de places pour #{remaining_pizzas} pizzas."
+    puts "#"*100
+
+    if has_enough_places(available_places, remaining_pizzas)
+    puts "#"*100
+    puts "Comme il y a assez de places, on a juste à updater tout le cart_product du client avec le créneau sélectionné et mettre à jour le créneau en y ajoutant la quantité de pizzas demandées c'est à dire +#{remaining_pizzas} pizzas."
+    puts "#"*100
+
+    current_user.cart.cart_products.each do |cart_product|
+      cart_product.update(schedule: selected_schedule)
+    end
+    selected_schedule.update(ordered_pizzas: selected_schedule.ordered_pizzas + remaining_pizzas)
+
+    puts "#"*100
+    puts "Après mise à jour voici selected_schedule.ordered_pizzas = #{selected_schedule.ordered_pizzas}."
+    puts "Voici les dates de chaque cart_product du client :"
+    current_user.cart.cart_products.each do |cart_product|
+      puts "Le cart_product de #{cart_product.quantity} #{cart_product.product.title} est caser pour le #{cart_product.schedule.date}."  
+    end
+    puts "#"*100
+
+    else
+    puts "#"*100
+    puts "Comme il n'y a pas assez de place, on va remplir le créneau en cours et boucler acec le créneau suivant + le nombre de pizzas restantes."
+    puts "#"*100
+    selected_schedule.update(ordered_pizzas: Restaurant.first.cooking_capacity)
+
+    remaining_pizzas = remaining_pizzas - available_places
+    year = selected_schedule.date.year
+    day = selected_schedule.date.day
+    month = selected_schedule.date.month
+    if selected_schedule.date.min == 0
+      hour = selected_schedule.date.hour
+      min = 30
+    elsif selected_schedule.date.min == 30
+      hour = selected_schedule.date.hour + 1
+      min = 00
+    end
+    next_time_object = Time.new(year, month, day, hour + 2, min) # +2 sur l'heure -> pour compenser le décalage de timezone.
+    
+    search_schedule(remaining_pizzas, next_time_object)
+    end
   end
 end
