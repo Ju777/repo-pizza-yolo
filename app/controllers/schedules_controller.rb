@@ -21,7 +21,7 @@ class SchedulesController < ApplicationController
     # Déterminons maintenant combien de pizzas nous devons préparés dans ce cart_product.
     remaining_pizzas = pizzas_to_cook
     # Lançons nous dans la recherche d'horaires disponibles pour préparer ces pizzas à l'horaire demandé.
-    while(search_schedule(remaining_pizzas, selected_date) != 0)
+    while(search_schedule(remaining_pizzas, selected_date) > 0)
       puts "#"*100
       puts "Début de la boucle while, il y a #{remaining_pizzas} pizzas à caser :"
       puts "#"*100
@@ -74,9 +74,15 @@ private
   end
 
   def pizzas_to_cook
+    puts "#"*100
+    puts "ENTREE DANS la méthode calcul des pizzas_to_cook."
+    puts "#"*100
     pizzas_quantity = 0
     current_user.cart.cart_products.each do |cart_product|
       if cart_product.product.category.title == "pizza"
+        puts "#"*100
+        puts "Ce cart product contient #{cart_product.quantity} #{cart_product.product.title} affectée au créneau #{cart_product.schedule.date}."
+        puts "#"*100
         pizzas_quantity += cart_product.quantity
       end
     end
@@ -118,7 +124,7 @@ private
   def search_schedule(remaining_pizzas, params_to_time)
     puts "#"*100
     puts "Ca y'est on démarre la recherche d'horaire disponible pour donner #{remaining_pizzas} pizzas (normalement pour le #{params_to_time})."
-    puts "Déjà, est-ce que l'horaire demandé par l'utilisateur existe ?" 
+    puts "Déjà, est-ce que l'horaire demandé par l'utilisateur existe ? S'il n'existe pas on va le créer." 
     puts "#"*100
     schedule_state = is_schedule_existing(params_to_time)
     unless schedule_state
@@ -129,30 +135,18 @@ private
     else
       selected_schedule = schedule_state
       puts "#"*100
-      puts "Je ne crée donc rien, on continue."
+      puts "Je ne le crée donc pas, on continue."
       puts "#"*100
     end
 
     puts "#"*100
-    puts "Maintenant qu'on a un créneau bien créé, y'a-t-il assez de place pour cuisiner #{remaining_pizzas} pizzas ? Rappelons que le maxium est #{Restaurant.first.cooking_capacity} pizza par créneau de 30 min."
+    puts "Maintenant qu'on a un créneau bien créé, y'a-t-il assez de place pour cuisiner #{remaining_pizzas} pizzas ? Rappelons que la capacité max de cette pizzeria est est #{Restaurant.first.cooking_capacity} pizzas par créneau de 30 min."
     puts "#"*100
 
-    if has_enough_places(selected_schedule, remaining_pizzas)
-      puts "#"*100
-      puts "Y'A ASSEZ ! On a plus qu'à communiquer ce créneau à #{current_user.email} qui pourra donc venir chercher sa commande à partir du #{selected_schedule.date}"
-      puts "Il faut penser à associer tous ses autres produits sur ce créneau aussi. "
-      puts "#"*100
-      update_user_cart_products(selected_schedule)
-      remaining_pizzas = 0
-      return remaining_pizzas
-    else
-      puts "#"*100
-      puts "Y'A PAS ASSEZ !"
-      puts "#"*100
+    available_places = how_much_places(selected_schedule, remaining_pizzas)
+    has_enough_places(available_places, remaining_pizzas)
 
-      remaining_pizzas = 0
-      return remaining_pizzas
-    end  
+    update_user_cart_schedules(selected_schedule, remaining_pizzas, available_places)
 
     remaining_pizzas = 0
     return remaining_pizzas
@@ -160,44 +154,61 @@ private
     
   end
 
-  def has_enough_places(schedule, pizzas_quantity)
-    puts "#"*100
-    puts "On est entré dans la méthode has_enough_places, on y calcule s'il y a assez de places dans le créneau choisi par le client."
-    puts "Je vais commencer par récupérer le nombre de pizzas déjà commandées sur ce créneau #{schedule.date}."
-    puts "Pour ce faire, je vais regarder quelle est la catégorie associée à chaque \"produit mis en panier\" de ce créneau."
-    cart_products = schedule.cart_products
-    puts "En voici la liste :"
+  def how_much_places(selected_schedule, remaining_pizzas)
+    cart_products = selected_schedule.cart_products
     already_ordered_pizzas = 0
+
     cart_products.each do |cart_product|
       puts "Dans le ProduitPanier #{cart_product.product.title} => il y a #{cart_product.quantity} #{cart_product.product.category.title}"
       if cart_product.product.category.title == "pizza"
         already_ordered_pizzas += cart_product.quantity
       end
     end
+
+    available_places = Restaurant.first.cooking_capacity - already_ordered_pizzas
+
     puts "#"*100
-    if already_ordered_pizzas + pizzas_quantity <= Restaurant.first.cooking_capacity
+    puts "Il y a déjà #{already_ordered_pizzas} pizzas sur ce créneau on veut en ajouter #{remaining_pizzas}."
+    puts "#"*100
+    return available_places
+  end
+
+  def has_enough_places(available_places, remaining_pizzas)
+    if available_places >= remaining_pizzas
       puts "#"*100
-      puts "il y a #{already_ordered_pizzas} pizzas déjà commandées + les #{pizzas_quantity} du client ça fait #{already_ordered_pizzas + pizzas_quantity} en tout."
+      puts "Y'A ASSEZ DE PLACES."
       puts "#"*100
       return true
     else
       puts "#"*100
-      puts "il y a #{already_ordered_pizzas} pizzas déjà commandées + les #{pizzas_quantity} du client ça fait #{already_ordered_pizzas + pizzas_quantity} en tout."
+      puts "Y'A PAS ASSEZ DE PLACES"
       puts "#"*100
       return false
     end
 
   end
 
-  def update_user_cart_products(selected_schedule)
+  def update_user_cart_schedules(selected_schedule, remaining_pizzas, available_places)
     puts "#"*100
-    puts "Pour se faire, on va faire un each sur current_user.cart.cart_products et associer le créneau #{selected_schedule.date} à chacun."
+    puts "ENTREE DANS L'UPDATE avec le créneau choisi : on est dans la véritable phase de réservation des cart_product."
+    puts "Le principe c'est que l'on va caser les pizzas jusqu'a ce qu'il n'y ait plus de places disponibles."
+    puts "Une fois cette action de faire, on sort de cette méthode, et la méthode principale prendra le relais : elle bouclera sur elle même avec le créneau suivant et le nombre restant de pizzas à préparer"
     puts "#"*100
-    current_user.cart.cart_products.each do |cart_product|
-      cart_product.update(schedule: selected_schedule)
-      puts "#"*100
-      puts "Il y a #{cart_product.quantity} #{cart_product.product.title} associé au #{cart_product.schedule.date}"
-      puts "#"*100
+
+    puts "#"*100
+    puts "De quoi j'ai besoin pour commencer : de tous les cart_products du current_user (qui sont associés à un horaire factice de 1900 ou à peu près."
+    puts "Les voici : all_cart_products = current_user.cart.cart_products.each :."
+    all_cart_products = current_user.cart.cart_products
+    all_cart_products.each do |cart_product|
+      puts "#{cart_product.id} : #{cart_product.product.title} => #{cart_product.schedule.date}."
+      if cart_product.product.category.title == "pizza"
+        puts "Ce cart_product contient #{cart_product.quantity} #{cart_product.product.category.title} à caser dans le créneau sélectionné."
+        cart_product.update(schedule:selected_schedule)
+        puts "C'est fait. Vérification cart_product.schedule.date = #{cart_product.schedule.date}."
+        remaining_pizzas -= cart_product.quantity
+        puts "Il reste à caser #{remaining_pizzas} pizzas."
+      end
     end
+    puts "#"*100
   end
 end
