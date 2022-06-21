@@ -28,14 +28,6 @@ class SchedulesController < ApplicationController
       search_schedule(remaining_pizzas, selected_date)
     end
 
-
-
-
-
-
-    # En fin de recherche d'horaires pour les pizzas, il faudra lier les produits non cuisinables de cette commande au même horaire que celui des pizzas.
-
-
     redirect_to cart_path(current_user.cart)
   end
 
@@ -55,24 +47,21 @@ private
     split_2 = split_1[2].split("T")
     split_3 = split_2[1].split(":")
 
-    @day = split_2[0].to_i
-    @month = split_1[1].to_i
-    @year = split_1[0].to_i
-    @hour = split_2[1].to_i
-    @min = split_3[1].to_i
-    # Ajustement de @min vers la demi-heure précédente la plus proche, pour créer des créneaux de 30 min.
-    @min = 0 if @min < 30
-    @min = 30 if @min >= 30
-
-    # Vérification que le créneau saisi respecte les horaires d'ouverture du restaurant.
-    # A TERMINER
-
-    time_object = Time.new(@year, @month, @day, @hour + 2, @min).getutc # +2 sur l'heure -> pour compenser le décalage de timezone.
+    day = split_2[0].to_i
+    month = split_1[1].to_i
+    year = split_1[0].to_i
+    hour = split_2[1].to_i
+    min = split_3[1].to_i
+    # Ajustement de min vers la demi-heure précédente la plus proche, pour créer des créneaux de 30 min.
+    min = 0 if min < 30
+    min = 30 if min >= 30
+     
+    time_object = Time.new(year, month, day, hour + 2, min).getutc # +2 sur l'heure -> pour compenser le décalage de timezone.
     puts "#"*100
-    puts "Les éléments extraits de la saisie sont => le #{@day}/#{@month}/#{@year} à #{@hour} heures et #{@min} minutes."
-    puts "La transformation a donné : time_object = Time.new(@year, @month, @day, @hour).getutc => #{time_object}."
+    puts "Les éléments extraits de la saisie sont => le #{day}/#{month}/#{year} à #{hour} heures et #{min} minutes."
+    puts "La transformation a donné : time_object = Time.new(year, month, day, hour).getutc => #{time_object}."
     puts "#"*100
-
+    
     return time_object
   end
 

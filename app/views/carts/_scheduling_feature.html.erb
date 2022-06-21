@@ -1,5 +1,15 @@
-<h5>Travail sur la fonctionnalité "Horaires"</h5>
-<p>Choisir un horaire de retrait :</p>
+<p>=========================================</p>
+<p>Votre horaire de retrait est :</p>
+<% if @cart_to_show.cart_products.first.schedule.date < Time.now %>
+  pas encore choisi.
+<% else %>  
+  <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d / %m / %Y à %Hh%M.") %>
+<% end %>
+
+
+<p>=========================================</p>
+<h6>Changer l'horaire de retrait ?</h6>
+
 <%= form_tag schedules_path, method: "post" do %>
   <%= datetime_local_field_tag 'date'%>
   <%= submit_tag "OK" %>
