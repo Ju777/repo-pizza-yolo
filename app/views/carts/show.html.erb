@@ -38,7 +38,7 @@
                             </div>                            
 
                              <div class="col">
-                            <%#= link_to "Qté -1", cart_product_path(product_id:cart_product), method: :put, class: "btn btn-outline-danger btn-sm" %>
+                            <%= link_to "Qté -1", qty_minus_one_cart_product_path(cart_product), method: :post, class: "btn btn-outline-danger btn-sm" %>
                             </div>
 
                             <div class="col">

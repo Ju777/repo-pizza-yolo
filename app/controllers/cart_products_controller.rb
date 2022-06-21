@@ -57,19 +57,26 @@ class CartProductsController < ApplicationController
     current_item.update(quantity:current_item.quantity + 1)
 
     if current_item.save
-      redirect_to cart_path(current_user.cart), notice: 'Line item was successfully updated.'
+      redirect_to cart_path(current_user.cart), notice: 'Quantité modifiée (+1).'
+    else
+      redirect_to cart_path(current_user.cart), notice: "Erreur: la quantité n'a pas été modifiée."
     end
-
-    #redirect_to cart_path(current_user.cart) <- mis en commentaire pour montrer que la qté s'incrémente sur la page 'add_qty' mais pas dans la BDD et la page cart/show
   end
 
   def qty_minus_one
-    @cart_product = CartProduct.find(params[:id])
-    if @cart_product.quantity > 1
-      @cart_product.quantity -= 1
+    current_item = CartProduct.find(params[:id])
+
+    if current_item.quantity > 1
+      current_item.update(quantity:current_item.quantity - 1)
+    elsif current_item.quantity = 1
+      current_item.destroy
     end
-    @cart_product.save
-    redirect_to cart_path(current_user.cart)
+
+    if current_item.save
+      redirect_to cart_path(current_user.cart), notice: 'Quantité modifiée (-1).'
+    else
+      redirect_to cart_path(current_user.cart), notice: "Erreur: la quantité n'a pas été modifiée."
+    end
   end
 
 end

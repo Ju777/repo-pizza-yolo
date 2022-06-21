@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     end
   end
 
-
   resources :orders
   get 'cancel', to: 'orders#cancel', as: 'orders_cancel'
   get 'success', to: 'orders#success', as: 'orders_success'
