@@ -20,16 +20,83 @@ body {
 }
 
 #homebtn {
-  border-color: rgba(255,255,255,0.9);
   color: rgba(255,255,255,0.9);
+  font-size: large;
+  padding-top: 6px;
+  border-bottom: 2px solid #009129;
+  transition: all 0.25s linear;
+  position: relative;
+}
+
+#homebtn:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #000000;
+  position: absolute;
+  left: 0;
+  bottom: -3px; /* this is to match where the border is */
+  transform-origin: top; 
+  transform: scale(0);
+  transition: 0.25s linear;
+/*   will-change: transform; */
+}
+
+#homebtn:hover:before {
+  transform: scale(1);
 }
 
 #storylink {
   color: rgba(255,255,255,0.55);
+  border-bottom: 2px solid #ffffff;
+  transition: all 0.25s linear;
+  position: relative;
+}
+
+#storylink:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #000000;
+  position: absolute;
+  left: 0;
+  bottom: -3px; /* this is to match where the border is */
+  transform-origin: top;
+  transform: scale(0);
+  transition: 0.25s linear;
+/*   will-change: transform; */
+}
+
+#storylink:hover:before {
+  transform: scale(1);
 }
 
 #menulink {
   color: rgba(255,255,255,0.55);
+  border-bottom: 2px solid #b70000;
+  transition: all 0.25s linear;
+  position: relative;
+}
+
+#menulink:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #000000;
+  position: absolute;
+  left: 0;
+  bottom: -3px; /* this is to match where the border is */
+  transform-origin: top; 
+  transform: scale(0);
+  transition: 0.25s linear;
+/*   will-change: transform; */
+}
+
+#menulink:hover:before {
+  transform: scale(1);
 }
 
 #subscribelink {
@@ -37,14 +104,52 @@ body {
   margin: 0px;
   padding: 0px;
   font-size: 15px;
+  position: relative;
 }
+
+#subscribelink:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #3e3e3e;
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  transform-origin: center; 
+  transform: scale(0);
+  transition: 0.25s linear;
+}
+
+#subscribelink:hover:before {
+  transform: scale(1);
+}
+
+
 
 #loglink {
   color: #ffffff;
   font-size: 15px;
-  margin: 5px;
-  padding: 10px;
-  height: 44px;
+  margin: 10px;
+  position: relative;
+}
+
+#loglink:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #3e3e3e;
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  transform-origin: center; 
+  transform: scale(0);
+  transition: 0.25s linear;
+}
+
+#loglink:hover:before {
+  transform: scale(1);
 }
 
 #cartbtn {
@@ -167,22 +272,15 @@ section {
 }
 
 #cardseebtn {
-  background: rgba(0,183,121,0);
+
   transform: perspective(0px);
   margin: 0px;
   margin-top: 0px;
-  border-width: 2px;
-  border-color: #00b779;
-  color: #00b779;
   padding-right: 15px;
   padding-left: 15px;
 }
 
 #cardaddtocartbtn {
-  color: #00b779;
-  border-width: 2px;
-  border-color: #00b779;
-  background: rgba(0, 183, 121, 0);
   padding-right: 15px;
   padding-left: 15px;
   margin-left: 20px;
@@ -253,12 +351,6 @@ section {
   color: #00b779;
 }
 
-#loginbtn {
-  color: #00b779;
-  background: rgba(0,183,121,0);
-  border: 2px solid #00b779;
-}
-
 #storyparallax {
   height: 930px;
   background: url("storyimg.jpg") center / cover;
@@ -296,4 +388,12 @@ section {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.badge {
+  background: #b70000;
+  transform: translate(-25px);
+  color: #ffffff;
+  padding: 6px 9px;
+  margin-bottom: 40px;
 }

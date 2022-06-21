@@ -1,11 +1,11 @@
 class User < ApplicationRecord
   after_create :welcome_send
   after_create :create_cart
-  
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :orders
+  has_many :orders, dependent: :destroy
   has_one :cart
   has_many :comments
   has_one :managed_restaurant, foreign_key: 'manager_id', class_name: "Restaurant"
@@ -16,13 +16,13 @@ class User < ApplicationRecord
 
   validates :firstname, :lastname,
     length: { maximum: 30 },
-    format: { with: /\A([A-Z]*|[a-z]*|\s*|[\'éèàç-]*)*\z/, message: "Un ou plusieurs caractères sont invalides." },
+    format: { with: /\A([A-Z]|[a-z]|\s|['éèàç-])*\z/, message: "contient un ou des caractères non valides." },
   on: :update
 
-  validates :phone,
-    length: { is: 10, message: "doit être composé de 10 chiffres" },
-    format: { with: /\A[0]{1}[1-7]{1}[0-9]{8}\z/, message: "doit être composé de 10 chiffres et commencer par 0" },
-  on: :update
+  # validates :phone,
+  #   length: { is: 10, message: "doit être composé de 10 chiffres" },
+  #   format: { with: /\A[0]{1}[1-7]{1}[0-9]{8}\z/, message: "doit être composé de 10 chiffres et commencer par 0" },
+  # on: :update
 
   def welcome_send
     UserMailer.welcome_email(self).deliver_now
