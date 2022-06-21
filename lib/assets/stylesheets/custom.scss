@@ -3,20 +3,8 @@ body {
   color: white;
 }
 
-#mainNav {
-  color: var(--bs-white);
-  --bs-body-bg: #000000;
-  background: rgb(0,0,0);
-  --bs-body-color: #ffffff;
-  height: 91px;
-}
-
 #navimg {
-  color: rgb(0,0,0);
   width: 240px;
-  margin: 0px;
-  padding: 0px;
-  margin-right: 20px;
 }
 
 #homebtn {
@@ -36,11 +24,10 @@ body {
   background-color: #000000;
   position: absolute;
   left: 0;
-  bottom: -3px; /* this is to match where the border is */
+  bottom: -3px;
   transform-origin: top; 
   transform: scale(0);
   transition: 0.25s linear;
-/*   will-change: transform; */
 }
 
 #homebtn:hover:before {
@@ -62,11 +49,10 @@ body {
   background-color: #000000;
   position: absolute;
   left: 0;
-  bottom: -3px; /* this is to match where the border is */
+  bottom: -3px;
   transform-origin: top;
   transform: scale(0);
   transition: 0.25s linear;
-/*   will-change: transform; */
 }
 
 #storylink:hover:before {
@@ -88,11 +74,10 @@ body {
   background-color: #000000;
   position: absolute;
   left: 0;
-  bottom: -3px; /* this is to match where the border is */
+  bottom: -3px;
   transform-origin: top; 
   transform: scale(0);
   transition: 0.25s linear;
-/*   will-change: transform; */
 }
 
 #menulink:hover:before {
@@ -101,8 +86,6 @@ body {
 
 #subscribelink {
   color: #ffffff;
-  margin: 0px;
-  padding: 0px;
   font-size: 15px;
   position: relative;
 }
@@ -163,6 +146,14 @@ body {
   margin: 0px;
 }
 
+.badge {
+  background: #b70000;
+  transform: translate(-25px);
+  color: #ffffff;
+  padding: 6px 9px;
+  margin-bottom: 40px;
+}
+
 .bg-primary-gradient {
   background: #000000;
   text-align: center;
@@ -170,7 +161,7 @@ body {
 }
 
 #copyright {
-  color: #2d2d2d;
+  color: #3e3e3e;
 }
 
 #logofooter {
@@ -391,10 +382,3 @@ section {
   width: 100%;
 }
 
-.badge {
-  background: #b70000;
-  transform: translate(-25px);
-  color: #ffffff;
-  padding: 6px 9px;
-  margin-bottom: 40px;
-}
