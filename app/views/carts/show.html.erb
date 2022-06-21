@@ -1,18 +1,55 @@
-<div class="cartcontent">
-  <div class="insidecartcontent">
-    <p><strong>Votre panier contient les produits suivants :</strong></p>
-      <% @cart_to_show.cart_products.each do |cart_product| %>
-        <div class="container">
-          <div class="row">
+<section class="mt-5">
+  <div class="container py-5">
+    <div class="row mb-4 mb-lg-5">
+      <div class="col-md-8 col-xl-6 text-center mx-auto">
+        <p class="fw-bold text-success mb-2">Résumé</p>
+        <h2 class="fw-bold" id="welcometitle">Panier</h2>
+      </div>
+    </div>  
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-6 col-xl-10">
+          <div class="card">
+            <div class="card-body text-center d-flex flex-column justify-content-between" id="logcard">
+              <div class="mb-3">
+                <div class="cartcontent">
+                  <div class="insidecartcontent">
+                      <% if @cart_to_show.cart_products.length == 0 %>
+                       <p><strong>Votre panier est vide.</strong></p>
+                      <% else %>
+                        <p><strong>Votre panier contient les produits suivants :</strong></p>
+                        <% @cart_to_show.cart_products.each do |cart_product| %>
+                          <div class="container mb-2">
+                            <div class="row">
+                              <div class="col">
+                                <%= cart_product.product.title %>
+                                <p><i>Quantité </i>= <%= cart_product.quantity %></p>
+                              </div>
+                              <div class="col">
+                                Prix : <%= cart_product.product.price %> €
+                              </div>
+                              <div class="col">
+                              <%= link_to "Retirer du Panier", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %> <%= cart_product.product.category.title %>                         
+                              </div>
+                              <hr/>
+                            </div>
+                          </div>
+                        <% end %>
+                      <div>
+                        <p><strong>TOTAL À PAYER : <%= @total_to_pay %> €</strong></p>
+                        <% if current_user.firstname == "" && current_user.lastname == "" && current_user.phone == "" %>
+                          <p>Profil incomplet, merci de <%= link_to "compléter votre profil", edit_user_path(@current_user.id) %> pour pouvoir finaliser votre commande :</p>
+                        <% else %>
+                          <%= link_to 'Payer ma Commande', orders_path(total:@total_to_pay), method: :post, class: "btn btn-outline-success", remote: true %>
+                        <% end %>
 
-            <div class="col">
-              <%= cart_product.product.title %>
-              <br>
-              Qté = <%= cart_product.quantity %>
-            </div>
+                        <%= render 'scheduling_feature' %>
 
-            <div class="col">
-              Prix : <%= cart_product.product.price %> €
+
+                      <% end %>
+                    </div>
+                  </div>
+                </div>        
+
               </div>
 
             <div class="col">
@@ -25,13 +62,5 @@
         </div>
       <% end %>
   </div>
-</div>
+</section>
 
-<div>
-  <p><strong>TOTAL A PAYER : <%= @total_to_pay %> €</strong></p>
-  <% if current_user.firstname == "" && current_user.lastname == "" && current_user.phone == "" %>
-    <p>Profil incomplet, merci de <%= link_to "compléter votre profil", edit_user_path(@current_user.id) %> pour pouvoir finaliser votre commande :</p>
-  <% else %>
-    <%= link_to 'Payer ma Commande', orders_path(total:@total_to_pay), method: :post, class: "btn btn-primary", remote: true %>
-  <% end %>
-</div>
