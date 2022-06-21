@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_21_091254) do
+ActiveRecord::Schema.define(version: 2022_06_21_103023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,8 @@ ActiveRecord::Schema.define(version: 2022_06_21_091254) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "cooking_capacity", default: 5
+    t.integer "opening", default: 10
+    t.integer "closing", default: 22
     t.index ["manager_id"], name: "index_restaurants_on_manager_id"
   end
 
