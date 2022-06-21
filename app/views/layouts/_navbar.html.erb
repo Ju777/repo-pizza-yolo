@@ -5,7 +5,7 @@
                 <ul class="navbar-nav mx-auto">
                     <%= link_to "Accueil", root_path, class:"nav-link active", id:"homebtn"%>
                     <%= link_to "L'Histoire", "/story", class:"nav-link", id:"storylink"%>
-                    <%= link_to "La Carte", root_path+"#menurow", class:"nav-link", id:"menulink"%>
+                    <%= link_to "La Carte", products_path, class:"nav-link", id:"menulink"%>
                 </ul>
             <% if user_signed_in? %>
                 <%= link_to "Mon Profil", user_path(current_user), id:"subscribelink"%>
