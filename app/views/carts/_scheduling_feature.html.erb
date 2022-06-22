@@ -12,14 +12,13 @@
   </p>
 <% else %>
   <p>
-    <%= form_tag schedules_path, method: "post" do %>
-      <%= datetime_local_field_tag 'date'%>
-      <%= submit_tag "OK" %>
+    <% if @pizzas_quantity = 0 %>
+      Votre commande sera prête au plus tôt <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d/%m/%Y à partir de %Hh%M.") %>
+    <% elsif @pizzas_quantity = 1 %>
+      Votre pizza sera prête au plus tôt <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d/%m/%Y à partir de %Hh%M.") %>
+    <% else %>
+      Vos <%= @pizzas_quantity %> pizzas seront prêtes au plus tôt <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d/%m/%Y à partir de %Hh%M.") %>
     <% end %>
-  </p>
-  <p>
-    vos <%= @cart_to_show.cart_products.first.schedule.ordered_pizzas %> pizza(s) seront prêtes au plus tôt <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d/%m/%Y à partir de %Hh%M.") %><br/>
-    Munissez vous du code de retrait qui vous sera envoyé par mail une fois le règlement effectué.</p>
-
+    <br/>Munissez vous du code de retrait qui vous sera envoyé par mail une fois le règlement effectué.</p>
 <% end %>
 <p>=========================================</p>

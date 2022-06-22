@@ -28,7 +28,8 @@ class SchedulesController < ApplicationController
       search_schedule(remaining_pizzas, selected_date)
     end
 
-    redirect_to cart_path(current_user.cart)
+    # redirect_to cart_path(current_user.cart)
+    redirect_to new_order_path
   end
 
   def edit
