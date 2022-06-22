@@ -6,10 +6,11 @@ class OrdersController < ApplicationController
   end
 
   def new
-  # The following code is not called in this user's process.
-  # But it is kept here in order to work with during the next week if the final project.
     @cart_to_show = current_user.cart
-    @order_to_pay = Order.where(user:current_user).last
+    @pizzas_quantity = pizzas_to_cook
+    @total_to_pay = total_cart
+    @order = Order.create(total_amount: @total_to_pay, user: current_user, restaurant: Restaurant.first)
+    @order.update(pickup_code: "#{@order.id}##{@order.created_at.to_i}")
   end
 
   def create
@@ -75,6 +76,8 @@ class OrdersController < ApplicationController
   end
 
   def destroy
+    empty_cart
+    redirect_to root_path    
   end
 
   def success
@@ -101,4 +104,33 @@ class OrdersController < ApplicationController
     end
   end
 
+  def total_cart
+    @cart = current_user.cart
+    total = 0
+      @cart.cart_products.each do |cart_product|
+        total += cart_product.product.price*cart_product.quantity
+      end
+    return total
+  end
+
+  def pizzas_to_cook
+    puts "#"*100
+    puts "ENTREE DANS la méthode calcul des pizzas_to_cook."
+    puts "#"*100
+    pizzas_quantity = 0
+    current_user.cart.cart_products.each do |cart_product|
+      if cart_product.product.category.title == "pizza"
+        puts "#"*100
+        puts "Ce cart product contient #{cart_product.quantity} #{cart_product.product.title} affectée au créneau #{cart_product.schedule.date}."
+        puts "#"*100
+        pizzas_quantity += cart_product.quantity
+      end
+    end
+
+    puts "#"*100
+    puts "Le calcul nous dit : #{pizzas_quantity} pizzas à préparer. Vérifie ce chiffre par rapport au panier."
+    puts "#"*100
+
+    return pizzas_quantity
+  end
 end

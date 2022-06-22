@@ -1,16 +1,24 @@
 <p>=========================================</p>
-<p>Votre horaire de retrait est :</p>
+<p>Horaire de retrait : 
 <% if @cart_to_show.cart_products.first.schedule.date < Time.now %>
-  pas encore choisi.
-<% else %>  
-  <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d / %m / %Y à %Hh%M.") %>
+  <p>
+    choisissez un horaire de retrait avant de passer au paiement.
+  </p>
+  <p>
+    <%= form_tag schedules_path, method: "post" do %>
+      <%= datetime_local_field_tag 'date'%>
+      <%= submit_tag "OK" %>
+    <% end %>
+  </p>
+<% else %>
+  <p>
+    <% if @pizzas_quantity = 0 %>
+      Votre commande sera prête au plus tôt <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d/%m/%Y à partir de %Hh%M.") %>
+    <% elsif @pizzas_quantity = 1 %>
+      Votre pizza sera prête au plus tôt <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d/%m/%Y à partir de %Hh%M.") %>
+    <% else %>
+      Vos <%= @pizzas_quantity %> pizzas seront prêtes au plus tôt <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d/%m/%Y à partir de %Hh%M.") %>
+    <% end %>
+    <br/>Munissez vous du code de retrait qui vous sera envoyé par mail une fois le règlement effectué.</p>
 <% end %>
-
-
 <p>=========================================</p>
-<h6>Changer l'horaire de retrait ?</h6>
-
-<%= form_tag schedules_path, method: "post" do %>
-  <%= datetime_local_field_tag 'date'%>
-  <%= submit_tag "OK" %>
-<% end %>
