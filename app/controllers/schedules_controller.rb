@@ -16,7 +16,6 @@ class SchedulesController < ApplicationController
     puts "#"*100
     puts "#"*100
 
-
     puts "#"*100
     puts "is_input_valid = true. GO."  
     puts "#"*100
@@ -33,7 +32,7 @@ class SchedulesController < ApplicationController
     end
 
     # redirect_to cart_path(current_user.cart)
-    redirect_to new_order_path
+    # redirect_to new_order_path
 
 
   end
@@ -54,7 +53,6 @@ private
   end
 
   def params_to_time
-
 
     split_1 = params[:date].split("-")
     split_2 = split_1[2].split("T")
@@ -152,9 +150,9 @@ private
     # has_enough_places(available_places, remaining_pizzas)
     # update_user_cart_schedules_V1(selected_schedule, remaining_pizzas, available_places)
 
-    available_places = how_much_places_V2(selected_schedule)
+    available_places = how_much_places(selected_schedule)
     # has_enough_places(available_places, remaining_pizzas)
-    update_user_cart_schedules_V2(selected_schedule, remaining_pizzas, available_places)
+    update_user_cart_schedules(selected_schedule, remaining_pizzas, available_places)
 
     
 
@@ -222,7 +220,7 @@ private
     puts "#"*100
   end
 
-  def how_much_places_V2(selected_schedule)
+  def how_much_places(selected_schedule)
     available_places = Restaurant.first.cooking_capacity - selected_schedule.ordered_pizzas
     puts "#"*100
     puts "Le créneau #{selected_schedule.date} contient déjà #{selected_schedule.ordered_pizzas} pizzas, il reste #{available_places} places."
@@ -230,7 +228,7 @@ private
     return available_places
   end
 
-  def update_user_cart_schedules_V2(selected_schedule, remaining_pizzas, available_places)
+  def update_user_cart_schedules(selected_schedule, remaining_pizzas, available_places)
     puts "#"*100
     puts "ON ENTRE DANS LA MÉTHODE UPDATE. Commençons déjà par vérifier si notre créneau contient assez de places pour #{remaining_pizzas} pizzas."
     puts "#"*100

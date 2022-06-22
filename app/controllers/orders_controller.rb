@@ -77,6 +77,8 @@ class OrdersController < ApplicationController
 
   def destroy
     empty_cart
+    Order.last.destroy
+    flash.notice= "Panier vidé, commande annulée."
     redirect_to root_path    
   end
 
