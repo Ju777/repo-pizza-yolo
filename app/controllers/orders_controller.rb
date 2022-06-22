@@ -128,13 +128,13 @@ class OrdersController < ApplicationController
     puts "#"*100
     puts "Je suis la méthode clean_old_schedules DEBUT ! :) ."
     puts "#"*100
-    cart_products = current_user.cart.cart_products
-    cart_products.each do |cart_product|
-      puts "#"*100
-      puts "Je suis la méthode clean_old_schedules DANS EACH ! :) ."
-      puts "#"*100
-      cart_product.schedule.destroy
-    end
+    # cart_products = current_user.cart.cart_products
+    # cart_products.each do |cart_product|
+    #   puts "#"*100
+    #   puts "Je suis la méthode clean_old_schedules DANS EACH ! :) ."
+    #   puts "#"*100
+    #   cart_product.schedule.destroy
+    # end
 
     Schedule.all.each do |schedule|
       if schedule.date.year == 1900 && schedule.created_at < Time.now - 3600*24*2
