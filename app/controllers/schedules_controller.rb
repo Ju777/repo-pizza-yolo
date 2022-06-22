@@ -11,7 +11,7 @@ class SchedulesController < ApplicationController
     @total_to_pay = total_cart
     @order = Order.create(total_amount: @total_to_pay, user: current_user, restaurant: Restaurant.first)
     @order.update(pickup_code: "#{@order.id}##{@order.created_at.to_i}")
-    @cart_schedule_state = is_full_cart_scheduled
+    @cart_schedule_state = is_cart_fully_scheduled
     puts "#"*100
     puts "METHODE SCHEDULE#NEW"
     puts "@cart_schedule_state = #{@cart_schedule_state}"
@@ -22,29 +22,30 @@ class SchedulesController < ApplicationController
     puts "#"*100
     puts "#"*100
     puts "DÉBUT DE LECTURE DE LA MÉTHODE Schedule#create."
-    puts "Voici le params = #{params.inspect}"
     puts "#"*100
     puts "#"*100
 
-    puts "#"*100
-    puts "is_input_valid = true. GO."  
-    puts "#"*100
+    # La saisie est-elle valide ?
+    is_input_empty
+
     # Commençons par transformer la saisie en éléments exploitables par le model Schedule.
     selected_date = params_to_time
     # Déterminons maintenant combien de pizzas nous devons préparés dans ce cart_product.
     remaining_pizzas = pizzas_to_cook
     # Lançons nous dans la recherche d'horaires disponibles pour préparer ces pizzas à l'horaire demandé.
-    while(search_schedule(remaining_pizzas, selected_date) > 0)
+    # while(search_schedule(remaining_pizzas, selected_date) > 0)
+    @search_completed = false
+    
+    while(@search_completed == false)
+      
       puts "#"*100
       puts "Début de la boucle while, il y a #{remaining_pizzas} pizzas à caser :"
       puts "#"*100
+      
       search_schedule(remaining_pizzas, selected_date)
     end
 
-    # redirect_to cart_path(current_user.cart)
-    redirect_to new_schedule_path
-
-
+    # redirect_to new_schedule_path
   end
 
   def edit
@@ -57,10 +58,16 @@ class SchedulesController < ApplicationController
   end
 
 
-# private
+private
 
-  def is_input_valid
-
+  def is_input_empty
+    puts "#"*100
+    puts "Voici le params = #{params.inspect}"
+    # Cas 1 : la saisie est vide.
+    if params[:date] == ""
+      puts "params[:date] = #{params[:date]}. La saisie est vide."
+    end
+    puts "#"*100 
   end
 
   def params_to_time
@@ -79,10 +86,10 @@ class SchedulesController < ApplicationController
     min = 0 if min < 30
     min = 30 if min >= 30
      
-    time_object = Time.new(year, month, day, hour, min).getutc
+    time_object = Time.new(year, month, day, hour, min)
     puts "#"*100
     puts "Les éléments extraits de la saisie sont => le #{day}/#{month}/#{year} à #{hour} heures et #{min} minutes."
-    puts "La transformation a donné : time_object = Time.new(year, month, day, hour).getutc => #{time_object}."
+    puts "La transformation a donné : time_object = Time.new(year, month, day, hour) => #{time_object}."
     puts "#"*100
     
     return time_object
@@ -158,20 +165,8 @@ class SchedulesController < ApplicationController
     puts "Maintenant qu'on a un créneau bien créé, y'a-t-il assez de place pour cuisiner #{remaining_pizzas} pizzas ? Rappelons que la capacité max de cette pizzeria est  #{Restaurant.first.cooking_capacity} pizzas par créneau de 30 min."
     puts "#"*100
 
-    # available_places = how_much_places_V1(selected_schedule, remaining_pizzas)
-    # has_enough_places(available_places, remaining_pizzas)
-    # update_user_cart_schedules_V1(selected_schedule, remaining_pizzas, available_places)
-
     available_places = how_much_places(selected_schedule)
-    # has_enough_places(available_places, remaining_pizzas)
     update_user_cart_schedules(selected_schedule, remaining_pizzas, available_places)
-
-    
-
-    # remaining_pizzas = 0
-    # return remaining_pizzas
-
-    
   end
 
   def how_much_places(selected_schedule)
@@ -216,12 +211,14 @@ class SchedulesController < ApplicationController
       puts "Après mise à jour voici selected_schedule.ordered_pizzas = #{selected_schedule.ordered_pizzas}."
       puts "Voici les dates de chaque cart_product du client :"
       current_user.cart.cart_products.each do |cart_product|
-        puts "Le cart_product de #{cart_product.quantity} #{cart_product.product.title} est caser pour le #{cart_product.schedule.date}."  
+        puts "Le cart_product de #{cart_product.quantity} #{cart_product.product.title} est casé pour le #{cart_product.schedule.date}. FIN 1"  
       end
       puts "#"*100
 
       remaining_pizzas = 0
-      return remaining_pizzas
+      @search_completed = true
+      # redirect_to new_schedule_path
+      # return remaining_pizzas
     else
       puts "#"*100
       puts "Comme il n'y a pas assez de place, il va falloir déborder sur le créneau suivant. Mais avant toute chose, il faut vérifier si ce créneau est toujours pendant les heures de services."      
@@ -237,7 +234,7 @@ class SchedulesController < ApplicationController
         min = 0
       end
 
-      next_time_object = Time.new(year , month, day, hour, min).getutc
+      next_time_object = Time.new(year , month, day, hour, min)
       puts "#"*100
       puts "           ==> next_time_object.hour est #{next_time_object.hour} heures."
       puts "#"*100
@@ -250,6 +247,7 @@ class SchedulesController < ApplicationController
         puts "2 - Updater le nombre de pizzas restantes à caser dans le créneau suivant."
         remaining_pizzas = remaining_pizzas - available_places
         puts "3 - Relancer la recherche sur le créneau suivant, avec le nombre de pizzas restantes."
+        puts "RECHERCHE DU NIL : #{remaining_pizzas}, #{next_time_object}"
         search_schedule(remaining_pizzas, next_time_object)
         puts "#"*100
         
@@ -259,7 +257,9 @@ class SchedulesController < ApplicationController
         puts "Avant toute chose, on va vérifier si le créneau en cours (le dernier du service donc) contient des extras commandes. Car si c'est le cas, on n'en acceptera pas d'autres."
 
         if selected_schedule.ordered_pizzas >= Restaurant.first.cooking_capacity
-          puts "Il y a déjà #{selected_schedule.ordered_pizzas} pizzas de prévues => on dépasse la limite, donc pas de nouvelle commande."
+          puts "Il y a déjà #{selected_schedule.ordered_pizzas} pizzas de prévues => on dépasse la limite, donc pas de nouvelle commande. FIN 3"
+          remaining_pizzas = 0
+          @search_completed = true
         else
           puts "Il y a déjà #{selected_schedule.ordered_pizzas} pizzas de prévues => on ne dépasse pas la limite, donc on va s'en occuper."
           puts "Il s'agit maintenant d'une acceptation de commande classique."
@@ -272,41 +272,16 @@ class SchedulesController < ApplicationController
           puts "Après mise à jour voici selected_schedule.ordered_pizzas = #{selected_schedule.ordered_pizzas}."
           puts "Voici les dates de chaque cart_product du client :"
           current_user.cart.cart_products.each do |cart_product|
-            puts "Le cart_product de #{cart_product.quantity} #{cart_product.product.title} est caser pour le #{cart_product.schedule.date}."  
+            puts "Le cart_product de #{cart_product.quantity} #{cart_product.product.title} est casé pour le #{cart_product.schedule.date} (extra_commande) FIN 2."  
           end
           puts "#"*100
 
           remaining_pizzas = 0
-          return remaining_pizzas
+          @search_completed = true
         end
       end
-      remaining_pizzas = 0
-      return remaining_pizzas
-
-      # if next_schedule.date.hour >= Restaurant.first.closing
-      #   puts "#"*100
-      #   puts "ON EST HORS HORAIRES DE SERVICES => Peut on bourrer le four ?"
-      #   puts "Dans ce #{selected_schedule.date} il y a #{selected_schedule.ordered_pizzas}, et le max accepté est #{Restaurant.first.cooking_capacity}."
-      #   if selected_schedule.ordered_pizzas < Restaurant.first.cooking_capacity
-      #     puts "Après vérification, oui on peut, le créneau n'est pas complètement plein."
-      #     puts "#"*100
-      #     current_user.cart.cart_products.each do |cart_product|
-      #     cart_product.update(schedule: selected_schedule)
-      #     end
-      #     selected_schedule.update(ordered_pizzas: selected_schedule.ordered_pizzas + remaining_pizzas)
-      #     remaining_pizzas = 0
-      #     return remaining_pizzas
-      #   else
-      #     puts "Après vérification, on ne peut pas, le créneau est déjà plein."
-      #   end
-      # else
-      #   puts "#"*100
-      #   puts "ON EST PAS HORS HORAIRES DE SERVICES => ON BOUCLE TRANQUILLE."
-      #   puts "#"*100
-      #   remaining_pizzas = remaining_pizzas - available_places
-      #   selected_schedule.update(ordered_pizzas: Restaurant.first.cooking_capacity)
-      #   search_schedule(remaining_pizzas, next_time_object)
-      # end
+      # remaining_pizzas = 0
+      # return remaining_pizzas
     end
   end
 
@@ -319,7 +294,7 @@ class SchedulesController < ApplicationController
     return total
   end
 
-  def is_full_cart_scheduled
+  def is_cart_fully_scheduled
     # S'il y a le moindre cart_product dont le schedule n'est pas à jour, la méthode renvoie false. True dans le cas contraire.
     false_count = 0
     current_user.cart.cart_products.each do |cart_product|
