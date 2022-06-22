@@ -5,6 +5,7 @@ class CartProductsController < ApplicationController
   end
 
   def show
+
   end
 
   def new
@@ -69,5 +70,6 @@ class CartProductsController < ApplicationController
       format.js {}
     end
   end
+
 
 end
