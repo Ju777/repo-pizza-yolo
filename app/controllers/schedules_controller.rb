@@ -11,6 +11,11 @@ class SchedulesController < ApplicationController
     @total_to_pay = total_cart
     @order = Order.create(total_amount: @total_to_pay, user: current_user, restaurant: Restaurant.first)
     @order.update(pickup_code: "#{@order.id}##{@order.created_at.to_i}")
+    @cart_schedule_state = is_full_cart_scheduled
+    puts "#"*100
+    puts "METHODE SCHEDULE#NEW"
+    puts "@cart_schedule_state = #{@cart_schedule_state}"
+    puts "#"*100
   end
 
   def create
@@ -69,7 +74,7 @@ class SchedulesController < ApplicationController
     year = split_1[0].to_i
     hour = split_2[1].to_i
     min = split_3[1].to_i
-    
+
     # Ajustement de min vers la demi-heure précédente la plus proche, pour créer des créneaux de 30 min.
     min = 0 if min < 30
     min = 30 if min >= 30
@@ -314,4 +319,19 @@ class SchedulesController < ApplicationController
     return total
   end
 
+  def is_full_cart_scheduled
+    # S'il y a le moindre cart_product dont le schedule n'est pas à jour, la méthode renvoie false. True dans le cas contraire.
+    false_count = 0
+    current_user.cart.cart_products.each do |cart_product|
+      if cart_product.schedule.date.year == 1900
+        false_count += 1
+      end
+    end
+
+    if false_count == 0
+      return true
+    else
+      return false
+    end    
+  end
 end
