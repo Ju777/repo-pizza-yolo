@@ -10,7 +10,6 @@ class SchedulesController < ApplicationController
     @pizzas_quantity = pizzas_to_cook
     @total_to_pay = total_cart
     @order = Order.create(total_amount: @total_to_pay, user: current_user, restaurant: Restaurant.first)
-    @order.update(pickup_code: "#{@order.id}##{@order.created_at.to_i}")
     @cart_schedule_state = is_cart_fully_scheduled
     puts "#"*100
     puts "METHODE SCHEDULE#NEW"
