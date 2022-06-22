@@ -11,12 +11,16 @@ class SchedulesController < ApplicationController
   def create
     puts "#"*100
     puts "#"*100
-    puts "BIENVENUE DANS LA MÉTHODE Schedule#create."
+    puts "DÉBUT DE LECTURE DE LA MÉTHODE Schedule#create."
     puts "Voici le params = #{params.inspect}"
     puts "#"*100
     puts "#"*100
 
-    # Commencons par transformer la saisie en éléments exploitables par le model Schedule.
+
+    puts "#"*100
+    puts "is_input_valid = true. GO."  
+    puts "#"*100
+    # Commençons par transformer la saisie en éléments exploitables par le model Schedule.
     selected_date = params_to_time
     # Déterminons maintenant combien de pizzas nous devons préparés dans ce cart_product.
     remaining_pizzas = pizzas_to_cook
@@ -30,6 +34,8 @@ class SchedulesController < ApplicationController
 
     # redirect_to cart_path(current_user.cart)
     redirect_to new_order_path
+
+
   end
 
   def edit
@@ -43,7 +49,13 @@ class SchedulesController < ApplicationController
 
 private
 
+  def is_input_valid
+
+  end
+
   def params_to_time
+
+
     split_1 = params[:date].split("-")
     split_2 = split_1[2].split("T")
     split_3 = split_2[1].split(":")
