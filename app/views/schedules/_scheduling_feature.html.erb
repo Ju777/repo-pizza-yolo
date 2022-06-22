@@ -1,6 +1,14 @@
 <p>=========================================</p>
-<p>Horaire de retrait : 
-<% if @cart_to_show.cart_products.first.schedule.date < Time.now %>
+<p>Horaire de retrait :
+
+<% check_schedules = true %>
+<% @cart_to_show.cart_products.each do |cart_product| %>
+  <% if cart_product.schedule.date < Time.now %>
+     <% check_schedules = false %>
+  <% end %>
+<% end %>
+
+<% if check_schedules == false %>
   <p>
     choisissez un horaire de retrait avant de passer au paiement.
   </p>

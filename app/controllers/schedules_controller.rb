@@ -6,6 +6,11 @@ class SchedulesController < ApplicationController
   end
 
   def new
+    @cart_to_show = current_user.cart
+    @pizzas_quantity = pizzas_to_cook
+    @total_to_pay = total_cart
+    @order = Order.create(total_amount: @total_to_pay, user: current_user, restaurant: Restaurant.first)
+    @order.update(pickup_code: "#{@order.id}##{@order.created_at.to_i}")
   end
 
   def create
@@ -32,7 +37,7 @@ class SchedulesController < ApplicationController
     end
 
     # redirect_to cart_path(current_user.cart)
-    # redirect_to new_order_path
+    redirect_to new_schedule_path
 
 
   end
@@ -46,7 +51,8 @@ class SchedulesController < ApplicationController
   def destroy
   end
 
-private
+
+# private
 
   def is_input_valid
 
@@ -162,21 +168,10 @@ private
     
   end
 
-  def how_much_places_V1(selected_schedule, remaining_pizzas)
-    cart_products = selected_schedule.cart_products
-    already_ordered_pizzas = 0
-
-    cart_products.each do |cart_product|
-      puts "Dans le ProduitPanier #{cart_product.product.title} => il y a #{cart_product.quantity} #{cart_product.product.category.title}"
-      if cart_product.product.category.title == "pizza"
-        already_ordered_pizzas += cart_product.quantity
-      end
-    end
-
-    available_places = Restaurant.first.cooking_capacity - already_ordered_pizzas
-
+  def how_much_places(selected_schedule)
+    available_places = Restaurant.first.cooking_capacity - selected_schedule.ordered_pizzas
     puts "#"*100
-    puts "Il y a déjà #{already_ordered_pizzas} pizzas sur ce créneau on veut en ajouter #{remaining_pizzas}."
+    puts "Le créneau #{selected_schedule.date} contient déjà #{selected_schedule.ordered_pizzas} pizzas, il reste #{available_places} places."
     puts "#"*100
     return available_places
   end
@@ -194,38 +189,6 @@ private
       return false
     end
 
-  end
-
-  def update_user_cart_schedules_V1(selected_schedule, remaining_pizzas, available_places)
-    puts "#"*100
-    puts "ENTREE DANS L'UPDATE avec le créneau choisi : on est dans la véritable phase de réservation des cart_product."
-    puts "Le principe c'est que l'on va caser les pizzas jusqu'a ce qu'il n'y ait plus de places disponibles."
-    puts "Une fois cette action de faire, on sort de cette méthode, et la méthode principale prendra le relais : elle bouclera sur elle même avec le créneau suivant et le nombre restant de pizzas à préparer"
-    puts "#"*100
-
-    puts "#"*100
-    puts "De quoi j'ai besoin pour commencer : de tous les cart_products du current_user (qui sont associés à un horaire factice de 1900 ou à peu près."
-    puts "Les voici : all_cart_products = current_user.cart.cart_products.each :."
-    all_cart_products = current_user.cart.cart_products
-    all_cart_products.each do |cart_product|
-      puts "#{cart_product.id} : #{cart_product.product.title} => #{cart_product.schedule.date}."
-      if cart_product.product.category.title == "pizza"
-        puts "Ce cart_product contient #{cart_product.quantity} #{cart_product.product.category.title} à caser dans le créneau sélectionné."
-        cart_product.update(schedule:selected_schedule)
-        puts "C'est fait. Vérification cart_product.schedule.date = #{cart_product.schedule.date}."
-        remaining_pizzas -= cart_product.quantity
-        puts "Il reste à caser #{remaining_pizzas} pizzas."
-      end
-    end
-    puts "#"*100
-  end
-
-  def how_much_places(selected_schedule)
-    available_places = Restaurant.first.cooking_capacity - selected_schedule.ordered_pizzas
-    puts "#"*100
-    puts "Le créneau #{selected_schedule.date} contient déjà #{selected_schedule.ordered_pizzas} pizzas, il reste #{available_places} places."
-    puts "#"*100
-    return available_places
   end
 
   def update_user_cart_schedules(selected_schedule, remaining_pizzas, available_places)
@@ -340,4 +303,14 @@ private
       # end
     end
   end
+
+  def total_cart
+    @cart = current_user.cart
+    total = 0
+      @cart.cart_products.each do |cart_product|
+        total += cart_product.product.price*cart_product.quantity
+      end
+    return total
+  end
+
 end

@@ -1,19 +1,2 @@
 <h1>Orders#new</h1>
 
-<%= render 'carts/scheduling_feature' %>
-
-<% if current_user.firstname == "" && current_user.lastname == "" && current_user.phone == "" %>
-  <p>Profil incomplet, merci de <%= link_to "compléter votre profil", edit_user_path(@current_user.id) %> pour pouvoir finaliser votre commande :</p>
-<% else %>
-  
-  <% if @cart_to_show.cart_products.first.schedule.date < Time.now %>
-    <%= link_to 'Payer ma commande', orders_path(total:@total_to_pay), method: :post, class: "btn btn-outline-danger disabled", remote: true %>
-    
-  <% else %>
-    <%= link_to 'Payer ma commande', orders_path(total:@total_to_pay), method: :post, class: "btn btn-outline-success", remote: true %>
-    <%= link_to 'Annuler', order_path(@order.id), method: :delete, class: "btn btn-danger" %>
-  <% end %>
-  
-<% end %>
-<p><strong>TOTAL À PAYER : <%= @total_to_pay %> €</strong></p>
-<%= link_to 'Annuler', order_path(@order.id), method: :delete, class: "btn btn-danger" %>
