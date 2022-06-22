@@ -75,7 +75,7 @@ class CartProductsController < ApplicationController
     if current_item.save
       redirect_to cart_path(current_user.cart), notice: 'Quantité modifiée (-1).'
     else
-      redirect_to cart_path(current_user.cart), notice: "Erreur: la quantité n'a pas été modifiée."
+      redirect_to cart_path(current_user.cart), notice: "Erreur: la quantité ne peut être modifiée."
     end
   end
 
