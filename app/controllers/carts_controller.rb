@@ -9,7 +9,12 @@ class CartsController < ApplicationController
   def show
     @cart_to_show = Cart.find(params[:id])
     @total_to_pay = total_cart
+
+    @cart_schedule_state = is_cart_fully_scheduled
+    @order = Order.where(user:current_user).last
+
     @all_products = @cart_to_show.cart_products.order(:created_at)
+
     # The following line is used with Stripe payment V1 only. It has to to be commented while using Stripe payment V2.
     # @order_to_pay = Order.create(total_amount:@total_to_pay, user:current_user, pickup_code:"not_paid", restaurant: Restaurant.first)
   end
@@ -27,6 +32,10 @@ class CartsController < ApplicationController
   end
 
   def destroy
+    current_cart = Cart.find(params[:id])
+    
+    empty_the_cart
+
   end
 
   private
@@ -48,4 +57,38 @@ class CartsController < ApplicationController
       end
     return total
   end
+
+  def is_cart_fully_scheduled
+    # S'il y a le moindre cart_product dont le schedule n'est pas à jour, la méthode renvoie false. True dans le cas contraire.
+    false_count = 0
+    current_user.cart.cart_products.each do |cart_product|
+      if cart_product.schedule.date.year == 1900
+        false_count += 1
+      end
+    end
+
+    if false_count == 0
+      return true
+    else
+      return false
+    end    
+  end
+
+#   def empty_the_cart
+#   current_cart = Cart.find(params[:id])
+#     current_products = current_cart.cart_products
+
+#     current_products.each do |cart_product|
+#       cart_product.destroy
+#     end
+
+#     respond_to do |format|
+#       format.html {
+#         flash.notice = "Panier vidé"
+#         redirect_to cart_path(current_user.cart)
+#       }
+#       format.js {}
+#     end
+#   end
+
 end

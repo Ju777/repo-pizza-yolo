@@ -30,7 +30,7 @@
                           </div>
 
                           <div class="col">
-                            Prix : <%= cart_product.product.price %> €
+                            Prix (unitaire): <%= cart_product.product.price %> €
                           </div>
 
                           <div class="col">
@@ -54,9 +54,22 @@
                       </div>
                     <% end %>
 
-                    <div>
-                      <p><strong>TOTAL À PAYER : <%= @total_to_pay %> €</strong></p>
-                      <%= link_to 'Je valide mon panier', new_order_path,class: "btn btn-success" %>                 
+                      <div>
+                        <p><strong>TOTAL À PAYER : <%= @total_to_pay %> €</strong></p>
+
+                        <% if @cart_schedule_state == false %>
+                          <%= link_to 'Je valide mon panier', new_schedule_path, class: "btn btn-success" %>
+                        <% else %>
+                          <button class="btn btn-success disabled">PANIER VALIDÉ<br/>HORAIRE DE RETRAIT : <%= current_user.cart.cart_products.first.schedule.date.strftime(" %d/%m/%Y à partir de %Hh%M.") %></button><br/>
+                          <br/>
+                          <%= link_to 'Payer ma commande', orders_path(total:@total_to_pay), method: :post, class: "btn btn-outline-success", remote: true %><br/>
+                          <%= link_to 'Annuler', order_path(@order.id), method: :delete, class: "btn btn-danger" %>
+                        <% end %>               
+
+                          <%= link_to "Vider le Panier", cart_path(current_user.cart), method: :delete, class: "btn btn-primary btn-sm" %>                           
+
+                      <% end %>
+
                     </div>
 
                   <% end %> 

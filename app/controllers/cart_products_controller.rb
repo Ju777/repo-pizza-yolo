@@ -5,6 +5,7 @@ class CartProductsController < ApplicationController
   end
 
   def show
+
   end
 
   def new
@@ -40,7 +41,9 @@ class CartProductsController < ApplicationController
     @cart_product = CartProduct.find(params[:id])
 
     if params[:increment] == "true"
-      @cart_product.update!(quantity: @cart_product.quantity+1)
+      fake_schedule = Schedule.create(date:Time.new(1900, 01, 01, 00, 00, 00))
+      @cart_product.update!(quantity: @cart_product.quantity+1, schedule:fake_schedule)
+      # @cart_product.update!(quantity: @cart_product.quantity+1)
     elsif params[:decrement] == "true" && @cart_product.quantity >= 1
       @cart_product.update!(quantity: @cart_product.quantity-1)
       if @cart_product.quantity == 0
@@ -70,31 +73,5 @@ class CartProductsController < ApplicationController
     end
   end
 
-  #def add_qty
-    #current_item = CartProduct.find(params[:id])
-    #current_item.update(quantity:current_item.quantity + 1)
-
-    #if current_item.save
-      #redirect_to cart_path(current_user.cart), notice: 'Quantité modifiée (+1).'
-    #else
-      #redirect_to cart_path(current_user.cart), notice: "Erreur: la quantité n'a pas été modifiée."
-    #end
-  #end
-
-  #def qty_minus_one
-    #current_item = CartProduct.find(params[:id])
-
-    #if current_item.quantity > 1
-      #current_item.update(quantity:current_item.quantity - 1)
-    #elsif current_item.quantity = 1
-      #current_item.destroy
-    #end
-
-    #if current_item.save
-      #redirect_to cart_path(current_user.cart), notice: 'Quantité modifiée (-1).'
-    #else
-      #redirect_to cart_path(current_user.cart), notice: "Erreur: la quantité n'a pas été modifiée."
-    #end
-  #end
 
 end

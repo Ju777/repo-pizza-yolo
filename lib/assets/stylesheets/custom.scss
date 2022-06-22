@@ -201,7 +201,8 @@ body {
 }
 
 #pizzar1 {
-  width: 461.188px;
+  position: relative;
+  flex: 0 0 45%;
   margin: 0px;
   padding: 0px;
 }
@@ -247,7 +248,7 @@ section {
   font-size: 15px;
   margin: 0px;
   padding: 0px;
-  color: #2d2d2d;
+  color: rgb(255, 183, 0);
 }
 
 #cardimg {
@@ -297,6 +298,7 @@ section {
 #productshowcatchphrase {
   padding-top: 0px;
   padding-bottom: 10px;
+  color:rgb(255, 183, 0);
 }
 
 #productshowdesc {

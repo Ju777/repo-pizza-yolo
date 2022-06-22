@@ -1,4 +1,4 @@
-<header class="pt-5">
+<header class="hero">
     <div class="container pt-xl-5">
         <div class="row">
             <div class="col-md-8 col-xl-6 text-center mx-auto">
@@ -10,11 +10,12 @@
             </div>
                 <div class="col-12 col-lg-10 mx-auto">
                     <div id="heropizzas" class="position-relative">
-                        <div id="pizzal"><%= image_tag "heropizza2.png", class:"img-fluid", data: {"bss-parallax":"0", "bss-parallax-speed":"0.25"}%></div>
-                        <%= image_tag "heropizza1.png", class:"img-fluid", id:"pizzar1", data: {"bss-parallax":"0", "bss-parallax-speed":"0.8"}%>
-                        <div id="pizzar2"><%= image_tag "heropizza3.png", class:"img-fluid mb-5", data: {"bss-parallax":"0", "bss-parallax-speed":"0.4"}%></div>                        
+                        <div id="pizzal"><%= image_tag "heropizza2.png", class:"img-fluid", data: {"bss-parallax":"0", "bss-parallax-speed":"0.4"}%></div>
+                        <div id="pizzar1"><%= image_tag "heropizza1.png", class:"img-fluid", data: {"bss-parallax":"0", "bss-parallax-speed":"0.6"}%></div>
+                        <div id="pizzar2"><%= image_tag "heropizza3.png", class:"img-fluid mb-5", data: {"bss-parallax":"0", "bss-parallax-speed":"0.3"}%></div>                        
                     </div>
                 </div>
         </div>
     </div>
 </header>
+<%=javascript_include_tag 'bold-and-bright' %>
