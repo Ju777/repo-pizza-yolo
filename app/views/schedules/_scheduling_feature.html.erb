@@ -18,8 +18,8 @@
       Votre commande sera prête au plus tôt <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d/%m/%Y à partir de %Hh%M.") %>
       <br/>Munissez vous du code de retrait qui vous sera envoyé par mail une fois le règlement effectué.</p>
     <% elsif @search_status == "extra" %>
-      Votre commande touche la limite de la journée, elle a été exceptionnellemnt accepctée. Mais il ne sera plus possible de faire de nouvelle commande pour 21h30.<br/>
-      VOtre commande sera prête au plus tôt <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d/%m/%Y à partir de %Hh%M.") %>
+      Votre commande touche la limite de la journée, elle a été exceptionnellemnt acceptée, mais il ne sera plus possible de commander de pizzas pour aujourd'hui.<br/>
+      Votre commande sera prête au plus tôt <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d/%m/%Y à partir de %Hh%M.") %>
       <br/>Munissez vous du code de retrait qui vous sera envoyé par mail une fois le règlement effectué.</p>
     <% elsif @search_status == "rejected" %>
       Votre commande dépasse nos possibilités de préparation pour ce créneau. Nous sommes au regret de ne pouvoir l'honorer.
