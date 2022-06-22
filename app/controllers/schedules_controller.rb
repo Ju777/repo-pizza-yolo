@@ -30,10 +30,12 @@ class SchedulesController < ApplicationController
     puts "#"*100
 
     # La saisie est-elle valide ?
-    # if is_input_empty || is_input_incorrect
-    #   flash.notice = "Saisie invalide"
-    #   redirect_to new_schedule_path
-    # else
+    if is_input_empty || !is_input_correct
+      flash.notice = "Saisie invalide => Non vide / 10h-22h / pas de dimanche."
+      # La redirection en fin de ce bloc va provoquer un doublon de création d'Order de la méthode New. C'est pourquoi on le destroy ici.
+      @order.destroy
+      redirect_to new_schedule_path
+    else
       # Commençons par transformer la saisie en éléments exploitables par le model Schedule.
       selected_date = params_to_time
       # Déterminons maintenant combien de pizzas nous devons préparés dans ce cart_product.
@@ -49,7 +51,7 @@ class SchedulesController < ApplicationController
         puts "#"*100
         search_schedule(remaining_pizzas, selected_date)
       end
-    # end ==> A réactiver avec la réactivation des méthodes de controles de saisie. 
+    end 
 
     puts "#"*100
     puts "TOUT EN BAS DE LA METHODE : @search_status = #{@search_status}"
@@ -80,17 +82,17 @@ private
     end
   end
 
-  def is_input_incorrect
-    if params_to_time.hour < Restaurant.first.opening 
+  def is_input_correct
+    if params_to_time.hour < Restaurant.first.opening || params_to_time.hour > Restaurant.first.closing  || params_to_time.sunday? 
       puts "#"*100
       puts "INPUT INCORRECT => VERIF DE LA SAISIE : params_to_time.hour = #{params_to_time.hour}, params_to_time.sunday? = #{params_to_time.sunday?}" 
       puts "#"*100
-      return true
+      return false
     else
       puts "#"*100
       puts "INPUT CORRECT => VERIF DE LA SAISIE : params_to_time.hour = #{params_to_time.hour}, params_to_time.sunday? = #{params_to_time.sunday?}" 
       puts "#"*100
-      return false
+      return true
     end
   end
 
