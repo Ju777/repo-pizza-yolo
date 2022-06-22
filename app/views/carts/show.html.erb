@@ -25,7 +25,7 @@
                               <p><i>Quantité </i>= <%= cart_product.quantity %></p>
                             </div>
                             <div class="col">
-                              Prix : <%= cart_product.product.price %> €
+                              Prix (unitaire): <%= cart_product.product.price %> €
                             </div>
 
                             <div class="col">
@@ -37,12 +37,9 @@
                             </div>
 
                             <div class="col">
-                            <%#= link_to "Retirer du Panier", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %> <%= cart_product.product.category.title %>                          
+                            <%= link_to "Retirer du Panier", cart_product, method: :delete %> <%= cart_product.product.category.title %>                          
                             </div>
 
-                            <div class="col">
-                            <%#= link_to "Vider le Panier", cart_product, method: :delete_all, class: "btn btn-primary btn-sm" %>                           
-                            </div> 
 
                             <hr/>
                             
@@ -50,9 +47,12 @@
                     <% end %>
                       <div>
                         <p><strong>TOTAL À PAYER : <%= @total_to_pay %> €</strong></p>
-                        <%= link_to 'Je valide mon panier', new_order_path,class: "btn btn-success" %>                 
-                        <% end %>
-                      </div>
+
+                          <%= link_to 'Je valide mon panier', new_order_path,class: "btn btn-success" %>
+                          <hr>
+                          <%= link_to "Vider le Panier", cart_path(current_user.cart), method: :delete, class: "btn btn-primary btn-sm" %>                           
+                      <% end %>
+                        
                     </div>
                   </div>        
                 </div>

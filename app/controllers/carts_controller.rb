@@ -27,6 +27,10 @@ class CartsController < ApplicationController
   end
 
   def destroy
+    current_cart = Cart.find(params[:id])
+    
+    empty_the_cart
+
   end
 
   private
@@ -48,4 +52,22 @@ class CartsController < ApplicationController
       end
     return total
   end
+
+  def empty_the_cart
+    current_cart = Cart.find(params[:id])
+    current_products = current_cart.cart_products
+
+    current_products.each do |cart_product|
+      cart_product.destroy
+    end
+
+    respond_to do |format|
+      format.html {
+        flash.notice = "Panier vidé"
+        redirect_to cart_path(current_user.cart)
+      }
+      format.js {}
+    end
+  end
+
 end

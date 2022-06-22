@@ -1,17 +1,16 @@
 <div class="container py-4 py-xl-5">
-  <br><br>
-  <h2><%= link_to "Retour", products_path(@products),class:"btn btn-success",id:"cardaddtocartbtn", type:"button" %></h2>
   <div class="row gy-4 gy-md-0">
     <div class="col-md-6">
       <% @product_to_show %>
-      <div class="p-xl-5 m-xl-5"><%= image_tag "cardimgtest.png", class:"rounded img-fluid w-100 fit-cover", id:"productshowimg"%></div>
+      <div class="p-xl-5 m-xl-5"><%= image_tag @product_to_show.image_url, class:"rounded img-fluid w-100 fit-cover", id:"productshowimg"%></div>
     </div>
     <div class="col-md-6 d-md-flex align-items-md-center" id="productshowtextcol">
       <div id="productshowtexts">
       <h2 class="text-uppercase fw-bold" id="productshowtitle"><%=@product_to_show.title%></h2>
-      <h5 id="productshowcatchphrase"><%=@product_to_show.catchphrase%></h5>
+      <small id="productshowcatchphrase"><%=@product_to_show.catchphrase%></small>
       <p id="productshowdesc" class="my-3"><%=@product_to_show.description%></p>
-      <p id="productshowprice"><%=@product_to_show.price%>.€</p>
+      <p id="productshowprice"><%=@product_to_show.price%> €</p>
+      <%= link_to "Retour", products_path(@products),class:"btn btn-outline-success mx-5",id:"cardaddtocartbtn", type:"button" %>
       <%= link_to "Ajouter au panier", cart_products_path(product_id:@product_to_show),class:"btn btn-success", type:"button", method: :post %>
     </div>
   </div>
