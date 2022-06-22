@@ -1,6 +1,9 @@
 class ProductsController < ApplicationController
   def index
     @all_products = Product.all
+    @all_pizzas = @all_products.where(category: Category.first)
+    @all_desserts = @all_products.where(category: Category.second)
+    @all_drinks = @all_products.where(category: Category.third)
   end
 
   def show
