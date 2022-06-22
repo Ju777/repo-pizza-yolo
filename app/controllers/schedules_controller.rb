@@ -30,7 +30,7 @@ class SchedulesController < ApplicationController
 
     # La saisie est-elle valide ?
     if is_input_empty || !is_input_correct
-      flash.notice = "Saisie invalide => Non vide / 10h-22h / pas de dimanche."
+      flash.notice = "Saisie invalide => Non vide / 10h-21h30 / pas le dimanche."
       # La redirection en fin de ce bloc va provoquer un doublon de création d'Order de la méthode New. C'est pourquoi on le destroy ici.
       @order.destroy
       redirect_to new_schedule_path
@@ -82,14 +82,15 @@ private
   end
 
   def is_input_correct
-    if params_to_time.hour < Restaurant.first.opening || params_to_time.hour > Restaurant.first.closing  || params_to_time.sunday? 
+    selected_date = params_to_time
+    if selected_date.hour < Restaurant.first.opening || selected_date.hour >= Restaurant.first.closing  || selected_date.sunday? 
       puts "#"*100
-      puts "INPUT INCORRECT => VERIF DE LA SAISIE : params_to_time.hour = #{params_to_time.hour}, params_to_time.sunday? = #{params_to_time.sunday?}" 
+      puts "INPUT INCORRECT => VERIF DE LA SAISIE : selected_date.hour = #{selected_date.hour}, selected_date.sunday? = #{selected_date.sunday?}" 
       puts "#"*100
       return false
     else
       puts "#"*100
-      puts "INPUT CORRECT => VERIF DE LA SAISIE : params_to_time.hour = #{params_to_time.hour}, params_to_time.sunday? = #{params_to_time.sunday?}" 
+      puts "INPUT CORRECT => VERIF DE LA SAISIE : selected_date.hour = #{selected_date.hour}, selected_date.sunday? = #{selected_date.sunday?}" 
       puts "#"*100
       return true
     end
@@ -187,7 +188,7 @@ private
     end
 
     puts "#"*100
-    puts "Maintenant qu'on a un créneau bien créé, y'a-t-il assez de place pour cuisiner #{remaining_pizzas} pizzas ? Rappelons que la capacité max de cette pizzeria est  #{Restaurant.first.cooking_capacity} pizzas par créneau de 30 min."
+    puts "Maintenant qu'on a un créneau bien créé, combien de places sont déjà occupées ? Rappelons que la capacité max de cette pizzeria est  #{Restaurant.first.cooking_capacity} pizzas par créneau de 30 min."
     puts "#"*100
 
     available_places = how_much_places(selected_schedule)
@@ -205,7 +206,7 @@ private
   def has_enough_places(available_places, remaining_pizzas)
     if available_places >= remaining_pizzas
       puts "#"*100
-      puts "Y'A ASSEZ DE PLACES. Notre client veut #{remaining_pizzas} pizzas."
+      puts "Y'A ASSEZ DE PLACES. Notre client veut seulement #{remaining_pizzas} pizzas."
       puts "#"*100
       return true
     else
