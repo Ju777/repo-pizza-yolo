@@ -9,6 +9,7 @@ class CartsController < ApplicationController
   def show
     @cart_to_show = Cart.find(params[:id])
     @total_to_pay = total_cart
+    @all_products = @cart_to_show.cart_products.order(:created_at)
     # The following line is used with Stripe payment V1 only. It has to to be commented while using Stripe payment V2.
     # @order_to_pay = Order.create(total_amount:@total_to_pay, user:current_user, pickup_code:"not_paid", restaurant: Restaurant.first)
   end
