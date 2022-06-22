@@ -46,7 +46,7 @@
                             </div>
 
                             <div class="col">
-                            <%#= link_to "Vider le Panier", cart_product, method: :delete_all, class: "btn btn-primary btn-sm" %>                           
+                            <%= link_to "Vider le Panier", cart_path(current_user.cart), method: :delete, class: "btn btn-primary btn-sm" %>                           
                             </div>                            
                             <hr/>
                           </div>
