@@ -41,7 +41,9 @@ class CartProductsController < ApplicationController
     @cart_product = CartProduct.find(params[:id])
 
     if params[:increment] == "true"
-      @cart_product.update!(quantity: @cart_product.quantity+1)
+      fake_schedule = Schedule.create(date:Time.new(1900, 01, 01, 00, 00, 00))
+      @cart_product.update!(quantity: @cart_product.quantity+1, schedule:fake_schedule)
+      # @cart_product.update!(quantity: @cart_product.quantity+1)
     elsif params[:decrement] == "true" && @cart_product.quantity >= 1
       @cart_product.update!(quantity: @cart_product.quantity-1)
       if @cart_product.quantity == 0
