@@ -63,7 +63,9 @@
                           <button class="btn btn-success disabled">PANIER VALIDÉ<br/>HORAIRE DE RETRAIT : <%= current_user.cart.cart_products.first.schedule.date.strftime(" %d/%m/%Y à partir de %Hh%M.") %></button><br/>
                           <br/>
                           <%= link_to 'Payer ma commande', orders_path(total:@total_to_pay), method: :post, class: "btn btn-outline-success", remote: true %><br/>
+                          <% if @order %>
                           <%= link_to 'Annuler', order_path(@order.id), method: :delete, class: "btn btn-danger" %>
+                          <% end %>
                         <% end %>               
 
                           <%= link_to "Vider le Panier", cart_path(current_user.cart), method: :delete, class: "btn btn-primary btn-sm" %>                           
