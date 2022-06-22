@@ -19,6 +19,10 @@ class SchedulesController < ApplicationController
   end
 
   def create
+    @cart_to_show = current_user.cart
+    @total_to_pay = total_cart
+    @order = Order.where(user:current_user).last
+
     puts "#"*100
     puts "#"*100
     puts "DÉBUT DE LECTURE DE LA MÉTHODE Schedule#create."
@@ -34,18 +38,19 @@ class SchedulesController < ApplicationController
     remaining_pizzas = pizzas_to_cook
     # Lançons nous dans la recherche d'horaires disponibles pour préparer ces pizzas à l'horaire demandé.
     # while(search_schedule(remaining_pizzas, selected_date) > 0)
-    @search_completed = false
+    @search_status = "searching"
     
-    while(@search_completed == false)
-      
+    # while(@search_status == false)
+    while(@search_status != "completed" && @search_status != "extra" && @search_status != "rejected")
       puts "#"*100
       puts "Début de la boucle while, il y a #{remaining_pizzas} pizzas à caser :"
       puts "#"*100
-      
       search_schedule(remaining_pizzas, selected_date)
     end
 
-    # redirect_to new_schedule_path
+    puts "#"*100
+    puts "TOUT EN BAS DE LA METHODE : @search_status = #{@search_status}"
+    puts "#"*100
   end
 
   def edit
@@ -216,9 +221,11 @@ private
       puts "#"*100
 
       remaining_pizzas = 0
-      @search_completed = true
+      @search_status = "completed"
+      puts "#"*100
+      puts "@searched_status = #{@search_status}"
+      puts "#"*100
       # redirect_to new_schedule_path
-      # return remaining_pizzas
     else
       puts "#"*100
       puts "Comme il n'y a pas assez de place, il va falloir déborder sur le créneau suivant. Mais avant toute chose, il faut vérifier si ce créneau est toujours pendant les heures de services."      
@@ -255,11 +262,19 @@ private
         puts "#"*100
         puts "Ce prochain horaire est APRÈS #{Restaurant.first.closing} heures qui est la fermeture. Donc on va devoir gérer cette exception."
         puts "Avant toute chose, on va vérifier si le créneau en cours (le dernier du service donc) contient des extras commandes. Car si c'est le cas, on n'en acceptera pas d'autres."
+        puts "#"*100
 
         if selected_schedule.ordered_pizzas >= Restaurant.first.cooking_capacity
+          puts "#"*100
           puts "Il y a déjà #{selected_schedule.ordered_pizzas} pizzas de prévues => on dépasse la limite, donc pas de nouvelle commande. FIN 3"
+          puts "#"*100
           remaining_pizzas = 0
-          @search_completed = true
+          @search_status = "rejected"
+          puts "#"*100
+          puts "@searched_status = #{@search_status}"
+          puts "#"*100
+
+          # redirect_to new_schedule_path
         else
           puts "Il y a déjà #{selected_schedule.ordered_pizzas} pizzas de prévues => on ne dépasse pas la limite, donc on va s'en occuper."
           puts "Il s'agit maintenant d'une acceptation de commande classique."
@@ -277,11 +292,13 @@ private
           puts "#"*100
 
           remaining_pizzas = 0
-          @search_completed = true
+          @search_status = "extra"
+          puts "#"*100
+          puts "@searched_status = #{@search_status}"
+          puts "#"*100
+          # redirect_to new_schedule_path
         end
       end
-      # remaining_pizzas = 0
-      # return remaining_pizzas
     end
   end
 

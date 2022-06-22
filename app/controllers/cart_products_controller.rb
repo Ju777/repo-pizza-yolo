@@ -5,6 +5,7 @@ class CartProductsController < ApplicationController
   end
 
   def show
+
   end
 
   def new
@@ -78,5 +79,7 @@ class CartProductsController < ApplicationController
       redirect_to cart_path(current_user.cart), notice: "Erreur: la quantité n'a pas été modifiée."
     end
   end
+
+
 
 end
