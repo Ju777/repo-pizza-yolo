@@ -30,23 +30,26 @@ class SchedulesController < ApplicationController
     puts "#"*100
 
     # La saisie est-elle valide ?
-    is_input_empty
-
-    # Commençons par transformer la saisie en éléments exploitables par le model Schedule.
-    selected_date = params_to_time
-    # Déterminons maintenant combien de pizzas nous devons préparés dans ce cart_product.
-    remaining_pizzas = pizzas_to_cook
-    # Lançons nous dans la recherche d'horaires disponibles pour préparer ces pizzas à l'horaire demandé.
-    # while(search_schedule(remaining_pizzas, selected_date) > 0)
-    @search_status = "searching"
-    
-    # while(@search_status == false)
-    while(@search_status != "completed" && @search_status != "extra" && @search_status != "rejected")
-      puts "#"*100
-      puts "Début de la boucle while, il y a #{remaining_pizzas} pizzas à caser :"
-      puts "#"*100
-      search_schedule(remaining_pizzas, selected_date)
-    end
+    # if is_input_empty || is_input_incorrect
+    #   flash.notice = "Saisie invalide"
+    #   redirect_to new_schedule_path
+    # else
+      # Commençons par transformer la saisie en éléments exploitables par le model Schedule.
+      selected_date = params_to_time
+      # Déterminons maintenant combien de pizzas nous devons préparés dans ce cart_product.
+      remaining_pizzas = pizzas_to_cook
+      # Lançons nous dans la recherche d'horaires disponibles pour préparer ces pizzas à l'horaire demandé.
+      # while(search_schedule(remaining_pizzas, selected_date) > 0)
+      @search_status = "searching"
+      
+      # while(@search_status == false)
+      while(@search_status != "completed" && @search_status != "extra" && @search_status != "rejected")
+        puts "#"*100
+        puts "Début de la boucle while, il y a #{remaining_pizzas} pizzas à caser :"
+        puts "#"*100
+        search_schedule(remaining_pizzas, selected_date)
+      end
+    # end ==> A réactiver avec la réactivation des méthodes de controles de saisie. 
 
     puts "#"*100
     puts "TOUT EN BAS DE LA METHODE : @search_status = #{@search_status}"
@@ -68,11 +71,27 @@ private
   def is_input_empty
     puts "#"*100
     puts "Voici le params = #{params.inspect}"
-    # Cas 1 : la saisie est vide.
     if params[:date] == ""
       puts "params[:date] = #{params[:date]}. La saisie est vide."
+      puts "#"*100 
+      return true
+    else
+      return false
     end
-    puts "#"*100 
+  end
+
+  def is_input_incorrect
+    if params_to_time.hour < Restaurant.first.opening 
+      puts "#"*100
+      puts "INPUT INCORRECT => VERIF DE LA SAISIE : params_to_time.hour = #{params_to_time.hour}, params_to_time.sunday? = #{params_to_time.sunday?}" 
+      puts "#"*100
+      return true
+    else
+      puts "#"*100
+      puts "INPUT CORRECT => VERIF DE LA SAISIE : params_to_time.hour = #{params_to_time.hour}, params_to_time.sunday? = #{params_to_time.sunday?}" 
+      puts "#"*100
+      return false
+    end
   end
 
   def params_to_time
