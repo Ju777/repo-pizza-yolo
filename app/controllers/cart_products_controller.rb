@@ -37,6 +37,24 @@ class CartProductsController < ApplicationController
   end
 
   def update
+    @cart_product = CartProduct.find(params[:id])
+
+    if params[:increment] == "true"
+      @cart_product.update!(quantity: @cart_product.quantity+1)
+    elsif params[:decrement] == "true" && @cart_product.quantity >= 1
+      @cart_product.update!(quantity: @cart_product.quantity-1)
+      if @cart_product.quantity == 0
+        @cart_product.destroy
+      end
+    else
+      @cart_product.destroy
+    end
+
+    respond_to do |format|
+      format.html { redirect_to cart_path(current_user.cart) }
+      format.js {}
+    end
+
   end
 
   def destroy
@@ -52,31 +70,31 @@ class CartProductsController < ApplicationController
     end
   end
 
-  def add_qty
-    current_item = CartProduct.find(params[:id])
-    current_item.update(quantity:current_item.quantity + 1)
+  #def add_qty
+    #current_item = CartProduct.find(params[:id])
+    #current_item.update(quantity:current_item.quantity + 1)
 
-    if current_item.save
-      redirect_to cart_path(current_user.cart), notice: 'Quantité modifiée (+1).'
-    else
-      redirect_to cart_path(current_user.cart), notice: "Erreur: la quantité n'a pas été modifiée."
-    end
-  end
+    #if current_item.save
+      #redirect_to cart_path(current_user.cart), notice: 'Quantité modifiée (+1).'
+    #else
+      #redirect_to cart_path(current_user.cart), notice: "Erreur: la quantité n'a pas été modifiée."
+    #end
+  #end
 
-  def qty_minus_one
-    current_item = CartProduct.find(params[:id])
+  #def qty_minus_one
+    #current_item = CartProduct.find(params[:id])
 
-    if current_item.quantity > 1
-      current_item.update(quantity:current_item.quantity - 1)
-    elsif current_item.quantity = 1
-      current_item.destroy
-    end
+    #if current_item.quantity > 1
+      #current_item.update(quantity:current_item.quantity - 1)
+    #elsif current_item.quantity = 1
+      #current_item.destroy
+    #end
 
-    if current_item.save
-      redirect_to cart_path(current_user.cart), notice: 'Quantité modifiée (-1).'
-    else
-      redirect_to cart_path(current_user.cart), notice: "Erreur: la quantité n'a pas été modifiée."
-    end
-  end
+    #if current_item.save
+      #redirect_to cart_path(current_user.cart), notice: 'Quantité modifiée (-1).'
+    #else
+      #redirect_to cart_path(current_user.cart), notice: "Erreur: la quantité n'a pas été modifiée."
+    #end
+  #end
 
 end

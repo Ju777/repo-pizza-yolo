@@ -13,11 +13,11 @@
               <div class="mb-3">
                 <div class="cartcontent">
                   <div class="insidecartcontent">
-                     <% if @cart_to_show.cart_products.length == 0 %>
-                     <p><strong>Votre panier est vide.</strong></p>
-                     <% else %>
-                    <p><strong>Votre panier contient les produits suivants :</strong></p>
-                      <% @cart_to_show.cart_products.each do |cart_product| %>
+                    <% if @all_products.length == 0 %>
+                      <p><strong>Votre panier est vide.</strong></p>
+                    <% else %>
+                      <p><strong>Votre panier contient les produits suivants :</strong></p>
+                      <% @all_products.each do |cart_product| %>
                         <div class="container mb-2">
                           <div class="row">
                             <div class="col">
@@ -29,16 +29,11 @@
                             </div>
 
                             <div class="col">
-                              <%= link_to "Qté +1", add_qty_cart_product_path(cart_product), method: :post, class: "btn btn-outline-success btn-sm" %>
-                            </div>
+                              <%= link_to "Qté +1", cart_product_path(cart_product, increment: "true"), method: :put, class: "btn btn-outline-success btn-sm" %>
+                            </div>                    
 
-                            <div>
-                              <%= text_area_tag(:message, "#{cart_product.quantity}", size: "2x1") %>
-                              <!-- ajouter ici le bouton 'Submit' (pour updater la nouvelle quantité) -->
-                            </div>                            
-
-                             <div class="col">
-                            <%= link_to "Qté -1", qty_minus_one_cart_product_path(cart_product), method: :post, class: "btn btn-outline-danger btn-sm" %>
+                            <div class="col">
+                              <%= link_to "Qté -1", cart_product_path(cart_product, decrement: "true"), method: :put, class: "btn btn-outline-danger btn-sm" %>
                             </div>
 
                             <div class="col">
@@ -47,19 +42,20 @@
 
                             <div class="col">
                             <%#= link_to "Vider le Panier", cart_product, method: :delete_all, class: "btn btn-primary btn-sm" %>                           
-                            </div>                            
+                            </div> 
+
                             <hr/>
+                            
                           </div>
-                        <% end %>
+                    <% end %>
                       <div>
                         <p><strong>TOTAL À PAYER : <%= @total_to_pay %> €</strong></p>
-                          <%= link_to 'Je valide mon panier', new_order_path,class: "btn btn-success" %>                 
-                      <% end %>
+                        <%= link_to 'Je valide mon panier', new_order_path,class: "btn btn-success" %>                 
+                        <% end %>
+                      </div>
                     </div>
-                  </div>
-                </div>        
-
+                  </div>        
+                </div>
               </div>
-  </div>
 </section>
 
