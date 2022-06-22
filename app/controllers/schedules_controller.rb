@@ -69,11 +69,12 @@ class SchedulesController < ApplicationController
     year = split_1[0].to_i
     hour = split_2[1].to_i
     min = split_3[1].to_i
+    
     # Ajustement de min vers la demi-heure précédente la plus proche, pour créer des créneaux de 30 min.
     min = 0 if min < 30
     min = 30 if min >= 30
      
-    time_object = Time.new(year, month, day, hour + 2, min).getutc # +2 sur l'heure -> pour compenser le décalage de timezone.
+    time_object = Time.new(year, month, day, hour, min).getutc
     puts "#"*100
     puts "Les éléments extraits de la saisie sont => le #{day}/#{month}/#{year} à #{hour} heures et #{min} minutes."
     puts "La transformation a donné : time_object = Time.new(year, month, day, hour).getutc => #{time_object}."
@@ -231,7 +232,7 @@ class SchedulesController < ApplicationController
         min = 0
       end
 
-      next_time_object = Time.new(year , month, day, hour + 2, min).getutc # +3 sur l'heure = +2 pour compenser le décalage de timezone + 1 pour passer à 
+      next_time_object = Time.new(year , month, day, hour, min).getutc
       puts "#"*100
       puts "           ==> next_time_object.hour est #{next_time_object.hour} heures."
       puts "#"*100
