@@ -1,4 +1,9 @@
 alert("le fichier JS est exécuté!");
 
-console.log(document.getElementById("item-id-<%=@cart_product.id%>"));
+product = document.getElementById("item-id-<%=@cart_product.id%>");
+qtyToUpdate = document.getElementById("qty-item-id-<%=@cart_product.id%>");
+
+console.log(product);
+console.log(qtyToUpdate);
+
 
