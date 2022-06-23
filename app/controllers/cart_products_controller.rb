@@ -73,5 +73,4 @@ class CartProductsController < ApplicationController
     end
   end
 
-
 end
