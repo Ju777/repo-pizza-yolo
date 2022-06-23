@@ -85,7 +85,7 @@ private
 
   def is_input_correct
     selected_date = params_to_time
-    if selected_date.hour < Restaurant.first.opening || selected_date.hour >= Restaurant.first.closing  || selected_date.sunday? #|| selected_date < Time.now
+    if selected_date.hour < Restaurant.first.opening || selected_date.hour >= Restaurant.first.closing  || selected_date.sunday? || selected_date < Time.new(Time.now.year, Time.now.month, Time.now.day, Time.now.hour, Time.now.min/30*30)
       puts "#"*100
       puts "INPUT INCORRECT => VERIF DE LA SAISIE : selected_date.hour = #{selected_date.hour}, selected_date.sunday? = #{selected_date.sunday?}" 
       puts "#"*100
