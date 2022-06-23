@@ -2,7 +2,7 @@
     <%= image_tag "loader.gif" %>
 </div>
 <%= render partial: 'products/hero' %>
-<section>
+<section class="mt-5" data-bss-parallax data-bss-parallax-speed="0.3">
         <div class="container">
             <div class="row" id="menurow">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
@@ -26,12 +26,12 @@
                      </div>
                  <% end %>
                     <div class="col-md-8 col-xl-6 text-center mt-4 mx-auto">
-                        <%= link_to 'Voir la carte', products_path, class:"btn btn-outline-light", id:"cardseebtn" %>
+                        <%= link_to 'Voir la carte', products_path, class:"btn btn-outline-light mt-5", id:"cardseebtn" %>
              </div>         
         </div>
 </section>
 
-<section>
+<section data-bss-parallax data-bss-parallax-speed="0.2">
 <div class="container py-4 py-xl-5">
     <div class="row mb-5 mt-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
@@ -83,3 +83,4 @@
 </div>
 </section>
 <%=javascript_include_tag 'loader' %>
+<%=javascript_include_tag 'bold-and-bright' %>
