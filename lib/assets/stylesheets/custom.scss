@@ -4,6 +4,7 @@ body {
   margin: 0;
   height: 100vh;
   cursor: image-url("cursor.png"), auto;
+  padding-top: 150px;
 }
 
 #navimg {
@@ -178,6 +179,20 @@ body {
   color: rgb(255,255,255);
 }
 
+#secondaryherophrase {
+  color: rgb(255, 183, 0);;
+}
+
+#herodatetime {
+  background: rgb(255,255,255);
+  color: rgb(0,0,0);
+  border-radius: 27px;
+  width: 230px;
+  height: 39.5938px;
+  font-size: 17px;
+  text-align: center;
+  border: 0px none rgb(255,255,255)
+}
 #herobtn {
   background: rgba(0,183,121,0);
   color: #00b779;
@@ -425,4 +440,8 @@ section {
       opacity: 0;
       visibility: hidden;
     }
+}
+
+.navbar-light .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
