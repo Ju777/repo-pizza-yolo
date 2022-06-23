@@ -1,10 +1,15 @@
-
-
-
 qtyToUpdate = document.getElementById("qty-item-id-<%=@cart_product.id%>");
+console.log(qtyToUpdate)
+
+productPrice = parseFloat("<%=@cart_product.product.price%>");
+console.log(productPrice)
+
+cartTotal = document.getElementById("cart-total");
+console.log(cartTotal);
+cartTotal = cartTotal.innerHTML;
+console.log(cartTotal);
 
 
-console.log(qtyToUpdate);
 
 if (qtyToUpdate) {
   qtyToUpdate = qtyToUpdate.innerHTML
@@ -13,7 +18,9 @@ if (qtyToUpdate) {
 
   // coder la mise à jour du TOTAL A PAYER ici
 
-  alert("la quantité a été mise à jour !");
+
+
+
+
+  alert("votre panier a été mise à jour !");
 };
-
-
