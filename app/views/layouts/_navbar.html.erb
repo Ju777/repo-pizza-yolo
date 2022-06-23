@@ -1,7 +1,11 @@
-<nav class="navbar navbar-expand-md position-relative" id="mainNav" style="background: rgb(0,0,0);">
+<nav class="navbar navbar-light navbar-expand-md fixed-top" id="mainNav" style="background: rgb(0,0,0);">
     <div class="container">
-        <div class="collapse navbar-collapse" id="navcol-1">
             <a class="navbar-brand" href=<%=root_path%>><%= image_tag "logo_navbar.png", id:"navimg"%> </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon bg-success"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
                     <%= link_to "Accueil", root_path, class:"nav-link active", id:"homebtn"%>
                     <%= link_to "L'Histoire", "/story", class:"nav-link", id:"storylink"%>
