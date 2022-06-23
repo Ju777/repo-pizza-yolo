@@ -59,7 +59,7 @@ class OrdersController < ApplicationController
         },
       ],
       success_url: orders_success_url + '?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: orders_cancel_url
+      cancel_url: orders_cancel_url + '?session_id={CHECKOUT_SESSION_ID}'
     )
   
     respond_to do |format|
@@ -79,7 +79,7 @@ class OrdersController < ApplicationController
 
   def destroy
     empty_cart
-    Order.last.destroy
+    current_user.orders.last.destroy # Ajouté suite à relecture
 
     flash.notice= "Panier vidé, commande annulée."
     redirect_to root_path    

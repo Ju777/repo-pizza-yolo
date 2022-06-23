@@ -7,7 +7,7 @@ class SchedulesController < ApplicationController
 
   def new
     @cart_to_show = current_user.cart
-    @pizzas_quantity = pizzas_to_cook
+    # @pizzas_quantity = pizzas_to_cook
     @total_to_pay = total_cart
     @order = Order.create(total_amount: @total_to_pay, user: current_user, restaurant: Restaurant.first)
     @cart_schedule_state = is_cart_fully_scheduled
@@ -85,7 +85,7 @@ private
 
   def is_input_correct
     selected_date = params_to_time
-    if selected_date.hour < Restaurant.first.opening || selected_date.hour >= Restaurant.first.closing  || selected_date.sunday? || selected_date < Time.now - 60
+    if selected_date.hour < Restaurant.first.opening || selected_date.hour >= Restaurant.first.closing  || selected_date.sunday? #|| selected_date < Time.now
       puts "#"*100
       puts "INPUT INCORRECT => VERIF DE LA SAISIE : selected_date.hour = #{selected_date.hour}, selected_date.sunday? = #{selected_date.sunday?}" 
       puts "#"*100
