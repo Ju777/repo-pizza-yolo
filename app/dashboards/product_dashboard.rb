@@ -29,44 +29,38 @@ class ProductDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    cart_products
-    carts
+    restaurants
     category
-    product_restaurants
+    title
+    price
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    cart_products
-    carts
-    category
-    product_restaurants
-    restaurants
     id
+    category
     title
+    catchphrase
     description
     price
     image_url
+    restaurants
     created_at
     updated_at
-    catchphrase
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    cart_products
-    carts
     category
-    product_restaurants
-    restaurants
     title
+    catchphrase
     description
     price
     image_url
-    catchphrase
+    restaurants
   ].freeze
 
   # COLLECTION_FILTERS
@@ -84,7 +78,7 @@ class ProductDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how products are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(product)
-  #   "Product ##{product.id}"
-  # end
+  def display_resource(product)
+    "#{product.title}"
+  end
 end
