@@ -1,9 +1,19 @@
-alert("le fichier JS est exécuté!");
 
-product = document.getElementById("item-id-<%=@cart_product.id%>");
+
+
 qtyToUpdate = document.getElementById("qty-item-id-<%=@cart_product.id%>");
 
-console.log(product);
+
 console.log(qtyToUpdate);
+
+if (qtyToUpdate) {
+  qtyToUpdate = qtyToUpdate.innerHTML
+  qtyToUpdate = parseInt(qtyToUpdate)
+  document.getElementById("qty-item-id-<%=@cart_product.id%>").innerHTML = qtyToUpdate + 1
+
+  // coder la mise à jour du TOTAL A PAYER ici
+
+  alert("la quantité a été mise à jour !");
+};
 
 
