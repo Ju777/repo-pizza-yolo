@@ -43,21 +43,27 @@ class CartProductsController < ApplicationController
     if params[:increment] == "true"
       fake_schedule = Schedule.create(date:Time.new(1900, 01, 01, 00, 00, 00))
       @cart_product.update!(quantity: @cart_product.quantity+1, schedule:fake_schedule)
-      # @cart_product.update!(quantity: @cart_product.quantity+1)
+      
+      respond_to do |format|
+        format.html { redirect_to cart_path(current_user.cart) }
+        format.js { render "increment.js.erb" }
+      end
+
     elsif params[:decrement] == "true" && @cart_product.quantity >= 1
       @cart_product.update!(quantity: @cart_product.quantity-1)
+
+      respond_to do |format|
+        format.html { redirect_to cart_path(current_user.cart) }
+        format.js { render "decrement.js.erb" }
+
       if @cart_product.quantity == 0
         @cart_product.destroy
+        end
       end
     else
       @cart_product.destroy
+      redirect_to cart_path(current_user.cart)
     end
-
-    respond_to do |format|
-      format.html { redirect_to cart_path(current_user.cart) }
-      format.js {}
-    end
-
   end
 
   def destroy
