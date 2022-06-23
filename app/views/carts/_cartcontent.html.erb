@@ -10,39 +10,40 @@
                     <p><strong>Votre panier est vide.</strong></p>
 
                   <% else %>
-                    <p><strong>Votre panier contient les produits suivants :</strong></p>
-
+                    <h4 class="mb-3 py-3"><strong>Votre panier contient les produits suivants :</strong></h4>
+                    <div class="row mb-3">
+                    <div class="col"><h5>Article</h5></div>
+                    <div class="col"><h5>Prix unitaire</h5></div>
+                    <div class="col"><h5>Quantité</h5></div>
+                    <div class="col"></div>
+                    </div>
+                    <hr/>
                     <% @all_products.each do |cart_product| %>            
                       <div class="container mb-2">
-                        <div class="row">
+                        <div class="row align-items-center">
                           <div class="col">
-                            <%= cart_product.product.title %>
-                            <p><i>Quantité </i>= </p>
-                            <p id="qty-item-id-<%=cart_product.id%>"><%= cart_product.quantity %></p>
+                            <h5><%= cart_product.product.title %></h5>
+                            <%= image_tag cart_product.product.image_url, class: "w-75" %>
                           </div>
 
                           <div class="col">
-                            Prix (unitaire): <%= cart_product.product.price %> €
+                          <h5><%= cart_product.product.price %> €</h5>
                           </div>
 
                           <div class="col">
-                            <%= link_to "Qté +1", cart_product_path(cart_product, increment: "true"), method: :put, class: "btn btn-outline-success btn-sm", remote: true %>
+                            <%= link_to "+1", cart_product_path(cart_product, increment: "true"), method: :put, class: "btn btn-outline-success btn-sm", remote: true %>
+                            <span class="px-3" id="qty-item-id-<%=cart_product.id%>"><%= cart_product.quantity %></span>
+                            <%= link_to "-1", cart_product_path(cart_product, decrement: "true"), method: :put, class: "btn btn-outline-danger btn-sm" %>
+
                           </div>                    
-
                           <div class="col">
-                            <%= link_to "Qté -1", cart_product_path(cart_product, decrement: "true"), method: :put, class: "btn btn-outline-danger btn-sm" %>
+                            <%= link_to "Supprimer", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %>                       
                           </div>
 
-                          <div class="col">
-                            <%= link_to "Retirer du Panier", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %> <%= cart_product.product.category.title %>                          
-                          </div>
 
-                          <div class="col">
-                            <%#= link_to "Vider le Panier", cart_product, method: :delete_all, class: "btn btn-primary btn-sm" %>                           
-                          </div> 
-
-                          <hr/>
+                          
                         </div>
+                        <hr/>
                       </div>
                     <% end %>
 
@@ -53,18 +54,22 @@
                         </div>
 
                         <% if @cart_schedule_state == false %>
-                          <%= link_to 'Je valide mon panier', new_schedule_path, class: "btn btn-success" %>
-                        
+                        <div class="btn-group mt-4" role="group">
+                          <%= link_to 'Valider le panier', new_schedule_path, class: "btn btn-success" %>
+                            <%= link_to 'Retour au shopping', products_path, class: "btn btn-light" %>
+                      <%= link_to "Vider le Panier", cart_path(current_user.cart), method: :delete, class: "btn btn-danger" %>
+                        </div>
                         <% else %>
                           <button class="btn btn-success disabled">PANIER VALIDÉ<br/>HORAIRE DE RETRAIT : <%= current_user.cart.cart_products.first.schedule.date.strftime(" %d/%m/%Y à partir de %Hh%M.") %></button><br/>
                           <br/>
                           <%= link_to 'Payer ma commande', orders_path(total:@total_to_pay), method: :post, class: "btn btn-outline-success", remote: true %><br/>
-                            
+                          <%= link_to 'Retour au shopping', products_path, class: "btn btn-light" %>
+
                             <% if @order %>
                               <%= link_to 'Annuler', order_path(@order.id), method: :delete, class: "btn btn-danger" %>
                             <% end %>
 
-                          <%= link_to "Vider le Panier", cart_path(current_user.cart), method: :delete, class: "btn btn-primary btn-sm" %>                           
+                                                     
                         <% end %>
                       </div>
 
