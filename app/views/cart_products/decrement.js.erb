@@ -1,6 +1,7 @@
 qtyToUpdate = document.getElementById("qty-item-id-<%=@cart_product.id%>");
 
 if (qtyToUpdate) {
+
   qtyToUpdate = qtyToUpdate.innerHTML
   qtyToUpdate = parseInt(qtyToUpdate)
   document.getElementById("qty-item-id-<%=@cart_product.id%>").innerHTML = qtyToUpdate - 1
@@ -21,3 +22,10 @@ if (qtyToUpdate) {
 
   alert("votre panier a été mise à jour !");
 };
+
+
+
+
+
+
+
