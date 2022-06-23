@@ -22,7 +22,7 @@ class CartProductsController < ApplicationController
 
       if new_cart_product.save
         flash[:success] = "Produit ajouté au panier"
-        redirect_to cart_path(current_user.cart)
+        redirect_to products_path
       else
         flash[:error] = "Erreur d'ajout au panier"
         redirect_to root_path
@@ -30,7 +30,7 @@ class CartProductsController < ApplicationController
 
     else
       existing_cart_product.update(quantity: existing_cart_product.quantity+1)
-      redirect_to cart_path(current_user.cart)
+      redirect_to products_path
     end
   end
 
@@ -39,9 +39,11 @@ class CartProductsController < ApplicationController
 
   def update
     @cart_product = CartProduct.find(params[:id])
+    fake_schedule = Schedule.create(date:Time.new(1900, 01, 01, 00, 00, 00))
+    
 
     if params[:increment] == "true"
-      fake_schedule = Schedule.create(date:Time.new(1900, 01, 01, 00, 00, 00))
+      
       @cart_product.update!(quantity: @cart_product.quantity+1, schedule:fake_schedule)
       
       respond_to do |format|
@@ -50,16 +52,13 @@ class CartProductsController < ApplicationController
       end
 
     elsif params[:decrement] == "true" && @cart_product.quantity >= 1
-      @cart_product.update!(quantity: @cart_product.quantity-1)
+      @cart_product.update!(quantity: @cart_product.quantity-1, schedule:fake_schedule)
 
       respond_to do |format|
         format.html { redirect_to cart_path(current_user.cart) }
         format.js { render "decrement.js.erb" }
-
-      if @cart_product.quantity == 0
-        @cart_product.destroy
-        end
       end
+     
     else
       @cart_product.destroy
       redirect_to cart_path(current_user.cart)
