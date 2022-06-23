@@ -21,24 +21,22 @@
             <div class="mb-3">
               <p>Nom : <%= @user.lastname %></p>
               <p>Prénom : <%= @user.firstname %></p>
-              <p>Téléphone : <%= @user.phone %>
-              <% if @user.phone == "" %>
-                <strong>TIPS</strong> : Entrez votre num de mobile pour être prévenu par SMS quand votre commande est prête.<% end %></p>
+              <p>Téléphone : <%= @user.phone %></p>
                 <p>Email : <%= @user.email %></p>
                 <hr/>
                 <p>Historiques des commandes : </p>
-              <ul>
+              <ol>
                 <% @user_orders.each do |order| %>
                   <li>
-                    <p><strong>Commande n° <%= order.id %> générée le <%= order.created_at %>, montant <%= order.total_amount %> €.</strong>(code retrait <%= order.pickup_code %>)</p>
+                    <p><strong>Commande du <%= order.created_at.strftime("%d/%m/%Y") %>, montant <%= order.total_amount %> €.</strong>  (code retrait <%= order.pickup_code %>)</p>
                   </li>
                 <% end %>
-              </ul>
+              </ol>
             </div>
 
             <div class="mb-3">
               <hr/>
-              <p>Changer avatar</p>
+              <p>Changer photo</p>
               <%= form_tag user_avatars_path(@user), multipart: true do %>
                 <%= file_field_tag :avatar %>
                 <%= submit_tag "OK" %>

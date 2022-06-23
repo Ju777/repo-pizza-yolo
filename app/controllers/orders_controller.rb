@@ -100,6 +100,7 @@ class OrdersController < ApplicationController
     puts "#"*100
     empty_cart
     clean_old_schedules
+    clean_wrong_orders
     order_recap
   end
 
@@ -137,9 +138,17 @@ class OrdersController < ApplicationController
     # end
 
     Schedule.all.each do |schedule|
-      if schedule.date.year == 1900 && schedule.created_at < Time.now - 3600*24*2
+      if schedule.date.year == 1900 && schedule.created_at < Time.now - 3600*24
         schedule.destroy
       end
+    end
+  end
+
+  def clean_wrong_orders
+    Order.where(pickup_code: nil).each do |order|
+      # if order.pickup_code == nil
+        order.destroy
+      # end
     end
   end
 

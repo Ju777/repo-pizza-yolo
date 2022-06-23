@@ -32,7 +32,9 @@ class SchedulesController < ApplicationController
     if is_input_empty || !is_input_correct
       flash.notice = "Saisie invalide => Non vide/ future / 10h-21h30 / pas le dimanche."
       # La redirection en fin de ce bloc va provoquer un doublon de création d'Order de la méthode New. C'est pourquoi on le destroy ici.
-      @order.destroy
+      if @order
+        @order.destroy
+      end
       redirect_to new_schedule_path
     else
       # Commençons par transformer la saisie en éléments exploitables par le model Schedule.
@@ -83,7 +85,7 @@ private
 
   def is_input_correct
     selected_date = params_to_time
-    if selected_date.hour < Restaurant.first.opening || selected_date.hour >= Restaurant.first.closing  || selected_date.sunday? || selected_date < Time.now
+    if selected_date.hour < Restaurant.first.opening || selected_date.hour >= Restaurant.first.closing  || selected_date.sunday? || selected_date < Time.now - 60
       puts "#"*100
       puts "INPUT INCORRECT => VERIF DE LA SAISIE : selected_date.hour = #{selected_date.hour}, selected_date.sunday? = #{selected_date.sunday?}" 
       puts "#"*100
