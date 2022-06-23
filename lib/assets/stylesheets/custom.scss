@@ -3,6 +3,7 @@ body {
   color: white;
   margin: 0;
   height: 100vh;
+  cursor: image-url("cursor.png"), auto;
 }
 
 #navimg {
@@ -417,7 +418,7 @@ section {
   padding: 0;
 }
   .disappear{
-    animation: vanish 1s forwards;
+    animation: vanish 2s forwards;
   }
   @keyframes vanish{
     100%{
