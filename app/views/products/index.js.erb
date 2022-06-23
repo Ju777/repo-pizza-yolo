@@ -1,0 +1,20 @@
+console.log("Arrivé dans le fichier !");
+
+
+productsContainer = document.getElementById("products_container");
+
+console.log(products_container);
+
+<% puts "#"*100 %>
+<% puts "#{@category_id}" %>
+<% puts "#"*100 %>
+
+<% if @category_id == "1" %>
+  productsContainer.innerHTML = ("<%= j render 'pizzas', cat_pizza: @cat_pizza, cat_dessert: @cat_dessert, cat_drink: @cat_drink, all_pizzas: @all_pizzas %>");
+<% elsif @category_id == "2" %>
+  productsContainer.innerHTML = ("<%= j render 'desserts', cat_pizza: @cat_pizza, cat_dessert: @cat_dessert, cat_drink: @cat_drink, all_desserts: @all_desserts %>");
+<% elsif @category_id == "3" %>
+  productsContainer.innerHTML = ("<%= j render 'drinks', cat_pizza: @cat_pizza, cat_dessert: @cat_dessert, cat_drink: @cat_drink, all_drinks: @all_drinks %>");
+<% elsif @category_id == "" %>
+  productsContainer
+<% end %>
