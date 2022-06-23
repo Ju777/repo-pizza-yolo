@@ -10,7 +10,7 @@
       <small id="productshowcatchphrase"><%=@product_to_show.catchphrase%></small>
       <p id="productshowdesc" class="my-3"><%=@product_to_show.description%></p>
       <p id="productshowprice"><%=@product_to_show.price%> €</p>
-      <%= link_to "Retour", products_path(@products),class:"btn btn-outline-success mx-5",id:"cardaddtocartbtn", type:"button" %>
+      <%= link_to "Retour", products_path,class:"btn btn-outline-success mx-5",id:"cardaddtocartbtn", type:"button" %>
       <%= link_to "Ajouter au panier", cart_products_path(product_id:@product_to_show),class:"btn btn-success", type:"button", method: :post %>
     </div>
   </div>

@@ -16,10 +16,7 @@ class ProductsController < ApplicationController
     puts "@category_id = #{@category_id}"
     puts "#"*100
 
-    respond_to do |format|
-      format.html {}
-      format.js {}
-    end
+
   end
 
   def show
