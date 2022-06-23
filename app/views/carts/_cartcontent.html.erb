@@ -8,6 +8,7 @@
                 <div class="insidecartcontent">
                   <% if @all_products.length == 0 %>
                     <p><strong>Votre panier est vide.</strong></p>
+                  <%= link_to 'Retour à la carte', products_path, class: "btn btn-light mx-auto" %>
 
                   <% else %>
                     <h4 class="mb-3 py-3"><strong>Votre panier contient les produits suivants :</strong></h4>
