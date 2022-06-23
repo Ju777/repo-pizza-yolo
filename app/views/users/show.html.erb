@@ -42,6 +42,8 @@
                   </div>
                 <%= link_to 'Éditer les identifiants', edit_user_registration_path(@user.id), class:"btn btn-outline-success mt-3 mb-3" %>
                 <%= link_to 'Changer mes infos personnelles', edit_user_path(current_user.id), class:"btn btn-outline-success" %>                        
+                <%= link_to 'Changer mes infos personnelles',  admin_root_path(current_user.id), class:"btn btn-outline-success" %>                        
+
             </div>
           </div>
         </div>
