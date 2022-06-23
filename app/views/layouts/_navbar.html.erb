@@ -16,7 +16,7 @@
             <% end %>
             <%if user_signed_in?%>
                 <%= link_to "Panier", cart_path(current_user.cart), class:"btn btn-outline-success", role:"button"%>
-                <span id="item-count" class="badge"> <%=current_user.cart.products.count%>  </span>
+                <span id="item-count" class="badge"> <%=current_user.cart.cart_products.sum("quantity") %>  </span>
             <%else%>
                 <%= link_to "Panier", new_user_session_path, class:"btn btn-outline-success", role:"button"%>
             <%end%>
