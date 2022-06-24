@@ -20,7 +20,7 @@ class CartProductsController < ApplicationController
       new_cart_product = CartProduct.new(product: product, cart:current_user.cart, quantity:1, schedule:fake_schedule)
 
       if new_cart_product.save     
-        flash[:success] = "Produit ajouté au panier"  
+        
         respond_to do |format|
           format.html{
             redirect_to products_path
