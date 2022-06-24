@@ -7,7 +7,8 @@ Nous vous invitons à venir la récupérer à notre pizzeria située au:
 <%= @order.restaurant.street %>
 <%= @order.restaurant.city %>
 <%= @order.restaurant.zipcode %>
-Se munir du code retrait <%= @order.pickup_code %>
+<p>Vos produits seront à disposition <%= @schedule.strftime("le %d/%m/%Y à partir de %Hh%M.") %>.</p>
+<p><strong>Se munir du code retrait <%= @order.pickup_code %></strong>.</p>
 
 N'hesitez-pas à nous téléphoner au : <%= @order.restaurant.phone %> si besoin.
 

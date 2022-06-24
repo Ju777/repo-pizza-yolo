@@ -1,4 +1,5 @@
 <% flash.each do |type, msg| %>
-    <%= msg %>
+  <div class="container py-5" id="flash_container"> 
+    <span class="flash"><%= msg %></span>
+  </div>
 <%end%>
-  

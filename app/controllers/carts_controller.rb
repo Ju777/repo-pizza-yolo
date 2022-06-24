@@ -9,12 +9,9 @@ class CartsController < ApplicationController
   def show
     @cart_to_show = Cart.find(params[:id])
     @total_to_pay = total_cart
-
     @cart_schedule_state = is_cart_fully_scheduled
     @order = Order.where(user:current_user).last
-
     @all_products = @cart_to_show.cart_products.order(:created_at)
-
   end
 
   def new
@@ -31,18 +28,16 @@ class CartsController < ApplicationController
 
   def destroy
     current_cart = Cart.find(params[:id])
-    
     empty_the_cart
-
   end
 
   private
 
   def check_cart_owner
     cart_owner = Cart.find(params[:id]).user
-        
+  
     unless current_user == cart_owner
-      flash.notice = "Accès non autorisé."
+      flash.notice = "Accès non autorisé"
       redirect_to root_path
     end
   end
@@ -57,7 +52,6 @@ class CartsController < ApplicationController
   end
 
   def is_cart_fully_scheduled
-    # S'il y a le moindre cart_product dont le schedule n'est pas à jour, la méthode renvoie false. True dans le cas contraire.
     false_count = 0
     current_user.cart.cart_products.each do |cart_product|
       if cart_product.schedule.date.year == 1900
@@ -73,7 +67,7 @@ class CartsController < ApplicationController
   end
 
   def empty_the_cart
-  current_cart = Cart.find(params[:id])
+    current_cart = Cart.find(params[:id])
     current_products = current_cart.cart_products
 
     current_products.each do |cart_product|

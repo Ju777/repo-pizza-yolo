@@ -2,7 +2,7 @@
     <div class="container py-5" id="products_container">  
         <div class="btn-group d-flex" role="group">
             <%= link_to "Pizzas", products_path(category: @cat_pizza), class: "btn btn-outline-light", type:"button", remote: true%>
-            <%= link_to "Desserts", products_path(category: @cat_dessert), class: "btn btn-outline-light", type:"button", remote: true %>
+            <%= link_to "Desserts", products_path(category: @cat_dessert), class: "btn btn-outline-light", type:"button", remote: true%>
             <%= link_to "Boissons", products_path(category: @cat_drink), class: "btn btn-outline-light", type:"button", remote: true%>
 
         </div>
@@ -13,7 +13,7 @@
                     <h4 class="fw-bold">Elles n'attendent que vous.</h4>
                 </div>
             </div>
-            <div class="row mx-auto  mx-auto"> <!-- Ajour de l'id -->
+            <div class="row mx-auto  mx-auto">
                 <% @all_pizzas.each do |product|  %>
                 <div class="col-sm  mx-auto"id="cardrow">
                   <div class="card border-dark text-center">
@@ -71,7 +71,7 @@
                             <small id="cardcatchphrase"> <%= product.catchphrase%> </small>
                             <p id="cardprice"><%= product.price%> €</p>
                             <%= link_to 'Voir', product_path(product), class:"btn btn-outline-success", id:"cardseebtn" %>
-                            <%= link_to "Ajouter au panier", cart_products_path(product_id:product),class:"btn btn-outline-success", id:"cardaddtocartbtn", type:"button", method: :post %>
+                            <%= link_to "Ajouter au panier", cart_products_path(product_id:product),class:"btn btn-outline-success", id:"cardaddtocartbtn", type:"button", method: :post%>
                             </div>
                         </div>
                     </div>

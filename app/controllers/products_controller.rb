@@ -8,15 +8,6 @@ class ProductsController < ApplicationController
     @cat_dessert = Category.second
     @cat_drink = Category.third
     @category_id = params[:category]
-
-
-    puts "#"*100
-    puts "params.inspect = #{params.inspect}"
-    puts "params.inspect = #{params[:category]}"
-    puts "@category_id = #{@category_id}"
-    puts "#"*100
-
-
   end
 
   def show

@@ -1,5 +1,20 @@
 Rails.application.routes.draw do
-  root 'products#landing'
+root 'products#landing'
+
+  namespace :admin do
+      resources :users
+      resources :carts
+      resources :comments
+      resources :orders
+      resources :restaurants
+      resources :categories
+      resources :products
+      resources :product_restaurants
+
+      root to: "users#index"
+    end
+
+  
   devise_for :users
   
   resources :carts, :path => "panier"
