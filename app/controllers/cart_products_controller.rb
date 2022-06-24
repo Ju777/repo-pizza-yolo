@@ -22,7 +22,14 @@ class CartProductsController < ApplicationController
 
       if new_cart_product.save
         flash[:success] = "Produit ajouté au panier"
-        redirect_to products_path
+        
+        respond_to do |format|
+          format.html{
+            redirect_to products_path
+          }
+          format.js {}
+        end
+        
       else
         flash[:error] = "Erreur d'ajout au panier"
         redirect_to root_path
@@ -30,7 +37,13 @@ class CartProductsController < ApplicationController
 
     else
       existing_cart_product.update(quantity: existing_cart_product.quantity+1)
-      redirect_to products_path
+      
+      respond_to do |format|
+        format.html{
+          redirect_to products_path
+        }
+        format.js {}
+      end
     end
   end
 
