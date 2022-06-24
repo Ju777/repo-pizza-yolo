@@ -46,18 +46,6 @@ Category.create(title:"dessert")
 Category.create(title:"boisson")
 
 
-
-# i=1
-# 10.times do
-#   # Schedule.create(date:Time.now + 3600*24*rand(2..10))
-#   if i.even?
-#     Schedule.create(date: Time.new(Time.now.year, Time.now.month, rand(Time.now.day..30), rand(10..21), 00))
-#   else
-#     Schedule.create(date: Time.new(Time.now.year, Time.now.month, rand(Time.now.day..30), rand(10..21), 30))
-#   end
-#   i+=1
-# end
-
 title = [
   "Margherita", "Pepperoni", "Quatre Fromages", "Reine", "Forestière", "Gourmet", 
   "Prosciutto", "Provençale", "Orientale", "Maritime", "Carnivore", "Salami", 
@@ -125,18 +113,9 @@ catchphrase = [ "La classique", "Attention, ça pique !", "Toujours plus de from
   ProductRestaurant.create(restaurant:Restaurant.find(rand(Restaurant.first.id..Restaurant.last.id)), product:Product.find(rand(Product.first.id..Product.last.id)))
 end
 
-# 20.times do
-#   Order.create(total_amount: Faker::Commerce.price, pickup_code:"not_paid", user:User.find(rand(User.first.id..User.last.id)), restaurant: Restaurant.find(rand(Restaurant.first.id..Restaurant.last.id)) )
-# end
 
 i=1
 10.times do
   Comment.create(note:rand(0..5), description:"user's comment n°#{i}", user:User.find(rand(User.first.id..User.last.id)))
   i+=1
 end
-
-# 20.times do
-#  CartProduct.create(cart:Cart.find(rand(Cart.first.id..Cart.last.id)), product:Product.find(rand(Product.first.id..Product.last.id)), quantity:Faker::Number.within(range: 1..10), schedule: Schedule.find(rand(Schedule.first.id..Schedule.last.id)))
-# end
-
-
