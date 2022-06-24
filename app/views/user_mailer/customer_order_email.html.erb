@@ -13,7 +13,9 @@
     <p><%= @order.restaurant.street %></p>
     <p><%= @order.restaurant.city %></p>
     <p><%= @order.restaurant.zipcode %></p>
+    <p>Vos produits seront à disposition <%= @schedule.strftime("le %d/%m/%Y à partir de %Hh%M.") %>.</p>
     <p><strong>Se munir du code retrait <%= @order.pickup_code %></strong>.</p>
+    
 
     <p>N'hesitez-pas à nous téléphoner au : <%= @order.restaurant.phone %> si besoin.</p>
 

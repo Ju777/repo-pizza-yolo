@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+root 'products#landing'
 
   namespace :admin do
       resources :users
@@ -14,7 +15,7 @@ Rails.application.routes.draw do
       root to: "users#index"
     end
 
-  root 'products#landing'
+  
   devise_for :users
   
   resources :carts
