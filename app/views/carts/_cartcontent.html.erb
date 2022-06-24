@@ -21,7 +21,7 @@
                     <hr/>
                     <% @all_products.each do |cart_product| %>            
                       <div class="container mb-2">
-                        <div class="row align-items-center">
+                        <div class="row align-items-center" id="item-nber<%= cart_product.id %>">
                           <div class="col">
                             <h5><%= cart_product.product.title %></h5>
                             <%= image_tag cart_product.product.image_url, class: "w-75" %>
@@ -34,7 +34,7 @@
                           <div class="col">
                             <%= link_to "+1", cart_product_path(cart_product, increment: "true"), method: :put, class: "btn btn-outline-success btn-sm", remote: true %>
                             <span class="px-3" id="qty-item-id-<%=cart_product.id%>"><%= cart_product.quantity %></span>
-                            <%= link_to "-1", cart_product_path(cart_product, decrement: "true"), method: :put, class: "btn btn-outline-danger btn-sm", remote: true %>
+                            <%= link_to "-1", cart_product_path(cart_product, decrement: "true", cart_product: @cart_product), method: :put, class: "btn btn-outline-danger btn-sm", remote: true %>
                           </div>                    
                           <div class="col">
                             <%= link_to "Supprimer", cart_product, method: :delete, class: "btn btn-outline-danger btn-sm" %>                      

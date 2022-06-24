@@ -56,7 +56,7 @@ class CartProductsController < ApplicationController
 
       respond_to do |format|
         format.html { redirect_to cart_path(current_user.cart) }
-        format.js { render "decrement.js.erb" }
+        format.js { render "decrement.js.erb", cart_product: @cart_product }
       end
      
     else
