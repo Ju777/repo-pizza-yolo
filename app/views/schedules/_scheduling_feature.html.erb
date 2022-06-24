@@ -3,7 +3,8 @@
 
 <% if @cart_schedule_state == false %>
   <p>
-    Vous avez ajoutés des achats, choisissez un horaire de retrait avant de passer au paiement.
+    Vous avez ajoutés des achats, choisissez un horaire de retrait :<br/>
+    (de 10h à 21h30 du lundi au samedi)
   </p>
   <p>
     <%= form_tag schedules_path, method: "post" do %>
