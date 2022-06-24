@@ -88,8 +88,8 @@ description = [
   "À consommer avec modération."
 ]
 
- price = [ 11.99, 12.99, 13.99, 12.99, 14.99, 14.99, 13.99, 13.99, 12.99, 14.99,
-  13.99, 11.99, 13.99, 12.99, 12.99, 6.99, 6.99, 7.99, 2.99, 3.99
+ price = [ 11, 12, 13, 12, 14, 14, 13, 13, 12, 14,
+  13, 11, 13, 12, 12, 6, 6, 7, 2, 3
 ]
 
 catchphrase = [ "La classique", "Attention, ça pique !", "Toujours plus de fromages", "God save the Queen", "Petite balade en forêt", 
