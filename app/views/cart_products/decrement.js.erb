@@ -1,58 +1,35 @@
 qtyToUpdate = document.getElementById("qty-item-id-<%=@cart_product.id%>").innerHTML;
-console.log(qtyToUpdate)
 
 if (qtyToUpdate > 1) {
-  console.log("qté supérieure à 1")
+
   qtyToUpdate = qtyToUpdate - 1
-  console.log(qtyToUpdate)
 
   document.getElementById("qty-item-id-<%=@cart_product.id%>").innerHTML = qtyToUpdate
-  console.log(qtyToUpdate)
 
   productPrice = parseFloat("<%=@cart_product.product.price%>");
-  console.log(productPrice)
-  console.log(typeof productPrice)
 
   cartTotal = document.getElementById("cart-total").innerHTML;
   cartTotal = parseFloat(cartTotal);
-  console.log(cartTotal);
-  console.log(typeof cartTotal);
 
   document.getElementById("cart-total").innerHTML = cartTotal - productPrice;
-  console.log(cartTotal);
-  console.log(typeof cartTotal);
 
   alert("votre panier a été mis à jour ! (quantité réduite)");
 
 } else if (qtyToUpdate == 1) {
-  console.log("qté égale à 1")
-
-  alert("cas de figure : qté = 1, article doit disparaitre du panier");
 
   var allItems = document.getElementById("insidecartcontent")
-
-
   var itemToRemove = document.getElementById("item-nber<%= @cart_product.id %>")
 
-
   allItems.removeChild(itemToRemove)
-  console.log(allItems.innerHTML)
 
   productPrice = parseFloat("<%=@cart_product.product.price%>");
-  console.log(productPrice)
-  console.log(typeof productPrice)
 
   cartTotal = document.getElementById("cart-total").innerHTML;
   cartTotal = parseFloat(cartTotal);
-  console.log(cartTotal);
-  console.log(typeof cartTotal);
 
   document.getElementById("cart-total").innerHTML = cartTotal - productPrice;
-  console.log(cartTotal);
-  console.log(typeof cartTotal);
 
   alert("article supprimé du panier");
-
 }
 
 
