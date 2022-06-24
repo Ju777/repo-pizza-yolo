@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>PizzaYolo</title>
-              <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,14 +14,11 @@
   </head>
 
   <body>
-
   <%= render partial: 'layouts/navbar' %>
-  
   <%= render partial: 'layouts/flash_message' %>
     
-
-
     <%= yield %>
      <%= render partial: 'layouts/footer' %>
   </body>
 </html>
+

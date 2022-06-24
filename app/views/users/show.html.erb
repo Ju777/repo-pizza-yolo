@@ -6,46 +6,46 @@
         <h2 class="fw-bold" id="welcometitle">Votre espace perso</h2>
       </div>
     </div>  
-      <div class="row d-flex justify-content-center">
-        <div class="col-md-6 col-xl-7">
-          <div class="card">
-            <div class="card-body text-center d-flex flex-column align-items-center" id="logcard">
-              <div class="mb-3">
-                <%if @user.avatar.attached?%>
-                  <%= image_tag @user.avatar, alt: 'avatar', class:'rounded-circle my-3 w-50' %>
-                <%end%>
-              </div>
-                <div class="mb-3">
-                  <p>Nom : <%= @user.lastname %></p>
-                  <p>Prénom : <%= @user.firstname %></p>
-                  <p>Téléphone : <%= @user.phone %>
-                  <% if @user.phone == "" %>
-                  <strong>TIPS</strong> : Entrez votre num de mobile pour être prévenu par SMS quand votre commande est prête.<% end %></p>
-                  <p>Email : <%= @user.email %></p>
-                  <hr/>
-                  <p>Historiques des commandes : </p>
-                    <ul>
-                    <% @user_orders.each do |order| %>
-                      <li>
-                      <p><strong>Commande n° <%= order.id %> générée le <%= order.created_at %>, montant <%= order.total_amount %> €.</strong></p>
-                      </li>
-                    <% end %>
-                    </ul>
-                </div>
-                  <div class="mb-3">
-                  <hr/>
-                    <p>Changer avatar</p>
-                    <%= form_tag user_avatars_path(@user), multipart: true do %>
-                    <%= file_field_tag :avatar %>
-                    <%= submit_tag "OK" %>
-                    <% end %>
-                  </div>
-                <%= link_to 'Éditer les identifiants', edit_user_registration_path(@user.id), class:"btn btn-outline-success mt-3 mb-3" %>
-                <%= link_to 'Changer mes infos personnelles', edit_user_path(current_user.id), class:"btn btn-outline-success" %>             
-
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-6 col-xl-7">
+        <div class="card">
+          <div class="card-body text-center d-flex flex-column align-items-center" id="logcard">
+          
+            <div class="mb-3">
+              <%if @user.avatar.attached?%>
+                <%= image_tag @user.avatar, alt: 'avatar', class:'rounded-circle my-3 w-50' %>
+              <%end%>
             </div>
+
+            <div class="mb-3">
+              <p>Nom : <%= @user.lastname %></p>
+              <p>Prénom : <%= @user.firstname %></p>
+              <p>Téléphone : <%= @user.phone %></p>
+                <p>Email : <%= @user.email %></p>
+                <hr/>
+                <p>Historiques des commandes : </p>
+              <ol>
+                <% @user_orders.each do |order| %>
+                  <li>
+                    <p><strong>Commande du <%= order.created_at.strftime("%d/%m/%Y") %>, montant <%= order.total_amount %> €.</strong>  (code retrait <%= order.pickup_code %>)</p>
+                  </li>
+                <% end %>
+              </ol>
+            </div>
+
+            <div class="mb-3">
+              <hr/>
+              <p>Changer photo</p>
+              <%= form_tag user_avatars_path(@user), multipart: true do %>
+                <%= file_field_tag :avatar %>
+                <%= submit_tag "OK" %>
+              <% end %>
+            </div>
+            <%= link_to 'Éditer les identifiants', edit_user_registration_path(@user.id), class:"btn btn-success mt-3 mb-3", id:"loginbtn" %>
+            <%= link_to 'Changer mes infos personnelles', edit_user_path(current_user.id), class:"btn btn-success", id:"loginbtn" %>                        
           </div>
         </div>
       </div>
+    </div>
   </div>
 </section>

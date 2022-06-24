@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_15_125208) do
+ActiveRecord::Schema.define(version: 2022_06_21_103023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,8 +42,10 @@ ActiveRecord::Schema.define(version: 2022_06_15_125208) do
     t.datetime "updated_at", null: false
     t.bigint "cart_id"
     t.bigint "product_id"
+    t.bigint "schedule_id"
     t.index ["cart_id"], name: "index_cart_products_on_cart_id"
     t.index ["product_id"], name: "index_cart_products_on_product_id"
+    t.index ["schedule_id"], name: "index_cart_products_on_schedule_id"
   end
 
   create_table "carts", force: :cascade do |t|
@@ -109,7 +111,17 @@ ActiveRecord::Schema.define(version: 2022_06_15_125208) do
     t.bigint "manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cooking_capacity", default: 5
+    t.integer "opening", default: 10
+    t.integer "closing", default: 22
     t.index ["manager_id"], name: "index_restaurants_on_manager_id"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "ordered_pizzas", default: 0
   end
 
   create_table "users", force: :cascade do |t|
@@ -131,6 +143,7 @@ ActiveRecord::Schema.define(version: 2022_06_15_125208) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cart_products", "carts"
   add_foreign_key "cart_products", "products"
+  add_foreign_key "cart_products", "schedules"
   add_foreign_key "carts", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "orders", "restaurants"

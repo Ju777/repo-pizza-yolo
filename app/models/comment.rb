@@ -3,6 +3,7 @@ class Comment < ApplicationRecord
 
   validates :note,
     presence: true
+    
   validates :description,
     presence: true,
     length: { in: 3..500 }

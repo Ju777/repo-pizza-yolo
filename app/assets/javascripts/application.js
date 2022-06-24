@@ -10,8 +10,9 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
 //= require activestorage
-//= require bootstrap.min
-//= require jquery.min
+//= require bootstrap
+//= require jquery
+//= require jquery_ujs
 //= require bold-and-bright
+//= require loader
