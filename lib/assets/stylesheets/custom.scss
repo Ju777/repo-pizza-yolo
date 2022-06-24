@@ -1,5 +1,5 @@
 body {
-  background: rgb(0,0,0);
+  background: rgb(0, 0, 0);
   color: white;
   margin: 0;
   height: 100vh;
@@ -12,7 +12,7 @@ body {
 }
 
 #homebtn {
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.9);
   font-size: large;
   padding-top: 6px;
   border-bottom: 2px solid #009129;
@@ -29,7 +29,7 @@ body {
   position: absolute;
   left: 0;
   bottom: -3px;
-  transform-origin: top; 
+  transform-origin: top;
   transform: scale(0);
   transition: 0.25s linear;
 }
@@ -39,7 +39,7 @@ body {
 }
 
 #storylink {
-  color: rgba(255,255,255,0.55);
+  color: rgba(255, 255, 255, 0.55);
   border-bottom: 2px solid #ffffff;
   transition: all 0.25s linear;
   position: relative;
@@ -64,7 +64,7 @@ body {
 }
 
 #menulink {
-  color: rgba(255,255,255,0.55);
+  color: rgba(255, 255, 255, 0.55);
   border-bottom: 2px solid #b70000;
   transition: all 0.25s linear;
   position: relative;
@@ -79,7 +79,7 @@ body {
   position: absolute;
   left: 0;
   bottom: -3px;
-  transform-origin: top; 
+  transform-origin: top;
   transform: scale(0);
   transition: 0.25s linear;
 }
@@ -103,7 +103,7 @@ body {
   position: absolute;
   left: 0;
   bottom: -3px;
-  transform-origin: center; 
+  transform-origin: center;
   transform: scale(0);
   transition: 0.25s linear;
 }
@@ -111,8 +111,6 @@ body {
 #subscribelink:hover:before {
   transform: scale(1);
 }
-
-
 
 #loglink {
   color: #ffffff;
@@ -130,7 +128,7 @@ body {
   position: absolute;
   left: 0;
   bottom: -3px;
-  transform-origin: center; 
+  transform-origin: center;
   transform: scale(0);
   transition: 0.25s linear;
 }
@@ -140,7 +138,7 @@ body {
 }
 
 #cartbtn {
-  background: rgba(0,183,121,0);
+  background: rgba(0, 183, 121, 0);
   color: #00b779;
   border-radius: 32px;
   font-size: 15px;
@@ -174,27 +172,26 @@ body {
   padding-top: 0px;
 }
 
-
 #mainherophrase {
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
 }
 
 #secondaryherophrase {
-  color: rgb(255, 183, 0);;
+  color: rgb(255, 183, 0);
 }
 
 #herodatetime {
-  background: rgb(255,255,255);
-  color: rgb(0,0,0);
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   border-radius: 27px;
   width: 230px;
   height: 39.5938px;
   font-size: 17px;
   text-align: center;
-  border: 0px none rgb(255,255,255)
+  border: 0px none rgb(255, 255, 255);
 }
 #herobtn {
-  background: rgba(0,183,121,0);
+  background: rgba(0, 183, 121, 0);
   color: #00b779;
   margin-top: 10px;
   border-radius: 32px;
@@ -290,13 +287,12 @@ section {
 }
 
 #cardprice {
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
   padding: 15px;
   margin-bottom: 8px;
 }
 
 #cardseebtn {
-
   transform: perspective(0px);
   margin: 0px;
   margin-top: 0px;
@@ -311,7 +307,7 @@ section {
 }
 
 #backlink {
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
 }
 
 #productshowimg {
@@ -323,24 +319,24 @@ section {
 }
 
 #productshowtitle {
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
   padding-bottom: 0px;
 }
 
 #productshowcatchphrase {
   padding-top: 0px;
   padding-bottom: 10px;
-  color:rgb(255, 183, 0);
+  color: rgb(255, 183, 0);
 }
 
 #productshowdesc {
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
   padding-top: 5px;
   padding-bottom: 5px;
 }
 
 #productshowprice {
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
 }
 
 #productshowbtn {
@@ -358,7 +354,7 @@ section {
 }
 
 #welcometitle {
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
 }
 
 #logcard {
@@ -368,7 +364,7 @@ section {
 }
 
 #logiconcircle {
-  background: rgba(0,183,121,0);
+  background: rgba(0, 183, 121, 0);
   border: 2px solid #00b779;
 }
 
@@ -394,28 +390,28 @@ section {
 }
 
 #storytitle {
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
   margin-top: 10px;
   padding-top: 50px;
 }
 
 #storytext {
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
 }
 
-/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */ 
-.cartcontent { 
-  color:#ffffff;
+/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */
+.cartcontent {
+  color: #ffffff;
 }
 
-/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */ 
-.insidecartcontent { 
+/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */
+.insidecartcontent {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.loader{
+.loader {
   position: fixed;
   top: 0;
   left: 0;
@@ -432,16 +428,24 @@ section {
   margin: 0;
   padding: 0;
 }
-  .disappear{
-    animation: vanish 1s forwards;
+.disappear {
+  animation: vanish 1s forwards;
+}
+@keyframes vanish {
+  100% {
+    opacity: 0;
+    visibility: hidden;
   }
-  @keyframes vanish{
-    100%{
-      opacity: 0;
-      visibility: hidden;
-    }
 }
 
 .navbar-light .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.flash {
+  padding: 10px;
+  border-radius: 10px;
+  color: #000000;
+  font-weight: bold;
+  background-color: rgb(255, 183, 0);
 }

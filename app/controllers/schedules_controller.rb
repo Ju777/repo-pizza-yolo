@@ -30,7 +30,7 @@ class SchedulesController < ApplicationController
 
     # La saisie est-elle valide ?
     if is_input_empty || !is_input_correct
-      flash.notice = "Saisie invalide => Non vide/ future / 10h-21h30 / pas le dimanche."
+      flash.notice = "Les horaires valides sont : de 10h à 21h30 du lundi au samedi."
       # La redirection en fin de ce bloc va provoquer un doublon de création d'Order de la méthode New. C'est pourquoi on le destroy ici.
       if @order
         @order.destroy
