@@ -19,13 +19,13 @@ class CartProductsController < ApplicationController
       fake_schedule = Schedule.create(date:Time.new(1900, 01, 01, 00, 00, 00))
       new_cart_product = CartProduct.new(product: product, cart:current_user.cart, quantity:1, schedule:fake_schedule)
 
-      if new_cart_product.save       
+      if new_cart_product.save     
+        
         respond_to do |format|
           format.html{
-            flash[:success] = "Produit ajouté au panier"
             redirect_to products_path
           }
-          format.js {}
+          format.js { }
         end     
       else
         flash[:error] = "Erreur d'ajout au panier"
@@ -34,7 +34,6 @@ class CartProductsController < ApplicationController
     else
       existing_cart_product.update(quantity: existing_cart_product.quantity+1) 
       respond_to do |format|
-        flash[:success] = "Produit ajouté au panier"
         format.html{
           redirect_to products_path
         }
