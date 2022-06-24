@@ -4,6 +4,8 @@ class Product < ApplicationRecord
   belongs_to :category
   has_many :product_restaurants, dependent: :destroy
   has_many :restaurants, through: :product_restaurants
+  extend FriendlyId
+  friendly_id :title, use: :slugged
 
   validates :title,
     presence: true,
