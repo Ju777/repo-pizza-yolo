@@ -1,31 +1,33 @@
-<p>=========================================</p>
-<p>Horaire de retrait : 
+<div id="schedule_feature">
+  <p>=========================================</p>
+  <p>Horaire de retrait : 
 
-<% if @cart_schedule_state == false %>
-  <p>
-    Vous avez ajoutés des achats, choisissez un horaire de retrait :<br/>
-    (de 10h à 21h30 du lundi au samedi)
-  </p>
-  <p>
-    <%= form_tag schedules_path, method: "post" do %>
-      <%= datetime_local_field_tag 'date'%>
-      <%= submit_tag "OK" %>
-    <% end %>
-  </p>
-<% else %>
-  <p>
-    <strong><%= @search_status %></strong><br/>
-    <% if @search_status == "completed"  %>
-      Votre commande sera prête au plus tôt <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d/%m/%Y à partir de %Hh%M.") %>
-      <br/>Munissez vous du code de retrait qui vous sera envoyé par mail une fois le règlement effectué.</p>
-    <% elsif @search_status == "extra" %>
-      Votre commande touche la limite de la journée, elle a été exceptionnellemnt acceptée, mais il ne sera plus possible de commander de pizzas pour aujourd'hui.<br/>
-      Votre commande sera prête au plus tôt <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d/%m/%Y à partir de %Hh%M.") %>
-      <br/>Munissez vous du code de retrait qui vous sera envoyé par mail une fois le règlement effectué.</p>
-    <% elsif @search_status == "rejected" %>
-      Votre commande dépasse nos possibilités de préparation pour ce créneau. Nous sommes au regret de ne pouvoir l'honorer.
-    <% end %>
-    <br/>Notre capacité de préparation est limitée à 5 pizzas toutes les 30 min.
-    
-<% end %>
-<p>=========================================</p>
+  <% if @cart_schedule_state == false %>
+    <p>
+      Vous avez ajoutés des achats, choisissez un horaire de retrait :<br/>
+      (de 10h à 21h30 du lundi au samedi)
+    </p>
+    <p>
+      <%= form_tag schedules_path, method: "post", class: "form" do %>
+        <%= datetime_local_field_tag 'date'%>
+        <%= submit_tag "OK" %>
+      <% end %>
+    </p>
+  <% else %>
+    <p>
+      <strong><%= @search_status %></strong><br/>
+      <% if @search_status == "completed"  %>
+        Votre commande sera prête au plus tôt <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d/%m/%Y à partir de %Hh%M.") %>
+        <br/>Munissez vous du code de retrait qui vous sera envoyé par mail une fois le règlement effectué.</p>
+      <% elsif @search_status == "extra" %>
+        Votre commande touche la limite de la journée, elle a été exceptionnellemnt acceptée, mais il ne sera plus possible de commander de pizzas pour aujourd'hui.<br/>
+        Votre commande sera prête au plus tôt <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d/%m/%Y à partir de %Hh%M.") %>
+        <br/>Munissez vous du code de retrait qui vous sera envoyé par mail une fois le règlement effectué.</p>
+      <% elsif @search_status == "rejected" %>
+        Votre commande dépasse nos possibilités de préparation pour ce créneau. Nous sommes au regret de ne pouvoir l'honorer.
+      <% end %>
+      <br/>Notre capacité de préparation est limitée à 5 pizzas toutes les 30 min.
+      
+  <% end %>
+  <p>=========================================</p>
+</div>
