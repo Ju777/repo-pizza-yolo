@@ -20,9 +20,10 @@ class CartProductsController < ApplicationController
       new_cart_product = CartProduct.new(product: product, cart:current_user.cart, quantity:1, schedule:fake_schedule)
 
       if new_cart_product.save     
-        
+        flash.notice = "Article ajouté au panier"
         respond_to do |format|
           format.html{
+
             redirect_to products_path
           }
           format.js { }
@@ -32,6 +33,7 @@ class CartProductsController < ApplicationController
         redirect_to root_path
       end
     else
+      flash.notice = "Article ajouté au panier"
       existing_cart_product.update(quantity: existing_cart_product.quantity+1) 
       respond_to do |format|
         format.html{
