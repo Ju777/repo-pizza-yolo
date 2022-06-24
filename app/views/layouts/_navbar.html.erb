@@ -14,6 +14,9 @@
             <% if user_signed_in? %>
                 <%= link_to "Mon Profil", user_path(current_user), id:"subscribelink"%>
                 <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, id:"loglink"%>
+            <%if current_user.role == "admin"%>
+             <%= link_to "Admin Dashboard", admin_root_path, class:"nav-link"%>
+                <%end%>
             <% else %>
                 <%= link_to "S'inscrire", new_user_registration_path, id:"subscribelink"%>
                 <%= link_to "Se connecter", new_user_session_path, id:"loglink"%>
