@@ -4,7 +4,6 @@ root 'products#landing'
   namespace :admin do
       resources :users
       resources :carts
-      #resources :cart_products
       resources :comments
       resources :orders
       resources :restaurants

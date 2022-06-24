@@ -7,8 +7,8 @@ class UsersController < ApplicationController
   end
 
   def show
-      @user = current_user
-      @user_orders = current_user.orders  
+    @user = current_user
+    @user_orders = current_user.orders  
   end
 
   def edit
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to user_path(@user), notice: "Modifications enregistrées." }
+        format.html { redirect_to user_path(@user), notice: "Modifications enregistrées" }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     profile_owner = User.find(params[:id])
         
     unless current_user == profile_owner
-      flash.notice = "Accès non autorisé."
+      flash.notice = "Accès non autorisé"
       redirect_to root_path
     end
   end
