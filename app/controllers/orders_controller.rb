@@ -75,7 +75,6 @@ class OrdersController < ApplicationController
     cart_products_to_empty.each do |cart_product|
       cart_product.destroy
     end
-
   end
 
   def clean_old_schedules
