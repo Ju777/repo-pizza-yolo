@@ -62,15 +62,17 @@
 
                         </div>
                         <% else %>
-                          <button class="btn btn-success disabled">PANIER VALIDÉ<br/>HORAIRE DE RETRAIT : <%= current_user.cart.cart_products.first.schedule.date.strftime(" %d/%m/%Y à partir de %Hh%M.") %></button><br/>
+                          <button class="btn btn-warning disabled mt-4">PANIER VALIDÉ<br/>HORAIRE DE RETRAIT : <%= current_user.cart.cart_products.first.schedule.date.strftime(" %d/%m/%Y à partir de %Hh%M.") %></button><br/>
                           <br/>
-                          <%= link_to 'Payer ma commande', orders_path(total:@total_to_pay), method: :post, class: "btn btn-outline-success", remote: true %><br/>
+                                                  <div class="btn-group mt-4" role="group">
+
+                          <%= link_to 'Payer ma commande', orders_path(total:@total_to_pay), method: :post, class: "btn btn-success", remote: true %><br/>
                           <%= link_to 'Retour à la carte', products_path, class: "btn btn-light" %>
 
                             <% if @order %>
-                              <%= link_to 'Annuler', order_path(@order.id), method: :delete, class: "btn btn-danger" %>
+                              <%= link_to 'Annuler ma commande', order_path(@order.id), method: :delete, class: "btn btn-danger" %>
                             <% end %>
-
+                          </div>
                                                      
                         <% end %>
                       </div>
