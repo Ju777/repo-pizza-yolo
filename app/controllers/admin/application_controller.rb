@@ -12,6 +12,7 @@ module Admin
       unless current_user.role == "admin"
         redirect_to root_path
         flash[:warning]="Access denied!"
+      end
     end
 
     # Override this value to specify the number of elements to display at a time
