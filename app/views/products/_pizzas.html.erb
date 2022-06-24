@@ -1,7 +1,7 @@
 <div class="btn-group d-flex" role="group">
-            <%= link_to "Pizzas", products_path(category: cat_pizza), class: "btn btn-outline-light", type:"button"%>
-            <%= link_to "Desserts", products_path(category: cat_dessert), class: "btn btn-outline-light", type:"button" %>
-            <%= link_to "Boissons", products_path(category: cat_drink), class: "btn btn-outline-light", type:"button"%>
+            <%= link_to "Pizzas", products_path(category: cat_pizza), class: "btn btn-outline-light", type:"button", remote: true%>
+            <%= link_to "Desserts", products_path(category: cat_dessert), class: "btn btn-outline-light", type:"button" , remote: true%>
+            <%= link_to "Boissons", products_path(category: cat_drink), class: "btn btn-outline-light", type:"button", remote: true%>
 
 </div>
 
