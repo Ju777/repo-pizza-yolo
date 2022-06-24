@@ -1,6 +1,5 @@
 qtyToUpdate = document.getElementById("qty-item-id-<%=@cart_product.id%>");
 
-
 if (qtyToUpdate) {
   qtyToUpdate = qtyToUpdate.innerHTML
   qtyToUpdate = parseInt(qtyToUpdate)
@@ -8,19 +7,10 @@ if (qtyToUpdate) {
 
   // coder la mise à jour du TOTAL A PAYER ici
   productPrice = parseFloat("<%=@cart_product.product.price%>");
-  console.log(productPrice)
-  console.log(typeof productPrice)
 
   cartTotal = document.getElementById("cart-total").innerHTML;
   cartTotal = parseFloat(cartTotal);
-  console.log(cartTotal);
-  console.log(typeof cartTotal);
 
   document.getElementById("cart-total").innerHTML = cartTotal + productPrice;
-  console.log(cartTotal);
-  console.log(typeof cartTotal);
 
 };
-
-
-

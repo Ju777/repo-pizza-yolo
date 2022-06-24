@@ -9,9 +9,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    #############################################
-    # STRIPE V2 process begins
-    
     @session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       line_items: [
@@ -29,10 +26,6 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.js
     end
-
-    # STRIPE V2 process ends
-    ############################################
- 
   end
 
   def edit
@@ -44,7 +37,7 @@ class OrdersController < ApplicationController
   def destroy
     empty_cart
     current_user.orders.last.destroy
-    flash.notice= "Panier vidé, commande annulée."
+    flash.notice= "Panier vidé, commande annulée"
     redirect_to root_path    
   end
 
@@ -56,11 +49,9 @@ class OrdersController < ApplicationController
     pickup_code = "#{order.id}##{order.created_at.to_i}"
     order.update(pickup_code:pickup_code)
     order_recap
-    
     empty_cart
     clean_old_schedules
     clean_wrong_orders
-    
   end
 
   def cancel
