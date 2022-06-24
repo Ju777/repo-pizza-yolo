@@ -13,24 +13,33 @@ class CartProductsController < ApplicationController
 
   def create
     product = Product.find(params[:product_id])
-
     existing_cart_product = CartProduct.find_by(product: product, cart: current_user.cart)
 
     unless current_user.cart.products.include?(product)
       fake_schedule = Schedule.create(date:Time.new(1900, 01, 01, 00, 00, 00))
       new_cart_product = CartProduct.new(product: product, cart:current_user.cart, quantity:1, schedule:fake_schedule)
 
-      if new_cart_product.save
-        flash[:success] = "Produit ajouté au panier"
-        redirect_to products_path
+      if new_cart_product.save       
+        respond_to do |format|
+          format.html{
+            flash[:success] = "Produit ajouté au panier"
+            redirect_to products_path
+          }
+          format.js {}
+        end     
       else
         flash[:error] = "Erreur d'ajout au panier"
         redirect_to root_path
       end
-
     else
-      existing_cart_product.update(quantity: existing_cart_product.quantity+1)
-      redirect_to products_path
+      existing_cart_product.update(quantity: existing_cart_product.quantity+1) 
+      respond_to do |format|
+        flash[:success] = "Produit ajouté au panier"
+        format.html{
+          redirect_to products_path
+        }
+        format.js {}
+      end
     end
   end
 
@@ -41,9 +50,7 @@ class CartProductsController < ApplicationController
     @cart_product = CartProduct.find(params[:id])
     fake_schedule = Schedule.create(date:Time.new(1900, 01, 01, 00, 00, 00))
     
-
-    if params[:increment] == "true"
-      
+    if params[:increment] == "true"    
       @cart_product.update!(quantity: @cart_product.quantity+1, schedule:fake_schedule)
       
       respond_to do |format|
@@ -77,5 +84,4 @@ class CartProductsController < ApplicationController
       format.js {}
     end
   end
-
 end

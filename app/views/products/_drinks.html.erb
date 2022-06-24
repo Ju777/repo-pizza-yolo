@@ -21,7 +21,7 @@
                 <small id="cardcatchphrase"> <%= product.catchphrase%> </small>
                 <p id="cardprice"><%= product.price%> €</p>
                 <%= link_to 'Voir', product_path(product), class:"btn btn-outline-success", id:"cardseebtn" %>
-                <%= link_to "Ajouter au panier", cart_products_path(product_id:product),class:"btn btn-outline-success", id:"cardaddtocartbtn", type:"button", method: :post %>
+                <%= link_to "Ajouter au panier", cart_products_path(product_id:product),class:"btn btn-outline-success", id:"cardaddtocartbtn", type:"button", method: :post, remote: true%>
                 </div>
             </div>
         </div>
