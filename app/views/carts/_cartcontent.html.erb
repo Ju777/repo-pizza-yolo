@@ -46,6 +46,7 @@
 
                      
                       <div>
+
                         <strong>TOTAL À PAYER : </strong>
                         <span id="cart-total"><%= @total_to_pay %></span> €
                       </div>
@@ -55,6 +56,7 @@
                        <%= link_to 'Valider le panier', new_schedule_path, class: "btn btn-success" %>
                        <%= link_to 'Retour à la carte', products_path, class: "btn btn-light" %>
                        <%= link_to "Vider le Panier", cart_path(current_user.cart), method: :delete, class: "btn btn-danger" %>
+
                       </div>
               
 
@@ -66,7 +68,7 @@
                         
                         <div class="btn-group mt-4" role="group">
                           <%= link_to 'Payer commande', orders_path(total:@total_to_pay), method: :post, class: "btn btn-success", remote: true %><br/>
-                          <button class="btn btn-light disabled">Panier validé</button><br/>                     
+                          <button class="btn btn-warning disabled mt-4">Panier validé</button><br/>                     
                           <% if @order %>
                             <%= link_to 'Annuler commande', order_path(@order.id), method: :delete, class: "btn btn-danger" %>
                           <% end %>   
