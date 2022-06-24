@@ -55,10 +55,12 @@ class OrdersController < ApplicationController
     order = current_user.orders.last
     pickup_code = "#{order.id}##{order.created_at.to_i}"
     order.update(pickup_code:pickup_code)
+    order_recap
+    
     empty_cart
     clean_old_schedules
     clean_wrong_orders
-    order_recap
+    
   end
 
   def cancel
@@ -78,7 +80,7 @@ class OrdersController < ApplicationController
 
   def clean_old_schedules
     Schedule.all.each do |schedule|
-      if schedule.date.year == 1900 && schedule.created_at < Time.now - 3600*24
+      if schedule.date.year == 1900 && schedule.created_at < Time.now 
         schedule.destroy
       end
     end
