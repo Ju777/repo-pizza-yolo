@@ -6,9 +6,6 @@
   <body>
     <h1>Commande n° <%= @order.pickup_code %> enregistrée !</h1>
 
-    <p>PIZZA-YOLO vous remercie pour votre commande, <%= @order.user.firstname %> !</p>
-
-
-    <p> À très vite sur PIZZA-YOLO !<br/><%= @url %></P>
+    <p><%= @order.user.firstname %> a passé (et payé) sa commande.</p>
   </body>
 </html>

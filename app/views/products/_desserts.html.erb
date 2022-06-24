@@ -1,0 +1,29 @@
+<div class="btn-group d-flex" role="group">
+            <%= link_to "Pizzas", products_path(category: cat_pizza), class: "btn btn-outline-light", type:"button", remote: true%>
+            <%= link_to "Desserts", products_path(category: cat_dessert), class: "btn btn-outline-light", type:"button", remote: true%>
+            <%= link_to "Boissons", products_path(category: cat_drink), class: "btn btn-outline-light", type:"button", remote: true%>
+
+</div>
+
+<div class="row" id="dessertsrow">
+  <div class="col-md-8 col-xl-6 text-center mx-auto">
+      <h3 class="fw-bold text-success mb-2">Nos désserts</h3>
+      <h4 class="fw-bold">Faits maison.</h4>
+  </div>
+</div>
+<div class="row mx-auto  mx-auto">
+    <% all_desserts.each do |product|  %>
+    <div class="col-sm  mx-auto"id="cardrow">
+      <div class="card border-dark text-center">
+            <div class="card-body"id="productcard">
+          <%= image_tag product.image_url, id:"cardimg"%>
+            <h5 class="card-title" id="cardtitle"><%=product.title%></h5>
+            <small id="cardcatchphrase"> <%= product.catchphrase%> </small>
+            <p id="cardprice"><%= product.price%> €</p>
+            <%= link_to 'Voir', product_path(product), class:"btn btn-outline-success", id:"cardseebtn" %>
+            <%= link_to "Ajouter au panier", cart_products_path(product_id:product),class:"btn btn-outline-success", id:"cardaddtocartbtn", type:"button", method: :post%>
+            </div>
+        </div>
+    </div>
+<% end %>
+</div>

@@ -2,20 +2,24 @@
 <html>
   <head>
     <title>PizzaYolo</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    
   </head>
 
   <body>
-    <% flash.each do |type ,msg| %>
-      <%= msg %>
-    <% end %>
-
-    <%= render 'layouts/sessions_info' %>
-
+  <%= render partial: 'layouts/navbar' %>
+  <%= render partial: 'layouts/flash_message' %>
+    
     <%= yield %>
+     <%= render partial: 'layouts/footer' %>
+     <script src="https://js.stripe.com/v3/"></script>
   </body>
 </html>
+

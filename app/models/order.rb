@@ -1,9 +1,15 @@
 class Order < ApplicationRecord
-  after_create :order_recap
-  
-  belongs_to :user
+# after_update :order_recap
 
-  def order_recap
-    UserMailer.order_recap_email(self).deliver_now
+  belongs_to :user
+  belongs_to :restaurant
+
+  private
+
+  def order_recap 
+    unless self.pickup_code == "not_paid"
+      UserMailer.customer_order_email(self).deliver_now 
+      UserMailer.pizzeria_order_email(self).deliver_now
+    end
   end
 end

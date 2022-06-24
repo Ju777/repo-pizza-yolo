@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Commande n° <%= @order.pickup_code %> enregistrée !</h1>
+
+    <p>PIZZA-YOLO vous remercie pour votre commande, <%= @order.user.firstname %> !</p>
+
+    <p>Nous vous invitons à venir la récupérer à notre pizzeria située au:</p>
+
+    <p><%= @order.restaurant.street %></p>
+    <p><%= @order.restaurant.city %></p>
+    <p><%= @order.restaurant.zipcode %></p>
+    <p>Vos produits seront à disposition <%= @schedule.strftime("le %d/%m/%Y à partir de %Hh%M.") %>.</p>
+    <p><strong>Se munir du code retrait <%= @order.pickup_code %></strong>.</p>
+    
+
+    <p>N'hesitez-pas à nous téléphoner au : <%= @order.restaurant.phone %> si besoin.</p>
+
+    <p> À très vite sur PIZZA-YOLO !<br/><%= @url %></p>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 pt-5">
+      <div class="alert alert-success" role="alert">
+        <h2 class="text-center">La commande est bien passée ! Merci !</h2>
+        <h3 class="text-center">Votre code de retrait est <strong><%= current_user.orders.last.pickup_code %></strong>,<br/>
+          Vous allez le recevoir sur l'adresse <strong><%= current_user.email %></strong>.
+        </h3>
+        <div class="d-flex justify-content-center pt-5">
+          <%= link_to  "Retour à l'accueil", root_path, class: "btn btn-light me-5"%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

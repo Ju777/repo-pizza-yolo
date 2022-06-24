@@ -1,24 +1,2 @@
 <h1>Orders#new</h1>
-<p>Find me in app/views/orders/new.html.erb</p>
 
-<h1>Bienvenue sur ma page de paiement, <%= @order_to_pay.user %> !</h1>
-<p>Vous avez choisi le produit <%= @order_to_pay.user.cart.products %>.</p>
-<%= form_tag orders_path do %>
-  <article>
-    <% if flash[:error].present? %>
-      <div id="error_explanation">
-        <p><%= flash[:error] %></p>
-      </div>
-    <% end %>
-    <label class="amount">
-      <span>Son prix est de : <%= @order_to_pay.total_amount %> €</span>
-    </label>
-  </article>
-  <br/>
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-  data-description="Achat d'un produit"
-  data-amount=<%= @stripe_amount %>
-  data-currency="eur"
-  data-locale="auto"></script>
-<% end %>

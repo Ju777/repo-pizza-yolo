@@ -1,0 +1,34 @@
+qtyToUpdate = document.getElementById("qty-item-id-<%=@cart_product.id%>").innerHTML;
+
+if (qtyToUpdate > 1) {
+
+  qtyToUpdate = qtyToUpdate - 1
+
+  document.getElementById("qty-item-id-<%=@cart_product.id%>").innerHTML = qtyToUpdate
+
+  productPrice = parseFloat("<%=@cart_product.product.price%>");
+
+  cartTotal = document.getElementById("cart-total").innerHTML;
+  cartTotal = parseFloat(cartTotal);
+
+  document.getElementById("cart-total").innerHTML = cartTotal - productPrice;
+
+
+} else if (qtyToUpdate == 1) {
+
+  var allItems = document.getElementById("insidecartcontent")
+  var itemToRemove = document.getElementById("item-nber<%= @cart_product.id %>")
+
+  allItems.removeChild(itemToRemove)
+
+  productPrice = parseFloat("<%=@cart_product.product.price%>");
+
+  cartTotal = document.getElementById("cart-total").innerHTML;
+  cartTotal = parseFloat(cartTotal);
+
+  document.getElementById("cart-total").innerHTML = cartTotal - productPrice;
+
+}
+
+
+

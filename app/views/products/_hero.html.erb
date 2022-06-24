@@ -1,0 +1,22 @@
+<header class="hero">
+    <div class="container pt-xl-5">
+        <div class="row">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <div class="text-center">
+                    <p class="fw-bold text-success mb-2">Voted #1 Worldwide</p>
+                    <h1 class="fw-bold py-2" id="mainherophrase">Votre Nouvelle Pizzeria Traditionnelle.</h1>
+                    <h5 class="fw-bold py-2" id="secondaryherophrase"> Nouveauté !<br/> Choisissez votre horaire de retrait au moment de valider le panier.</h5>
+                <%= link_to "Commander", products_path, class:"btn btn-outline-success mt-3", role:"button"%> 
+                </div>
+            </div>
+                <div class="col-12 col-lg-10 mx-auto">
+                    <div id="heropizzas" class="position-relative">
+                        <div id="pizzal"><%= image_tag "heropizza2.png", class:"img-fluid", data: {"bss-parallax":"0", "bss-parallax-speed":"0.3"}%></div>
+                        <div id="pizzar1"><%= image_tag "heropizza1.png", class:"img-fluid", data: {"bss-parallax":"0", "bss-parallax-speed":"0.2"}%></div>
+                        <div id="pizzar2"><%= image_tag "heropizza3.png", class:"img-fluid mb-5", data: {"bss-parallax":"0", "bss-parallax-speed":"0.8"}%></div>                        
+                    </div>
+                </div>
+        </div>
+    </div>
+</header>
+<%=javascript_include_tag 'bold-and-bright' %>

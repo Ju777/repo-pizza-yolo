@@ -6,55 +6,33 @@ class OrdersController < ApplicationController
   end
 
   def new
-    puts "#"*100
-    puts "On est dans la méthode NEW de Orders."
-    puts "#"*100
-
-    @order_to_pay = Order.where(user:current_user).last
-    puts "#"*100
-    puts "order_to_pay = #{@order_to_pay}"
-    puts "#"*100
-
-
   end
 
   def create
+    #############################################
+    # STRIPE V2 process begins
     
-    puts "#"*100
-    puts "On est dans la méthode CREATE de Orders."
-    puts "#"*100
-
-    @current_order = Order.where(user:current_user).last
-    
-    # Before the rescue, at the beginning of the method
-    @stripe_amount = ((@current_order.total_amount)*100).to_i
-    begin
-      customer = Stripe::Customer.create({
-      email: params[:stripeEmail],
-      source: params[:stripeToken],
-      })
-      charge = Stripe::Charge.create({
-      customer: customer.id,
-      amount: @stripe_amount,
-      description: "Achat d'un produit",
-      currency: 'eur',
-      })
-      @current_order.update(pickup_code:"#{@current_order.id}####{@current_order.created_at}")
-      puts "#"*100
-      puts "On est dans le block STRIPE."
-      puts "@current_order = #{@current_order}"
-      puts "@current_order.total_amount = #{@current_order.total_amount}"
-      puts "@current_order.user.email = #{@current_order.user.email}"
-      puts "#"*100
-      # Faire une redirection ici ?
-      
-    rescue Stripe::CardError => e
-      flash[:error] = e.message 
-      redirect_to new_order_path # initialement : redirect_to new_order_path
+    @session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      line_items: [
+        {
+          name: 'Pizza-Yolo',
+          amount: ((params[:total].to_f)*100).to_i,
+          currency: 'eur',
+          quantity: 1
+        },
+      ],
+      success_url: orders_success_url + '?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: orders_cancel_url + '?session_id={CHECKOUT_SESSION_ID}'
+    )
+  
+    respond_to do |format|
+      format.js
     end
-    # After the rescue, if the payment succeeded
 
-
+    # STRIPE V2 process ends
+    ############################################
+ 
   end
 
   def edit
@@ -64,5 +42,58 @@ class OrdersController < ApplicationController
   end
 
   def destroy
+    empty_cart
+    current_user.orders.last.destroy
+    flash.notice= "Panier vidé, commande annulée."
+    redirect_to root_path    
+  end
+
+  def success
+    @session = Stripe::Checkout::Session.retrieve(params[:session_id])
+    @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+    total_amount = params[:total]
+    order = current_user.orders.last
+    pickup_code = "#{order.id}##{order.created_at.to_i}"
+    order.update(pickup_code:pickup_code)
+    order_recap
+    
+    empty_cart
+    clean_old_schedules
+    clean_wrong_orders
+    
+  end
+
+  def cancel
+    @session = Stripe::Checkout::Session.retrieve(params[:session_id])
+    @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+  end
+  
+  private 
+
+  def empty_cart
+    cart_products_to_empty = current_user.cart.cart_products
+    cart_products_to_empty.each do |cart_product|
+      cart_product.destroy
+    end
+  end
+
+  def clean_old_schedules
+    Schedule.all.each do |schedule|
+      if schedule.date.year == 1900 && schedule.created_at < Time.now 
+        schedule.destroy
+      end
+    end
+  end
+
+  def clean_wrong_orders
+    Order.where(pickup_code: nil).each do |order|
+        order.destroy
+    end
+  end
+
+  def order_recap
+    order = current_user.orders.last
+    UserMailer.customer_order_email(order).deliver_now 
+    UserMailer.pizzeria_order_email(order).deliver_now
   end
 end

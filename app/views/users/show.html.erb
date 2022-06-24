@@ -1,19 +1,51 @@
-<div class="main-div">
-  <h2><strong>Bienvenue sur ta Page de Profil :</strong></h2>
-</div>
+<section class="mt-5">
+  <div class="container py-5">
+    <div class="row mb-4 mb-lg-5">
+      <div class="col-md-8 col-xl-6 text-center mx-auto">
+        <p class="fw-bold text-success mb-2">Profil</p>
+        <h2 class="fw-bold" id="welcometitle">Votre espace perso</h2>
+      </div>
+    </div>  
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-6 col-xl-7">
+        <div class="card">
+          <div class="card-body text-center d-flex flex-column align-items-center" id="logcard">
+          
+            <div class="mb-3">
+              <%if @user.avatar.attached?%>
+                <%= image_tag @user.avatar, alt: 'avatar', class:'rounded-circle my-3 w-50' %>
+              <%end%>
+            </div>
 
-    <div class="container">
-     <div class="row justify-content-center">
-        <div class="col-4">
-        <p>Nom : <%= current_user.lastname %></p>
-        <p>Prénom : <%= current_user.firstname %></p>
-        <p>Tel: <%= current_user.phone %></p>
-        <p>Email : <%= current_user.email %></p>
-        <p>Commande : <%= current_user.orders.last %></p>
+            <div class="mb-3">
+              <p>Nom : <%= @user.lastname %></p>
+              <p>Prénom : <%= @user.firstname %></p>
+              <p>Téléphone : <%= @user.phone %></p>
+                <p>Email : <%= @user.email %></p>
+                <hr/>
+                <p>Historiques des commandes : </p>
+              <ol>
+                <% @user_orders.each do |order| %>
+                  <li>
+                    <p><strong>Commande du <%= order.created_at.strftime("%d/%m/%Y") %>, montant <%= order.total_amount %> €.</strong>  (code retrait <%= order.pickup_code %>)</p>
+                  </li>
+                <% end %>
+              </ol>
+            </div>
 
-     <%= link_to 'Editer le profil', edit_user_registration_path(current_user.id), class:"btn btn-success" %>
+            <div class="mb-3">
+              <hr/>
+              <p>Changer photo</p>
+              <%= form_tag user_avatars_path(@user), multipart: true do %>
+                <%= file_field_tag :avatar %>
+                <%= submit_tag "OK" %>
+              <% end %>
+            </div>
+            <%= link_to 'Éditer les identifiants', edit_user_registration_path(@user.id), class:"btn btn-success mt-3 mb-3", id:"loginbtn" %>
+            <%= link_to 'Changer mes infos personnelles', edit_user_path(current_user.id), class:"btn btn-success", id:"loginbtn" %>                        
+          </div>
+        </div>
+      </div>
     </div>
-   </div>
   </div>
-       
-</div>
+</section>
