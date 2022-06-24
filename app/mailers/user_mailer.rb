@@ -3,14 +3,14 @@ class UserMailer < ApplicationMailer
  
   def welcome_email(user)
     @user = user 
-    @url  = 'https://pizza-yolo-dev.herokuapp.com/' 
+    @url  = 'https://pizza-yolo.herokuapp.com/' 
     mail(to: @user.email, subject: 'Bienvenue chez nous !') 
   end
 
   def customer_order_email(order)
     @order = order
     @user = @order.user
-    @url  = 'https://pizza-yolo-dev.herokuapp.com/' 
+    @url  = 'https://pizza-yolo.herokuapp.com/' 
     mail(to: @order.user.email, subject: 'PIZZA-YOLO: Récapitulatif de votre commande') 
   end
 

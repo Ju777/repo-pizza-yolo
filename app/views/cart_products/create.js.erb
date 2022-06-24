@@ -1,5 +1,2 @@
-console.log("On est bien dans le JS de product#create");
 badgeCart = document.getElementById("item-count");
-console.log(badgeCart);
 badgeCart.innerHTML = <%=current_user.cart.cart_products.sum("quantity").to_s %>
-console.log(badgeCart);
