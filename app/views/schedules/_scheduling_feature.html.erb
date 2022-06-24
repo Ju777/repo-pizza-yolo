@@ -20,7 +20,6 @@
   </p>
 <% else %>
   <p>
-    <strong><%= @search_status %></strong><br/>
     <% if @search_status == "completed"  %>
       Votre commande sera prête au plus tôt <%= @cart_to_show.cart_products.first.schedule.date.strftime("le %d/%m/%Y à partir de %Hh%M.") %>
       <br/>Munissez vous du code de retrait qui vous sera envoyé par mail une fois le règlement effectué.</p>
