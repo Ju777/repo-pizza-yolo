@@ -183,7 +183,7 @@ body {
   color: rgb(255, 183, 0);;
 }
 
-#herodatetime {
+#datetime {
   background: rgb(255,255,255);
   color: rgb(0,0,0);
   border-radius: 27px;
@@ -401,18 +401,6 @@ section {
 
 #storytext {
   color: rgb(255,255,255);
-}
-
-/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */ 
-.cartcontent { 
-  color:#ffffff;
-}
-
-/* je suis pas sûr que ça doit être mis ici ? (p-ê directement dans app/assets/stylesheets/carts.scss ? */ 
-.insidecartcontent { 
-  display: flex;
-  flex-direction: column;
-  width: 100%;
 }
 
 .loader{

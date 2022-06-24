@@ -1,14 +1,22 @@
-<p>=========================================</p>
-<p>Horaire de retrait : 
 
+<div class="row justify-content-center py-5 mt-5 mx-auto">
+      <div class="col-md-6 col-xl-10">
+        <div class="card">
+          <div class="card-body text-center justify-content-center" id="logcard">
+            <div class="mb-3">
+              <div class="schedulecard">
+
+                <div class="cardcontent">
+                    <h3 class="py-3"><strong>Retrait</strong></h3>
+                    <div class="container">
 <% if @cart_schedule_state == false %>
-  <p>
-    Vous avez ajoutés des achats, choisissez un horaire de retrait avant de passer au paiement.
+  <p class="py-3">
+    Vous venez de valider votre panier, choisissez un horaire de retrait avant de passer au paiement.
   </p>
   <p>
     <%= form_tag schedules_path, method: "post" do %>
-      <%= datetime_local_field_tag 'date'%>
-      <%= submit_tag "OK" %>
+      <%= datetime_local_field_tag 'date'%><br/>
+      <%= submit_tag "OK", class:"btn btn-outline-success mt-3" %>
     <% end %>
   </p>
 <% else %>
@@ -27,4 +35,14 @@
     <br/>Notre capacité de préparation est limitée à 5 pizzas toutes les 30 min.
     
 <% end %>
-<p>=========================================</p>
+
+                </div>
+
+              </div>        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
