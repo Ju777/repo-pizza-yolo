@@ -22,7 +22,7 @@ if (qtyToUpdate > 1) {
   console.log(cartTotal);
   console.log(typeof cartTotal);
 
-  alert("votre panier a été mise à jour !");
+  alert("votre panier a été mis à jour ! (quantité réduite)");
 
 } else if (qtyToUpdate == 1) {
   console.log("qté égale à 1")
@@ -36,7 +36,22 @@ if (qtyToUpdate > 1) {
 
 
   allItems.removeChild(itemToRemove)
-  console.log(allItems)
+  console.log(allItems.innerHTML)
+
+  productPrice = parseFloat("<%=@cart_product.product.price%>");
+  console.log(productPrice)
+  console.log(typeof productPrice)
+
+  cartTotal = document.getElementById("cart-total").innerHTML;
+  cartTotal = parseFloat(cartTotal);
+  console.log(cartTotal);
+  console.log(typeof cartTotal);
+
+  document.getElementById("cart-total").innerHTML = cartTotal - productPrice;
+  console.log(cartTotal);
+  console.log(typeof cartTotal);
+
+  alert("article supprimé du panier");
 
 }
 
