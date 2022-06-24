@@ -11,7 +11,7 @@ module Admin
     def authenticate_admin
       unless current_user.role == "admin"
         redirect_to root_path
-        flash[:warning]="Access denied!"
+        flash[:warning]="Accès non autorisé"
       end
     end
 

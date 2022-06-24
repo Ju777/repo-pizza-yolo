@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
 
   def show
     @products = Product.all
-    @product_to_show = Product.find(params[:id]) 
+    @product_to_show = Product.friendly.find(params[:id])
   end
 
   def landing

@@ -4,7 +4,6 @@ root 'products#landing'
   namespace :admin do
       resources :users
       resources :carts
-      #resources :cart_products
       resources :comments
       resources :orders
       resources :restaurants
@@ -18,7 +17,7 @@ root 'products#landing'
   
   devise_for :users
   
-  resources :carts
+  resources :carts, :path => "panier"
   resources :cart_products 
   resources :orders
   get 'cancel', to: 'orders#cancel', as: 'orders_cancel'
