@@ -10,7 +10,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-    <script src="https://js.stripe.com/v3/"></script>
+    
   </head>
 
   <body>
@@ -19,6 +19,7 @@
     
     <%= yield %>
      <%= render partial: 'layouts/footer' %>
+     <script src="https://js.stripe.com/v3/"></script>
   </body>
 </html>
 
