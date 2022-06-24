@@ -1,19 +1,19 @@
 Rails.application.routes.draw do
 root 'products#landing'
 
-  namespace :admin do
-      resources :users
-      resources :carts
-      #resources :cart_products
-      resources :comments
-      resources :orders
-      resources :restaurants
-      resources :categories
-      resources :products
-      resources :product_restaurants
+  # namespace :admin do
+  #     resources :users
+  #     resources :carts
+  #     #resources :cart_products
+  #     resources :comments
+  #     resources :orders
+  #     resources :restaurants
+  #     resources :categories
+  #     resources :products
+  #     resources :product_restaurants
 
-      root to: "users#index"
-    end
+  #     root to: "users#index"
+  #   end
 
   
   devise_for :users
