@@ -245,6 +245,7 @@ private
 
       remaining_pizzas = 0
       @search_status = "completed"
+      flash.notice = "Horaire validé"
       puts "#"*100
       puts "@searched_status = #{@search_status}"
       puts "#"*100
@@ -293,6 +294,7 @@ private
           puts "#"*100
           remaining_pizzas = 0
           @search_status = "rejected"
+          flash.notice = "Votre commande dépasse notre capacité de préparation."
           puts "#"*100
           puts "@searched_status = #{@search_status}"
           puts "#"*100
@@ -316,6 +318,7 @@ private
 
           remaining_pizzas = 0
           @search_status = "extra"
+          flash.notice = "Horaire validé"
           puts "#"*100
           puts "@searched_status = #{@search_status}"
           puts "#"*100
