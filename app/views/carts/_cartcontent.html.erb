@@ -20,8 +20,8 @@
                     </div>
                     <hr/>
                     <% @all_products.each do |cart_product| %>            
-                      <div class="container mb-2">
-                        <div class="row align-items-center" id="item-nber<%= cart_product.id %>">
+                      <div class="container mb-2" id="item-nber<%= cart_product.id %>">
+                        <div class="row align-items-center">
                           <div class="col">
                             <h5><%= cart_product.product.title %></h5>
                             <%= image_tag cart_product.product.image_url, class: "w-75" %>

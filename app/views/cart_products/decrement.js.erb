@@ -27,7 +27,16 @@ if (qtyToUpdate > 1) {
 } else if (qtyToUpdate == 1) {
   console.log("qté égale à 1")
 
+  alert("cas de figure : qté = 1, article doit disparaitre du panier");
 
+  var allItems = document.getElementById("insidecartcontent")
+
+
+  var itemToRemove = document.getElementById("item-nber<%= @cart_product.id %>")
+
+
+  allItems.removeChild(itemToRemove)
+  console.log(allItems)
 
 }
 
